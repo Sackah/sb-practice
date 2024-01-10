@@ -5,23 +5,26 @@ import { SBHeading } from './models/heading.model';
 import { SBSection } from './models/section.model';
 import { SBForm } from './models/form.model';
 import { SBEmail } from './models/email.model';
+import { HeadingPickerComponent } from './components/heading-picker/heading-picker.component';
+import { HeadingComponent } from './components/heading/heading.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    HeadingPickerComponent,
+    HeadingComponent,
+  ],
 })
 export class AppComponent {
-  heading!: SBHeading;
+  headings: SBHeading[] = [];
   section!: SBSection;
   form!: SBForm;
   email!: SBEmail;
-
-  addHeading() {
-    this.heading = new SBHeading();
-  }
 
   addSection() {
     this.section = new SBSection(this.email);
@@ -31,10 +34,14 @@ export class AppComponent {
     this.email = new SBEmail();
   }
 
+  addHeading() {
+    this.headings.push(new SBHeading());
+  }
+
   addForm() {
     this.form = new SBForm(
       { mainText: 'Form Title', subText: 'Lorem lorem lorem' },
-      this.heading,
+      this.headings,
       this.section
     );
 

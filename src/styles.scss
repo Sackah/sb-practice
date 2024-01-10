@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+div {
+  width: 100px;
+  height: 100px;
+  background-color: #eee;
+  color: black;
+  margin-bottom: 30px;
+  cursor: pointer;
+  text-align: center;
+}
