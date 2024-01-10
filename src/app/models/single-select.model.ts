@@ -2,6 +2,7 @@ export class SBSingleSelect {
   question: string;
   answer?: string;
   options: string[];
+  type = 'single-select';
 
   constructor(
     question: string = 'label',

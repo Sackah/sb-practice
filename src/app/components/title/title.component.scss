@@ -1,0 +1,23 @@
+input {
+  border: none;
+  display: block;
+  padding: 0;
+  width: auto;
+}
+
+input:focus {
+  outline: none;
+}
+
+input:first-of-type {
+  font-size: 34px;
+  font-weight: bold;
+}
+input:not(:first-of-type) {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+input:not(:first-of-type)::before {
+  content: "Sub section";
+}

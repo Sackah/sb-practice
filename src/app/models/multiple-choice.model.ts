@@ -2,6 +2,7 @@ export class SBMultiSelect {
   question: string;
   answer?: string[];
   options: string[];
+  type = 'multi-select';
 
   constructor(
     question: string = 'label',

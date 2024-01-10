@@ -1,12 +1,10 @@
 import { SBHeading } from './heading.model';
 import { SBSection } from './section.model';
+import { SBTitle } from './title.model';
 
 export class SBForm {
   // @ts-ignore
-  title: {
-    mainText: string;
-    subText: string;
-  };
+  title: SBTitle;
 
   // @ts-ignore
   heading: SBHeading[];
@@ -63,14 +61,14 @@ export class SBForm {
   };
 
   constructor(
-    title = { mainText: 'Form Title', subText: 'Lorem lorem lorem' },
+    title: SBTitle = new SBTitle(),
     heading?: SBHeading[],
-    section?: SBSection,
+    section?: SBSection[],
     styles?: any
   ) {
     this.title = title;
     if (heading) this.heading = heading;
-    if (section) this.sections = [section];
+    if (section) this.sections = section;
     if (styles) this.styles = styles;
   }
 }

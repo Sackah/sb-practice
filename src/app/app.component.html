@@ -1,7 +1,23 @@
+<app-title [title]="title"></app-title>
 <div (click)="addHeading()">Add heading</div>
 @for (heading of headings; track $index) {
 <app-heading [heading]="heading"></app-heading>
 }
 <div (click)="addSection()">Add section</div>
 <div (click)="addEmail()">Add email</div>
+@for (section of sections; track $index) {
+<section>
+    <header>
+        <h2>{{ section.title.mainText }}</h2>
+        <h3>{{ section.title.subText }}</h3>
+    </header>
+    @for (question of section.questions; track $index) {
+    @switch(typeOfQuestion(question)[0]) {
+    @case ("email") {
+    <app-email [email]="typeOfQuestion(question)[1]"></app-email>
+    }
+    }
+    }
+</section>
+}
 <button type="submit" (click)="addForm()">Create form</button>

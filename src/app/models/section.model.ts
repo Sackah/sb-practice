@@ -1,7 +1,7 @@
 import { SBEmail } from './email.model';
 import { SBMultiSelect } from './multiple-choice.model';
 import { SBName } from './name.model';
-import { SBPhone } from './phone.model';
+import { SBPhoneNumber } from './phone.model';
 import { SBSingleSelect } from './single-select.model';
 
 export class SBSection {
@@ -11,7 +11,13 @@ export class SBSection {
     subText: string;
   };
   // @ts-ignore
-  questions: (SBEmail | SBName | SBSingleSelect | SBPhone | SBMultiSelect)[];
+  questions: (
+    | SBEmail
+    | SBName
+    | SBSingleSelect
+    | SBPhoneNumber
+    | SBMultiSelect
+  )[];
 
   constructor(
     questions: any,
