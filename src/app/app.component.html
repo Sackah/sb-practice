@@ -15,19 +15,6 @@
     }
     }
 </app-section>
-<!-- <section>
-    <header>
-        <h2>{{ section.title.mainText }}</h2>
-        <h3>{{ section.title.subText }}</h3>
-    </header>
-    @for (question of section.questions; track $index) {
-    @switch(typeOfQuestion(question)[0]) {
-    @case ("email") {
-    <app-email [email]="typeOfQuestion(question)[1]"></app-email>
-    }
-    }
-    }
-</section> -->
 }
 <button type="submit" (click)="addForm()">Create form</button>
 <app-email-emitter></app-email-emitter>
