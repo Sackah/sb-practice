@@ -22,8 +22,8 @@ export class SBSection {
   constructor(
     questions: any,
     title = {
-      mainText: 'Form Title',
-      subText: 'Lorem lorem lorem lorem lorem',
+      mainText: 'Section 1',
+      subText: 'Lorem lorem lorem lorem',
     }
   ) {
     this.title = title;

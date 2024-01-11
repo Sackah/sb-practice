@@ -13,6 +13,7 @@ import { SBTitle } from './models/title.model';
 import { TitleComponent } from './components/title/title.component';
 import { SurveyCustomization2Service } from './services/survey-customization2.service';
 import { EmailEmitterComponent } from './email-emitter/email-emitter.component';
+import { SectionComponent } from './components/section/section.component';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ import { EmailEmitterComponent } from './email-emitter/email-emitter.component';
     EmailComponent,
     TitleComponent,
     EmailEmitterComponent,
+    SectionComponent,
   ],
 })
 export class AppComponent implements OnInit {
@@ -35,7 +37,7 @@ export class AppComponent implements OnInit {
     {
       questions: [],
       title: {
-        mainText: 'Form Title',
+        mainText: 'Section 1',
         subText: 'Lorem lorem lorem lorem lorem',
       },
     },
