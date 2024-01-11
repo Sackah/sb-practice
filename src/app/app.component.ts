@@ -11,6 +11,8 @@ import { EmailComponent } from './components/email/email.component';
 import { SBName } from './models/name.model';
 import { SBTitle } from './models/title.model';
 import { TitleComponent } from './components/title/title.component';
+import { SurveyCustomization2Service } from './services/survey-customization2.service';
+import { EmailEmitterComponent } from './email-emitter/email-emitter.component';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +25,7 @@ import { TitleComponent } from './components/title/title.component';
     HeadingComponent,
     EmailComponent,
     TitleComponent,
+    EmailEmitterComponent,
   ],
 })
 export class AppComponent implements OnInit {
@@ -51,14 +54,22 @@ export class AppComponent implements OnInit {
     this.headings.push(new SBHeading());
   }
 
+  constructor(private service: SurveyCustomization2Service) {
+    service.data.subscribe({
+      next: (data) => {
+        if (data === 'email') {
+          this.addEmail();
+        }
+      },
+    });
+  }
+
   /**
    * Cases:
    */
   typeOfQuestion(question: any) {
-    console.log('block ran', question);
     switch (question.type) {
       case 'email':
-        console.log('fell here');
         return ['email', question as SBEmail] as const;
       case 'name':
         return ['name', question as SBName] as const;
