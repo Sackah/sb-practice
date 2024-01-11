@@ -20,7 +20,6 @@ import { TitleComponent } from './components/title/title.component';
   imports: [
     CommonModule,
     RouterOutlet,
-    HeadingPickerComponent,
     HeadingComponent,
     EmailComponent,
     TitleComponent,
@@ -39,7 +38,6 @@ export class AppComponent implements OnInit {
     },
   ];
   form!: SBForm;
-  // emails: SBEmail[] = [];
 
   addSection() {
     this.sections.push(new SBSection([]));
@@ -57,10 +55,12 @@ export class AppComponent implements OnInit {
    * Cases:
    */
   typeOfQuestion(question: any) {
-    switch (question) {
-      case question instanceof SBEmail:
+    console.log('block ran', question);
+    switch (question.type) {
+      case 'email':
+        console.log('fell here');
         return ['email', question as SBEmail] as const;
-      case question instanceof SBName:
+      case 'name':
         return ['name', question as SBName] as const;
       default:
         return ['unknown', question] as const;

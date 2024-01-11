@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './email.component.scss',
 })
 export class EmailComponent {
-  @Input() email!: SBEmail;
+  @Input() email!: SBEmail | any;
   @Output() emailTextChange = new EventEmitter<SBEmail>();
 
   onEmailTextChange() {
