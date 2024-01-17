@@ -1,8 +1,4 @@
 <app-title [title]="title"></app-title>
-<div (click)="addHeading()">Add heading</div>
-@for (heading of headings; track $index) {
-<app-heading [heading]="heading"></app-heading>
-}
 <div (click)="addSection()">Add section</div>
 <div (click)="addEmail()">Add email</div>
 <div (click)="addMultiSelect()">Add multi select</div>

@@ -1,12 +1,9 @@
 export class SBTitle {
-  mainText: string;
-  subText: string;
+  title: string;
+  description: string;
 
-  constructor(
-    mainText: string = 'Form Title',
-    subText: string = 'Lorem lorem lorem'
-  ) {
-    this.mainText = mainText;
-    this.subText = subText;
+  constructor(title: string = 'Survey Title', description: string = '') {
+    this.title = title;
+    this.description = description;
   }
 }

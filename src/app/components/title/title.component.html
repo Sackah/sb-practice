@@ -1,2 +1,17 @@
-<input type="text" [(ngModel)]="title.mainText" />
-<input type="text" [(ngModel)]="title.subText" />
+<div
+    class="outer bg-white rounded-md py-[16px] px-[32px] my-[24px] h-[177px] flex items-center justify-center shadow-md">
+    <div class="inner w-full">
+        @if(!editTitle){
+        <h1 class="text-[24px] font-semibold" (dblclick)="onEditTitle($event)">
+            {{title.title}}
+        </h1>
+        }
+        @if(editTitle){
+        <input type="text" class="text-[24px] font-semibold" [(ngModel)]="title.title" (keydown)="onEditTitle($event)"
+            (clickOutside)="handelOutsideClick()" (dblclick)="onEditTitle($event)" />
+        }
+        <input id="desc" type="text" placeholder="Survey description"
+            class="border-b-2 border-b-[#F0F2F5] bg-transparent w-full mt-[24px] py-[6px] outline-none"
+            [(ngModel)]="title.description">
+    </div>
+</div>

@@ -34,7 +34,6 @@ import { MultipleSelectComponent } from './components/multiple-select/multiple-s
   ],
 })
 export class AppComponent implements OnInit {
-  headings: SBHeading[] = [];
   title!: SBTitle;
   sections: SBSection[] = [
     {
@@ -53,10 +52,6 @@ export class AppComponent implements OnInit {
 
   addEmail() {
     this.sections[this.sections.length - 1].questions.push(new SBEmail());
-  }
-
-  addHeading() {
-    this.headings.push(new SBHeading());
   }
 
   addMultiSelect() {
@@ -94,7 +89,7 @@ export class AppComponent implements OnInit {
   }
 
   addForm() {
-    this.form = new SBForm(this.title, this.headings, this.sections);
+    this.form = new SBForm(this.title, this.sections);
 
     console.log(this.form);
   }

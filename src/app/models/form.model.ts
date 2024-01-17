@@ -7,9 +7,6 @@ export class SBForm {
   title: SBTitle;
 
   // @ts-ignore
-  heading: SBHeading[];
-
-  // @ts-ignore
   sections: SBSection[];
 
   // @ts-ignore
@@ -62,12 +59,10 @@ export class SBForm {
 
   constructor(
     title: SBTitle = new SBTitle(),
-    heading?: SBHeading[],
     section?: SBSection[],
     styles?: any
   ) {
     this.title = title;
-    if (heading) this.heading = heading;
     if (section) this.sections = section;
     if (styles) this.styles = styles;
   }
