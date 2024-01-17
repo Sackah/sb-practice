@@ -14,6 +14,8 @@ import { TitleComponent } from './components/title/title.component';
 import { SurveyCustomization2Service } from './services/survey-customization2.service';
 import { EmailEmitterComponent } from './email-emitter/email-emitter.component';
 import { SectionComponent } from './components/section/section.component';
+import { SBMultiSelect } from './models/multiple-choice.model';
+import { MultipleSelectComponent } from './components/multiple-select/multiple-select.component';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +30,7 @@ import { SectionComponent } from './components/section/section.component';
     TitleComponent,
     EmailEmitterComponent,
     SectionComponent,
+    MultipleSelectComponent,
   ],
 })
 export class AppComponent implements OnInit {
@@ -56,6 +59,10 @@ export class AppComponent implements OnInit {
     this.headings.push(new SBHeading());
   }
 
+  addMultiSelect() {
+    this.sections[this.sections.length - 1].questions.push(new SBMultiSelect());
+  }
+
   constructor(private service: SurveyCustomization2Service) {
     service.data.subscribe({
       next: (data) => {
@@ -75,6 +82,8 @@ export class AppComponent implements OnInit {
         return ['email', question as SBEmail] as const;
       case 'name':
         return ['name', question as SBName] as const;
+      case 'multi-select':
+        return ['multi-select', question as SBMultiSelect] as const;
       default:
         return ['unknown', question] as const;
     }
