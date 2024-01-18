@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StylePickerComponent } from './style-picker.component';
+import { ImageComponent } from './image.component';
 
-describe('StylePickerComponent', () => {
-  let component: StylePickerComponent;
-  let fixture: ComponentFixture<StylePickerComponent>;
+describe('ImageComponent', () => {
+  let component: ImageComponent;
+  let fixture: ComponentFixture<ImageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StylePickerComponent]
+      imports: [ImageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(StylePickerComponent);
+    fixture = TestBed.createComponent(ImageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

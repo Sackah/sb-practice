@@ -1,22 +1,6 @@
-<app-title [title]="title"></app-title>
-<div (click)="addSection()">Add block</div>
-<div (click)="addEmail()">Add email</div>
-<div (click)="addMultiSelect()">Add multi select</div>
-@for (block of blocks; track $index) {
-<app-section [block]="block">
-    @for (question of block.questions; track $index) {
-    @switch(typeOfQuestion(question)[0]) {
-    @case ("email") {
-    <app-email [email]="typeOfQuestion(question)[1]"></app-email>
-    }
-    @case ("multi-select"){
-    <app-multiple-select [select]="typeOfQuestion(question)[1]"></app-multiple-select>
-    }
-    }
-    }
-</app-section>
-}
-<button type="submit" (click)="addForm()">Create form</button>
-<app-email-emitter></app-email-emitter>
+<!-- <app-title [title]="title"></app-title> -->
+<app-image [image]="image" (edit)="onEditImage()" (delete)="onDeleteImage()"></app-image>
 
-<textarea value="text here"></textarea>
+@if(showPopup){
+<input type="text" placeholder="enter and image url" [(ngModel)]="url" (keydown)="changeImage($event)">
+}

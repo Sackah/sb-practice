@@ -1,13 +1,14 @@
-import { SBHeading } from './heading.model';
 import { SBBlock } from './block.model';
 import { SBTitle } from './title.model';
 
 export class SBForm {
   // @ts-ignore
+  logo: SBImage;
+  // @ts-ignore
   title: SBTitle;
 
   // @ts-ignore
-  sections: SBSection[];
+  blocks: SBBlock[];
 
   // @ts-ignore
   general?: {
@@ -59,7 +60,7 @@ export class SBForm {
 
   constructor(title: SBTitle = new SBTitle(), block?: SBBlock[], styles?: any) {
     this.title = title;
-    if (block) this.sections = block;
+    if (block) this.blocks = block;
     if (styles) this.styles = styles;
   }
 }
