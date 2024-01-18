@@ -4,12 +4,9 @@ import { SBName } from './name.model';
 import { SBPhoneNumber } from './phone.model';
 import { SBSingleSelect } from './single-select.model';
 
-export class SBSection {
+export class SBBlock {
   // @ts-ignore
-  title: {
-    mainText: string;
-    subText: string;
-  };
+  title: string;
   // @ts-ignore
   questions: (
     | SBEmail
@@ -19,13 +16,7 @@ export class SBSection {
     | SBMultiSelect
   )[];
 
-  constructor(
-    questions: any,
-    title = {
-      mainText: 'Section 1',
-      subText: 'Lorem lorem lorem lorem',
-    }
-  ) {
+  constructor(questions: any, title = 'Untitled Block') {
     this.title = title;
     this.questions = questions || [new SBEmail(), new SBName()];
   }

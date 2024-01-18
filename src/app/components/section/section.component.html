@@ -1,7 +1,11 @@
 <section>
     <header>
-        <input type="text" class="label" [(ngModel)]="section.title.mainText" />
-        <input type="text" class="label" [(ngModel)]="section.title.subText" />
+        @if(editTitle){
+        <input type="text" class="label" [(ngModel)]="block.title" (keydown)="onEditTitle($event)"
+            (clickOutside)="handelOutsideClick()" (dblclick)="onEditTitle($event)" />
+        } @else {
+        <h1 class="label" (dblclick)="onEditTitle($event)">{{block.title}}</h1>
+        }
     </header>
     <ng-content></ng-content>
 </section>

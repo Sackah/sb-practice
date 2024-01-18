@@ -1,5 +1,5 @@
 import { SBHeading } from './heading.model';
-import { SBSection } from './section.model';
+import { SBBlock } from './block.model';
 import { SBTitle } from './title.model';
 
 export class SBForm {
@@ -57,13 +57,9 @@ export class SBForm {
     layouts: 'classic' | 'card';
   };
 
-  constructor(
-    title: SBTitle = new SBTitle(),
-    section?: SBSection[],
-    styles?: any
-  ) {
+  constructor(title: SBTitle = new SBTitle(), block?: SBBlock[], styles?: any) {
     this.title = title;
-    if (section) this.sections = section;
+    if (block) this.sections = block;
     if (styles) this.styles = styles;
   }
 }

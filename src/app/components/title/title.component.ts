@@ -19,7 +19,7 @@ export class TitleComponent {
 
   onEditTitle(e: Event) {
     if (e instanceof KeyboardEvent) {
-      if (e.key === 'Enter') {
+      if (e.key === 'Enter' || e.key === 'Escape') {
         this.editTitle = !this.editTitle;
       }
     } else if (e instanceof MouseEvent) {

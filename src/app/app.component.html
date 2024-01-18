@@ -1,10 +1,10 @@
 <app-title [title]="title"></app-title>
-<div (click)="addSection()">Add section</div>
+<div (click)="addSection()">Add block</div>
 <div (click)="addEmail()">Add email</div>
 <div (click)="addMultiSelect()">Add multi select</div>
-@for (section of sections; track $index) {
-<app-section [section]="section">
-    @for (question of section.questions; track $index) {
+@for (block of blocks; track $index) {
+<app-section [block]="block">
+    @for (question of block.questions; track $index) {
     @switch(typeOfQuestion(question)[0]) {
     @case ("email") {
     <app-email [email]="typeOfQuestion(question)[1]"></app-email>

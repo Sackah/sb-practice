@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { SBHeading } from './models/heading.model';
-import { SBSection } from './models/section.model';
+import { SBBlock } from './models/block.model';
 import { SBForm } from './models/form.model';
 import { SBEmail } from './models/email.model';
 import { HeadingPickerComponent } from './components/heading-picker/heading-picker.component';
@@ -35,27 +35,24 @@ import { MultipleSelectComponent } from './components/multiple-select/multiple-s
 })
 export class AppComponent implements OnInit {
   title!: SBTitle;
-  sections: SBSection[] = [
+  blocks: SBBlock[] = [
     {
       questions: [],
-      title: {
-        mainText: 'Section 1',
-        subText: 'Lorem lorem lorem lorem lorem',
-      },
+      title: 'Untitled Block',
     },
   ];
   form!: SBForm;
 
   addSection() {
-    this.sections.push(new SBSection([]));
+    this.blocks.push(new SBBlock([]));
   }
 
   addEmail() {
-    this.sections[this.sections.length - 1].questions.push(new SBEmail());
+    this.blocks[this.blocks.length - 1].questions.push(new SBEmail());
   }
 
   addMultiSelect() {
-    this.sections[this.sections.length - 1].questions.push(new SBMultiSelect());
+    this.blocks[this.blocks.length - 1].questions.push(new SBMultiSelect());
   }
 
   constructor(private service: SurveyCustomization2Service) {
@@ -89,7 +86,7 @@ export class AppComponent implements OnInit {
   }
 
   addForm() {
-    this.form = new SBForm(this.title, this.sections);
+    this.form = new SBForm(this.title, this.blocks);
 
     console.log(this.form);
   }

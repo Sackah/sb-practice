@@ -3,15 +3,15 @@
     <div class="inner w-full">
         @if(!editTitle){
         <h1 class="text-[24px] font-semibold" (dblclick)="onEditTitle($event)">
-            {{title.title}}
+            {{title.title.detail}}
         </h1>
         }
         @if(editTitle){
-        <input type="text" class="text-[24px] font-semibold" [(ngModel)]="title.title" (keydown)="onEditTitle($event)"
-            (clickOutside)="handelOutsideClick()" (dblclick)="onEditTitle($event)" />
+        <input type="text" class="text-[24px] font-semibold" [(ngModel)]="title.title.detail"
+            (keydown)="onEditTitle($event)" (clickOutside)="handelOutsideClick()" (dblclick)="onEditTitle($event)" />
         }
         <input id="desc" type="text" placeholder="Survey description"
             class="border-b-2 border-b-[#F0F2F5] bg-transparent w-full mt-[24px] py-[6px] outline-none"
-            [(ngModel)]="title.description">
+            [(ngModel)]="title.description.detail">
     </div>
 </div>
