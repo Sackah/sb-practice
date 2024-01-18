@@ -1,23 +1,23 @@
-import { SBSurveyCreationStyle } from './survey-creation-style.model';
+import { SBQuestionStyle } from './question-styles.model';
 
 export class SBTitle {
   title: {
     detail: string;
-    style: SBSurveyCreationStyle;
+    style: SBQuestionStyle;
   };
   description: {
     detail: string;
-    style: SBSurveyCreationStyle;
+    style: SBQuestionStyle;
   };
 
   constructor(title: string = 'Survey Title', description: string = '') {
     this.title = {
       detail: title,
-      style: new SBSurveyCreationStyle(),
+      style: new SBQuestionStyle(),
     };
     this.description = {
       detail: description,
-      style: new SBSurveyCreationStyle(),
+      style: new SBQuestionStyle(),
     };
   }
 }

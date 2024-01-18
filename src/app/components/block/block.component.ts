@@ -1,19 +1,20 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SBBlock } from '../../models/block.model';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from '../../directives/clickoutside.directive';
+import { SBQuestion } from '../../models/question.model';
 
 @Component({
-  selector: 'app-section',
+  selector: 'app-block',
   standalone: true,
-  imports: [CommonModule, FormsModule, ClickOutsideDirective],
-  templateUrl: './section.component.html',
-  styleUrl: './section.component.scss',
+  imports: [FormsModule, ClickOutsideDirective],
+  templateUrl: './block.component.html',
+  styleUrl: './block.component.scss',
 })
-export class SectionComponent {
+export class BlockComponent {
   @Input() block!: SBBlock;
   @Output() textChange = new EventEmitter<SBBlock>();
+  @Output() delete = new EventEmitter<string>();
 
   editTitle = false;
 
@@ -33,5 +34,16 @@ export class SectionComponent {
 
   onTextChange() {
     this.textChange.emit(this.block);
+  }
+
+  handleAdd() {
+    this.block.questions = [
+      ...this.block.questions,
+      new SBQuestion('Untitled Question', 'paragraph'),
+    ];
+  }
+
+  handleDelete() {
+    this.delete.emit('delete');
   }
 }

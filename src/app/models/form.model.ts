@@ -1,66 +1,63 @@
 import { SBBlock } from './block.model';
+import { SBImage } from './image.model';
 import { SBTitle } from './title.model';
 
+/**
+ * Upon form initialization, the form will have a single block with a single question and
+ * a title with default value.
+ */
 export class SBForm {
-  // @ts-ignore
-  logo: SBImage;
-  // @ts-ignore
-  title: SBTitle;
+  title = new SBTitle();
 
-  // @ts-ignore
-  blocks: SBBlock[];
+  blocks: SBBlock[] = [];
 
-  // @ts-ignore
-  general?: {
-    title: string;
-    logo: string;
-    logoUrl: string;
-    language: string;
+  logo: SBImage | null = null;
+
+  general = {
+    title: '',
+    logo: null,
+    logoUrl: '',
+    language: '',
   };
 
-  // @ts-ignore
-  welcomeSuccess?: {
-    welcomeMessage: string;
-    successMessage: string;
+  welcomeSuccess = {
+    welcomeMessage: '',
+    successMessage: '',
   };
 
-  // @ts-ignore
-  notification?: {
-    notificationTitle: string;
+  notification = {
+    notificationTitle: '',
   };
 
-  // @ts-ignore
-  team?: {
-    teamTitle: string;
-    teamName: string;
-    teamEmail: string;
-    teamPhone: string;
+  team = {
+    teamTitle: '',
+    teamName: '',
+    teamEmail: '',
+    teamPhone: '',
   };
 
-  styles?: {
+  styles = {
     colors: {
-      pageColor: string;
-      pageImage: string;
-      formColor: string;
-      formImage: string;
-      fontColor: string;
-      inputBg: string;
-    };
+      pageColor: '',
+      pageImage: '',
+      formColor: '',
+      formImage: '',
+      fontColor: '',
+      inputBg: '',
+    },
     styles: {
-      fontFamily: string;
-      fontSize: string;
-      formWidth: string;
-      labelAlignment: 'left' | 'top' | 'right' | 'bottom';
-      questionSpacing: string;
-      labelWidth: string;
-    };
-    themes: {};
-    layouts: 'classic' | 'card';
+      fontFamily: '',
+      fontSize: '',
+      formWidth: '',
+      labelAlignment: '',
+      questionSpacing: '',
+      labelWidth: '',
+    },
+    themes: {},
+    layouts: '',
   };
 
-  constructor(title: SBTitle = new SBTitle(), block?: SBBlock[], styles?: any) {
-    this.title = title;
-    if (block) this.blocks = block;
-    if (styles) this.styles = styles;
+  constructor() {
+    this.blocks.push(new SBBlock());
   }
 }

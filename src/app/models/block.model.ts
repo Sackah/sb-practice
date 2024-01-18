@@ -1,8 +1,18 @@
-export class SBBlock {
-  // @ts-ignore
-  title: string;
-  // @ts-ignore
-  questions: SBQuestion[];
+import { SBQuestionStyle } from './question-styles.model';
+import { SBQuestion } from './question.model';
 
-  constructor() {}
+export class SBBlock {
+  title: {
+    detail: string;
+    style: SBQuestionStyle;
+  };
+
+  questions: SBQuestion[] = [];
+
+  constructor(title = 'Untitled Block') {
+    this.title = {
+      detail: title,
+      style: new SBQuestionStyle(),
+    };
+  }
 }

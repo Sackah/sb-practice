@@ -5,6 +5,9 @@ import { TitleComponent } from './components/title/title.component';
 import { SBImage } from './models/image.model';
 import { ImageComponent } from './components/image/image.component';
 import { FormsModule } from '@angular/forms';
+import { SBForm } from './models/form.model';
+import { BlockComponent } from './components/block/block.component';
+import { SBBlock } from './models/block.model';
 
 @Component({
   selector: 'app-root',
@@ -17,27 +20,25 @@ import { FormsModule } from '@angular/forms';
     RouterOutlet,
     TitleComponent,
     ImageComponent,
+    BlockComponent,
   ],
 })
 export class AppComponent implements OnInit {
   image = new SBImage('https://picsum.photos/200/300');
+  form = new SBForm();
+
   ngOnInit(): void {}
 
-  showPopup = false;
-  url: string = '';
-
-  onEditImage() {
-    this.showPopup = true;
+  clg() {
+    console.log(this.form);
   }
 
-  changeImage(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
-      this.image.changeUrl(this.url);
-      console.log('edit image');
-    }
+  deleteBlock(index: number) {
+    const newList = this.form.blocks.filter((_, i) => i !== index);
+    this.form.blocks = [...newList];
   }
 
-  onDeleteImage() {
-    console.log('delete image');
+  addBlock() {
+    this.form.blocks = [...this.form.blocks, new SBBlock()];
   }
 }

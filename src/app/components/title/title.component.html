@@ -1,17 +1,16 @@
-<div
-    class="outer bg-white rounded-md py-[16px] px-[32px] my-[24px] h-[177px] flex items-center justify-center shadow-md">
-    <div class="inner w-full">
+<section>
+    <div>
         @if(!editTitle){
-        <h1 class="text-[24px] font-semibold" (dblclick)="onEditTitle($event)">
+        <h1 (dblclick)="onEditTitle($event)">
             {{title.title.detail}}
         </h1>
         }
         @if(editTitle){
-        <input type="text" class="text-[24px] font-semibold" [(ngModel)]="title.title.detail"
-            (keydown)="onEditTitle($event)" (clickOutside)="handelOutsideClick()" (dblclick)="onEditTitle($event)" />
+        <input type="text" class="title" [(ngModel)]="title.title.detail" (keydown)="onEditTitle($event)"
+            (clickOutside)="handelOutsideClick()" (dblclick)="onEditTitle($event)" />
         }
         <input id="desc" type="text" placeholder="Survey description"
             class="border-b-2 border-b-[#F0F2F5] bg-transparent w-full mt-[24px] py-[6px] outline-none"
             [(ngModel)]="title.description.detail">
     </div>
-</div>
+</section>

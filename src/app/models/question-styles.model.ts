@@ -1,4 +1,4 @@
-export class SBSurveyCreationStyle {
+export class SBQuestionStyle {
   bold: boolean = false;
   italic: boolean = false;
   underline: boolean = false;
@@ -6,6 +6,7 @@ export class SBSurveyCreationStyle {
   quote: boolean = false;
   list: 'bullet | number' | null = null;
   link?: string;
+  linkText?: string;
   image?: File;
 
   constructor() {}
