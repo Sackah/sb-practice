@@ -8,13 +8,32 @@ section {
   margin-bottom: 30px;
 }
 
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  & > img {
+    cursor: pointer;
+  }
+}
+
+ul {
+  list-style: none;
+
+  & li {
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+}
+
 h1,
 input {
   font-size: 1.5rem;
   font-weight: 600;
   color: #101928;
   display: block;
-  margin-bottom: 20px;
   -webkit-user-select: none;
   user-select: none;
   outline: none;
@@ -27,25 +46,4 @@ input:focus {
   border: none;
   border-bottom: 1px solid #101928;
   outline: none;
-}
-
-div.buttons {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-
-  & > button {
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    justify-content: center;
-    color: #fff;
-    background: #eb5017;
-    cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: none;
-  }
 }

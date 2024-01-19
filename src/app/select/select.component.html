@@ -1,0 +1,12 @@
+<section (clickOutside)="clickedOutside()">
+    <span (click)="toggleMenu()">{{selectedItem}}</span>
+    @if (isMenuOpen) {
+    <ul>
+        <li (click)="handleSeletion($event, 'multiple-choice')">Multiple Choice</li>
+        <li (click)="handleSeletion($event,'checkbox')">Checkboxes</li>
+        <li (click)="handleSeletion($event, 'dropdown')">Dropdown</li>
+        <li (click)="handleSeletion($event, 'short-text')">Short text</li>
+        <li (click)="handleSeletion($event, 'paragraph')">Paragraph</li>
+    </ul>
+    }
+</section>

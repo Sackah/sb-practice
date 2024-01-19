@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EmailEmitterComponent } from './email-emitter.component';
+import { SelectComponent } from './select.component';
 
-describe('EmailEmitterComponent', () => {
-  let component: EmailEmitterComponent;
-  let fixture: ComponentFixture<EmailEmitterComponent>;
+describe('SelectComponent', () => {
+  let component: SelectComponent;
+  let fixture: ComponentFixture<SelectComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EmailEmitterComponent]
+      imports: [SelectComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(EmailEmitterComponent);
+    fixture = TestBed.createComponent(SelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

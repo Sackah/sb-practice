@@ -1,0 +1,22 @@
+<section (dblclick)="editable = !editable" (clickOutside)="editable = false">
+    @if(!editable){
+    <main>
+        <h1 class="title">{{question.title.detail}}</h1>
+    </main>
+    }@else(){
+    <main>
+        <input class="title" type="text" [(ngModel)]="question.title.detail" />
+        <app-select></app-select>
+    </main>
+    }
+    <div class="buttons">
+        <img src="assets/copy-icon.svg" alt="">
+
+        <img (click)="handleDeleteQuestion()" src="assets/delete-icon.svg" alt="">
+
+        <button type="button" (click)="handleAddQuestion()">
+            <img src="assets/add-icon.svg" alt="">
+            New question
+        </button>
+    </div>
+</section>

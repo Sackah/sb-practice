@@ -1,6 +1,6 @@
 import { SBQuestionStyle } from './question-styles.model';
 
-type QuestionType =
+export type QuestionType =
   | 'multiple-choice'
   | 'checkbox'
   | 'dropdown'

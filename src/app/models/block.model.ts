@@ -14,5 +14,6 @@ export class SBBlock {
       detail: title,
       style: new SBQuestionStyle(),
     };
+    this.questions.push(new SBQuestion('Untitled Question', 'short-text'));
   }
 }

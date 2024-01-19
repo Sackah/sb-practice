@@ -1,20 +1,34 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
 import { SBBlock } from '../../models/block.model';
 import { FormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from '../../directives/clickoutside.directive';
 import { SBQuestion } from '../../models/question.model';
+import { DropdownService } from '../../dropdown/dropdown.service';
+import { QuestionComponent } from '../question/question.component';
 
 @Component({
   selector: 'app-block',
   standalone: true,
-  imports: [FormsModule, ClickOutsideDirective],
+  imports: [FormsModule, ClickOutsideDirective, QuestionComponent],
   templateUrl: './block.component.html',
   styleUrl: './block.component.scss',
 })
 export class BlockComponent {
   @Input() block!: SBBlock;
   @Output() textChange = new EventEmitter<SBBlock>();
-  @Output() delete = new EventEmitter<string>();
+  @Output() deleteBlock = new EventEmitter<void>();
+
+  constructor(
+    private dropdownService: DropdownService,
+    private viewContainerRef: ViewContainerRef
+  ) {}
 
   editTitle = false;
 
@@ -36,14 +50,25 @@ export class BlockComponent {
     this.textChange.emit(this.block);
   }
 
-  handleAdd() {
+  handleAddQuestion() {
     this.block.questions = [
       ...this.block.questions,
       new SBQuestion('Untitled Question', 'paragraph'),
     ];
   }
 
-  handleDelete() {
-    this.delete.emit('delete');
+  handleDeleteBlock() {
+    this.deleteBlock.emit();
+    this.dropdownService.close();
+  }
+
+  handleDeleteQuestion(index: number) {
+    const newList = this.block.questions.filter((_, i) => i !== index);
+    this.block.questions = [...newList];
+  }
+
+  toggleDropdown(event: MouseEvent, template: TemplateRef<any>) {
+    const position = { top: event.clientY + 10, left: event.clientX + 10 };
+    this.dropdownService.open(template, this.viewContainerRef, position);
   }
 }
