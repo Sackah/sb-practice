@@ -68,6 +68,7 @@ export class BlockComponent {
   }
 
   toggleDropdown(event: MouseEvent, template: TemplateRef<any>) {
+    event.stopPropagation();
     const position = { top: event.clientY + 10, left: event.clientX + 10 };
     this.dropdownService.open(template, this.viewContainerRef, position);
   }

@@ -1,4 +1,3 @@
-<div class="dropdown" [style.top.px]="position?.top" [style.left.px]="position?.left">
+<div class="dropdown" (clickOutside)="close()" [style.top.px]="position?.top" [style.left.px]="position?.left">
     <ng-content></ng-content>
 </div>
-<div class="background" (click)="close()"></div>
