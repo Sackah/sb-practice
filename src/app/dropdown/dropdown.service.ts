@@ -17,7 +17,8 @@ export class DropdownService {
   open(
     content: TemplateRef<any>,
     viewContainerRef: ViewContainerRef,
-    position: { top: number; left: number }
+    position: { top: number; left: number },
+    event: MouseEvent
   ): ComponentRef<DropdownComponent> {
     const contentViewRef = content.createEmbeddedView(null);
     const dropdownComponentRef = viewContainerRef.createComponent(
@@ -27,7 +28,14 @@ export class DropdownService {
         projectableNodes: [[...contentViewRef.rootNodes]],
       }
     );
-    dropdownComponentRef.instance.position = position;
+    const triggerElement = event.target as HTMLElement;
+    const rect = triggerElement.getBoundingClientRect();
+    const newPosition = {
+      top: rect.top + window.scrollY + position.top,
+      left: rect.left + window.scrollX + position.left,
+    };
+    dropdownComponentRef.instance.position = newPosition;
+    event.stopPropagation();
     dropdownComponentRef.instance.closeEvent.subscribe(() =>
       this.closeDropdown(dropdownComponentRef)
     );

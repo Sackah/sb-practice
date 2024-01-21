@@ -16,6 +16,7 @@ export class QuestionComponent {
   @Input() question!: SBQuestion;
   @Output() addQuestion = new EventEmitter<void>();
   @Output() deleteQuestion = new EventEmitter<void>();
+  @Output() duplicateQuestion = new EventEmitter<SBQuestion>();
   editable = false;
 
   handleAddQuestion() {
@@ -24,5 +25,9 @@ export class QuestionComponent {
 
   handleDeleteQuestion() {
     this.deleteQuestion.emit();
+  }
+
+  handleDuplicateQuestion() {
+    this.duplicateQuestion.emit(this.question);
   }
 }

@@ -9,6 +9,8 @@
   min-height: 100vh;
   font-family: Inter, sans-serif;
   padding: 10%;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .page > button {
@@ -32,4 +34,6 @@ p {
   margin-bottom: 20px;
   cursor: pointer;
   text-align: center;
+  -webkit-user-select: none;
+  user-select: none;
 }

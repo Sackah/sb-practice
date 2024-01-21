@@ -8,15 +8,22 @@
         <input class="title" type="text" [(ngModel)]="question.title.detail" />
         <app-select></app-select>
     </main>
-    }
     <div class="buttons">
-        <img src="assets/copy-icon.svg" alt="">
+        <img src="assets/copy-icon.svg" (click)="handleDuplicateQuestion()" alt="">
 
         <img (click)="handleDeleteQuestion()" src="assets/delete-icon.svg" alt="">
+
+        <span>
+            Required
+            <label>
+                <input type="checkbox" class="switch" [(ngModel)]="question.required" />
+            </label>
+        </span>
 
         <button type="button" (click)="handleAddQuestion()">
             <img src="assets/add-icon.svg" alt="">
             New question
         </button>
     </div>
+    }
 </section>

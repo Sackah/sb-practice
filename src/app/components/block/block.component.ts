@@ -22,7 +22,7 @@ import { QuestionComponent } from '../question/question.component';
 })
 export class BlockComponent {
   @Input() block!: SBBlock;
-  @Output() textChange = new EventEmitter<SBBlock>();
+  @Output() duplicateBlock = new EventEmitter<SBBlock>();
   @Output() deleteBlock = new EventEmitter<void>();
 
   constructor(
@@ -32,6 +32,10 @@ export class BlockComponent {
 
   editTitle = false;
 
+  /**
+   * This function is for toggling the edit state for the block title
+   * @param e event
+   */
   onEditTitle(e: Event) {
     if (e instanceof KeyboardEvent) {
       if (e.key === 'Enter' || e.key === 'Escape') {
@@ -42,14 +46,9 @@ export class BlockComponent {
     }
   }
 
-  handelOutsideClick() {
-    this.editTitle = false;
-  }
-
-  onTextChange() {
-    this.textChange.emit(this.block);
-  }
-
+  /**
+   * Operations on the question list
+   */
   handleAddQuestion() {
     this.block.questions = [
       ...this.block.questions,
@@ -57,19 +56,38 @@ export class BlockComponent {
     ];
   }
 
-  handleDeleteBlock() {
-    this.deleteBlock.emit();
-    this.dropdownService.close();
-  }
-
   handleDeleteQuestion(index: number) {
     const newList = this.block.questions.filter((_, i) => i !== index);
     this.block.questions = [...newList];
   }
 
+  handleDuplicateQuestion(event: SBQuestion, index: number) {
+    const currentQuestion = JSON.parse(JSON.stringify(event));
+    this.block.questions = [
+      ...this.block.questions.slice(0, index + 1),
+      currentQuestion,
+      ...this.block.questions.slice(index + 1),
+    ];
+  }
+
+  /**
+   * Operations on the block itself
+   */
+  handleDeleteBlock() {
+    this.deleteBlock.emit();
+    this.dropdownService.close();
+  }
+
+  handleDuplicateBlock() {
+    this.duplicateBlock.emit(this.block);
+    this.dropdownService.close();
+  }
+
   toggleDropdown(event: MouseEvent, template: TemplateRef<any>) {
-    event.stopPropagation();
-    const position = { top: event.clientY + 10, left: event.clientX + 10 };
-    this.dropdownService.open(template, this.viewContainerRef, position);
+    const position = {
+      top: 20,
+      left: -20,
+    };
+    this.dropdownService.open(template, this.viewContainerRef, position, event);
   }
 }

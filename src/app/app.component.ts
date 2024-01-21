@@ -41,4 +41,13 @@ export class AppComponent implements OnInit {
   addBlock() {
     this.form.blocks = [...this.form.blocks, new SBBlock()];
   }
+
+  duplicateBlock(event: SBBlock, index: number) {
+    const currentBlock = JSON.parse(JSON.stringify(event));
+    this.form.blocks = [
+      ...this.form.blocks.slice(0, index + 1),
+      currentBlock,
+      ...this.form.blocks.slice(index + 1),
+    ];
+  }
 }

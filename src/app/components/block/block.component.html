@@ -2,7 +2,7 @@
     <header>
         @if(editTitle){
         <input type="text" class="label" [(ngModel)]="block.title.detail" (keydown)="onEditTitle($event)"
-            (clickOutside)="handelOutsideClick()" (dblclick)="onEditTitle($event)" />
+            (clickOutside)="editTitle = false" (dblclick)="onEditTitle($event)" />
         } @else {
         <h1 class="label" (dblclick)="onEditTitle($event)">{{block.title.detail}}</h1>
         }
@@ -10,14 +10,22 @@
     </header>
     @for (question of block.questions; track $index) {
     <app-question [question]="question" (addQuestion)="handleAddQuestion()"
-        (deleteQuestion)="handleDeleteQuestion($index)"></app-question>
+        (deleteQuestion)="handleDeleteQuestion($index)" (duplicateQuestion)="handleDuplicateQuestion($event, $index)">
+        ></app-question>
     }
+    @if(block.questions.length < 1){ <div class="buttons">
+        <button type="button" (click)="handleAddQuestion()">
+            <img src="assets/add-icon.svg" alt="">
+            New question
+        </button>
+        </div>
+        }
 </section>
 
 <ng-template #dropdownTemplate>
     <ul>
-        <li>duplicate</li>
-        <li>add</li>
-        <li (click)="handleDeleteBlock()">delete</li>
+        <li (click)="handleDuplicateBlock()"><img src="assets/copy-icon-2.svg" alt="">Duplicate</li>
+        <li (click)="handleDeleteBlock()"> <img src="assets/delete-icon-2.svg" alt="">Delete</li>
+        <li><img src="assets/minus-icon-2.svg" alt="">Add page break</li>
     </ul>
 </ng-template>
