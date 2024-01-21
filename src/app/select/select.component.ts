@@ -1,4 +1,4 @@
-import { Component, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ClickOutsideDirective } from '../directives/clickoutside.directive';
 import { QuestionType } from '../models/question.model';
 import { BehaviorSubject } from 'rxjs';
@@ -16,6 +16,7 @@ export class SelectComponent {
   selection = new BehaviorSubject<QuestionType>('multiple-choice');
   selectionObservable = this.selection.asObservable();
   selectedItem!: string;
+  @Output() selectionChange = new EventEmitter<QuestionType>();
 
   ngOnInit() {
     this.selectedItem = 'Multiple Choice';
@@ -36,23 +37,24 @@ export class SelectComponent {
     this.selectionObservable.subscribe((item) => {
       switch (item) {
         case 'multiple-choice':
-          /**
-           * So inside these individual cases you can emit some event that the question component
-           * can listen to and updated/add the question type.
-           */
           this.selectedItem = 'Multiple Choice';
+          this.selectionChange.emit(item);
           break;
         case 'checkbox':
           this.selectedItem = 'Checkboxes';
+          this.selectionChange.emit(item);
           break;
         case 'dropdown':
           this.selectedItem = 'Dropdown';
+          this.selectionChange.emit(item);
           break;
         case 'paragraph':
           this.selectedItem = 'Paragraph';
+          this.selectionChange.emit(item);
           break;
         case 'short-text':
           this.selectedItem = 'Short text';
+          this.selectionChange.emit(item);
           break;
         default:
           break;

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SBQuestion } from '../../models/question.model';
+import { QuestionType, SBQuestion } from '../../models/question.model';
 import { ClickOutsideDirective } from '../../directives/clickoutside.directive';
 import { FormsModule } from '@angular/forms';
 import { LongpressDirective } from '../../directives/longpress.directive';
@@ -29,5 +29,19 @@ export class QuestionComponent {
 
   handleDuplicateQuestion() {
     this.duplicateQuestion.emit(this.question);
+  }
+
+  handleTypeChange(event: QuestionType) {
+    this.question.type = event;
+    if (event === 'multiple-choice' || event === 'checkbox') {
+      this.question.options = ['option 1'];
+    }
+  }
+
+  /**
+   * Operations on option
+   */
+  addOption() {
+    this.question.options.push(`option ${this.question.options.length + 1}`);
   }
 }

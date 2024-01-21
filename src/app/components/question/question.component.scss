@@ -108,3 +108,65 @@ $knob-offset: 0.2rem;
     }
   }
 }
+
+/**
+ * Question Types
+ */
+.paragraph {
+  border-bottom: 1px dashed #ccc;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+
+  &[contenteditable="true"]:empty:before {
+    content: attr(data-placeholder);
+    color: #aaa;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.mcq {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+
+  & > input {
+    display: inline;
+    font-size: 1rem;
+  }
+
+  & > input[type="text"] {
+    border: none;
+    border-bottom: 1px solid #101928;
+    outline: none;
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.adder {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  font-size: 1rem;
+
+  & p:first-of-type {
+    display: inline;
+    color: #667185;
+    cursor: pointer;
+  }
+  & p:last-of-type {
+    display: inline;
+    color: #1671d9;
+    cursor: pointer;
+  }
+}

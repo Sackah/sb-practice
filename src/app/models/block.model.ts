@@ -14,6 +14,8 @@ export class SBBlock {
       detail: title,
       style: new SBQuestionStyle(),
     };
-    this.questions.push(new SBQuestion('Untitled Question', 'short-text'));
+    const mcq = new SBQuestion('Untitled Question', 'multiple-choice');
+    mcq.options = ['option 1'];
+    this.questions.push(mcq);
   }
 }

@@ -15,14 +15,14 @@ export class SBQuestion {
   type: QuestionType;
   tag?: string;
   required = false;
-  options?: string[];
+  options: string[] = [];
   answers: string | string[] = '';
 
   constructor(
     title = 'Untitled Question',
     type: QuestionType,
-    tag?: string,
-    options?: string[]
+    options?: string[],
+    tag?: string
   ) {
     this.title = {
       detail: title,
@@ -30,6 +30,6 @@ export class SBQuestion {
     };
     this.type = type;
     this.tag = tag;
-    this.options = options;
+    options?.forEach((option) => this.options.push(option));
   }
 }

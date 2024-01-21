@@ -52,7 +52,7 @@ export class BlockComponent {
   handleAddQuestion() {
     this.block.questions = [
       ...this.block.questions,
-      new SBQuestion('Untitled Question', 'paragraph'),
+      new SBQuestion('Untitled Question', 'multiple-choice', ['option 1']),
     ];
   }
 
