@@ -33,7 +33,11 @@ export class QuestionComponent {
 
   handleTypeChange(event: QuestionType) {
     this.question.type = event;
-    if (event === 'multiple-choice' || event === 'checkbox') {
+    if (
+      event === 'multiple-choice' ||
+      event === 'checkbox' ||
+      event === 'dropdown'
+    ) {
       this.question.options = ['option 1'];
     }
   }

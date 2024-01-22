@@ -10,13 +10,12 @@ section {
   user-select: none;
 }
 
-h1,
-input.title {
-  font-size: 1.5rem;
-  font-weight: 600;
+.title {
+  font-size: 1.15rem;
+  font-weight: 400;
   color: #101928;
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 2px;
   -webkit-user-select: none;
   user-select: none;
   outline: none;
@@ -32,6 +31,7 @@ input.title:focus {
 }
 
 input#desc,
+input.desc,
 input#desc:focus {
   font-size: 1rem;
   border: none;
@@ -40,4 +40,48 @@ input#desc:focus {
   display: block;
   outline: none;
   width: 100%;
+}
+
+input.desc {
+  margin-top: 10px;
+  &:disabled {
+    background: #fff;
+  }
+}
+
+.text-styles {
+  label {
+    position: relative;
+
+    #bold,
+    #italic,
+    #underline,
+    #desc-bold,
+    #desc-italic,
+    #desc-underline {
+      appearance: none;
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      position: relative;
+
+      + svg {
+        position: absolute;
+        left: 0;
+      }
+
+      &:checked + svg > path {
+        fill: #101928;
+      }
+    }
+  }
+}
+
+/**** Styling for text appearanc ****/
+.text-bold {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.text-italic {
+  font-style: italic;
 }
