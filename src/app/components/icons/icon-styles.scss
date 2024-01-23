@@ -1,0 +1,15 @@
+svg {
+  position: absolute;
+  left: 0;
+
+  &:hover {
+    cursor: pointer;
+    background: #eee;
+  }
+
+  &.icon-checked {
+    & > path {
+      fill: #000;
+    }
+  }
+}

@@ -1,33 +1,26 @@
 <section (dblclick)="onEditTitle($event)" (clickOutside)="handelOutsideClick()">
     <div>
         @if(!editTitle){
-            <h1 [class]="titleStyle">
-                {{title.title.detail}}
-            </h1>
-            <input [class]="descriptionStyle" type="text" placeholder="Survey description"
+        <h1 [class]="titleStyle">
+            {{title.title.detail}}
+        </h1>
+        <input [class]="descriptionStyle" type="text" placeholder="Survey description"
             [value]="title.description.detail">
         }
         @if(editTitle){
-            <!-- Input for title -->
+        <!-- Input for title -->
         <input type="text" [class]="titleStyle" [(ngModel)]="title.title.detail" (keydown)="onEditTitle($event)"
             (dblclick)="onEditTitle($event)" />
 
-            <!-- SVGS!!!! -->
-            <div class="text-styles">
+        <!-- ICONS -->
+        <div class="text-styles">
             <label for="bold">
                 <input id="bold" type="checkbox" [(ngModel)]="title.title.style.bold">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                    <path
-                        d="M19.6 15.29C20.57 14.62 21.25 13.52 21.25 12.5C21.25 10.24 19.5 8.5 17.25 8.5H11V22.5H18.04C20.13 22.5 21.75 20.8 21.75 18.71C21.75 17.19 20.89 15.89 19.6 15.29ZM14 11H17C17.83 11 18.5 11.67 18.5 12.5C18.5 13.33 17.83 14 17 14H14V11ZM17.5 20H14V17H17.5C18.33 17 19 17.67 19 18.5C19 19.33 18.33 20 17.5 20Z"
-                        fill="#D0D5DD" />
-                </svg>
+                <bold-icon [checked]="title.title.style.bold"></bold-icon>
             </label>
             <label for="italic">
                 <input id="italic" type="checkbox" [(ngModel)]="title.title.style.italic">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                    <path d="M14 8.5V11.5H16.21L12.79 19.5H10V22.5H18V19.5H15.79L19.21 11.5H22V8.5H14Z"
-                    fill="#D0D5DD" />
-                </svg>
+                <italic-icon [checked]="title.title.style.italic"></italic-icon>
             </label>
         </div>
 
@@ -36,24 +29,17 @@
         <input id="desc" type="text" placeholder="Survey description" [class]="descriptionStyle"
             [(ngModel)]="title.description.detail">
 
-            <!-- SVGS!!!! -->
-            <div class="text-styles">
-                <label for="desc-bold">
-                    <input id="desc-bold" type="checkbox" [(ngModel)]="title.description.style.bold">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                        <path
-                        d="M19.6 15.29C20.57 14.62 21.25 13.52 21.25 12.5C21.25 10.24 19.5 8.5 17.25 8.5H11V22.5H18.04C20.13 22.5 21.75 20.8 21.75 18.71C21.75 17.19 20.89 15.89 19.6 15.29ZM14 11H17C17.83 11 18.5 11.67 18.5 12.5C18.5 13.33 17.83 14 17 14H14V11ZM17.5 20H14V17H17.5C18.33 17 19 17.67 19 18.5C19 19.33 18.33 20 17.5 20Z"
-                            fill="#D0D5DD" />
-                    </svg>
-                </label>
-                <label for="desc-italic">
-                    <input id="desc-italic" type="checkbox" [(ngModel)]="title.description.style.italic">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
-                        <path d="M14 8.5V11.5H16.21L12.79 19.5H10V22.5H18V19.5H15.79L19.21 11.5H22V8.5H14Z"
-                            fill="#D0D5DD" />
-                    </svg>
-                </label>
-            </div>
+        <!-- ICONS -->
+        <div class="text-styles">
+            <label for="desc-bold">
+                <input id="desc-bold" type="checkbox" [(ngModel)]="title.description.style.bold">
+                <bold-icon [checked]="title.description.style.bold"></bold-icon>
+            </label>
+            <label for="desc-italic">
+                <input id="desc-italic" type="checkbox" [(ngModel)]="title.description.style.italic">
+                <italic-icon [checked]="title.description.style.italic"></italic-icon>
+            </label>
+        </div>
         }
     </div>
 </section>

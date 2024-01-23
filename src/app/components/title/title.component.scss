@@ -10,6 +10,7 @@ section {
   user-select: none;
 }
 
+/********* Default title *********/
 .title {
   font-size: 1.15rem;
   font-weight: 400;
@@ -64,20 +65,11 @@ input.desc {
       width: 32px;
       height: 32px;
       position: relative;
-
-      + svg {
-        position: absolute;
-        left: 0;
-      }
-
-      &:checked + svg > path {
-        fill: #101928;
-      }
     }
   }
 }
 
-/**** Styling for text appearanc ****/
+/**** Styling for text appearance ****/
 .text-bold {
   font-size: 1.5rem;
   font-weight: 600;

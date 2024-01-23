@@ -3,11 +3,19 @@ import { SBTitle } from '../../models/title.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from '../../directives/clickoutside.directive';
+import { BoldIconComponent } from '../icons/bold.component';
+import { ItalicIconComponent } from '../icons/italic.component';
 
 @Component({
   selector: 'app-title',
   standalone: true,
-  imports: [CommonModule, FormsModule, ClickOutsideDirective],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ClickOutsideDirective,
+    BoldIconComponent,
+    ItalicIconComponent,
+  ],
   templateUrl: './title.component.html',
   styleUrl: './title.component.scss',
 })
@@ -18,7 +26,7 @@ export class TitleComponent implements OnInit {
   editTitle = false;
 
   ngOnInit(): void {
-    this.title.title.style.bold = true;
+    // this.title.title.style.bold = true;
   }
 
   onEditTitle(e: Event) {
