@@ -1,13 +1,26 @@
-<section>
+<section (clickOutside)="editTitle = false">
+    @if(editTitle){
     <header>
-        @if(editTitle){
-        <input type="text" class="label" [(ngModel)]="block.title.detail" (keydown)="onEditTitle($event)"
-            (clickOutside)="editTitle = false" (dblclick)="onEditTitle($event)" />
-        } @else {
-        <h1 class="label" (dblclick)="onEditTitle($event)">{{block.title.detail}}</h1>
-        }
+        <input type="text" [class]="titleStyle" [(ngModel)]="block.title.detail" (keydown)="onEditTitle($event)"
+            (dblclick)="onEditTitle($event)" />
         <img src="assets/3dots.svg" (click)="toggleDropdown($event, dropdownTemplate)" alt="">
     </header>
+    <div class="text-styles">
+        <label for="bold">
+            <input id="bold" type="checkbox" [(ngModel)]="block.title.style.bold">
+            <bold-icon [checked]="block.title.style.bold"></bold-icon>
+        </label>
+        <label for="italic">
+            <input id="italic" type="checkbox" [(ngModel)]="block.title.style.italic">
+            <italic-icon [checked]="block.title.style.italic"></italic-icon>
+        </label>
+    </div>
+    } @else {
+    <header>
+        <h1 [class]="titleStyle" (dblclick)="onEditTitle($event)">{{block.title.detail}}</h1>
+        <img src="assets/3dots.svg" (click)="toggleDropdown($event, dropdownTemplate)" alt="">
+    </header>
+    }
     @for (question of block.questions; track $index) {
     <app-question [question]="question" (addQuestion)="handleAddQuestion()"
         (deleteQuestion)="handleDeleteQuestion($index)" (duplicateQuestion)="handleDuplicateQuestion($event, $index)">

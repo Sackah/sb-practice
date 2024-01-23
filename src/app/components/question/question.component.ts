@@ -4,13 +4,21 @@ import { ClickOutsideDirective } from '../../directives/clickoutside.directive';
 import { FormsModule } from '@angular/forms';
 import { LongpressDirective } from '../../directives/longpress.directive';
 import { SelectComponent } from '../../select/select.component';
+import { BoldIconComponent } from '../icons/bold.component';
+import { ItalicIconComponent } from '../icons/italic.component';
 
 @Component({
   selector: 'app-question',
   standalone: true,
-  imports: [ClickOutsideDirective, FormsModule, SelectComponent],
+  imports: [
+    ClickOutsideDirective,
+    FormsModule,
+    SelectComponent,
+    BoldIconComponent,
+    ItalicIconComponent,
+  ],
   templateUrl: './question.component.html',
-  styleUrl: './question.component.scss',
+  styleUrls: ['./question.component.scss', '../styles/text.styles.scss'],
 })
 export class QuestionComponent {
   @Input() question!: SBQuestion;
@@ -40,6 +48,14 @@ export class QuestionComponent {
     ) {
       this.question.options = ['option 1'];
     }
+  }
+
+  get titleStyle() {
+    return {
+      title: true,
+      'text-bold': this.question.title.style.bold,
+      'text-italic': this.question.title.style.italic,
+    };
   }
 
   /**

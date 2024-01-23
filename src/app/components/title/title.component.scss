@@ -49,31 +49,3 @@ input.desc {
     background: #fff;
   }
 }
-
-.text-styles {
-  label {
-    position: relative;
-
-    #bold,
-    #italic,
-    #underline,
-    #desc-bold,
-    #desc-italic,
-    #desc-underline {
-      appearance: none;
-      display: inline-block;
-      width: 32px;
-      height: 32px;
-      position: relative;
-    }
-  }
-}
-
-/**** Styling for text appearance ****/
-.text-bold {
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-.text-italic {
-  font-style: italic;
-}

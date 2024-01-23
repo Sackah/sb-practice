@@ -17,7 +17,7 @@ import { ItalicIconComponent } from '../icons/italic.component';
     ItalicIconComponent,
   ],
   templateUrl: './title.component.html',
-  styleUrl: './title.component.scss',
+  styleUrls: ['./title.component.scss', '../styles/text.styles.scss'],
 })
 export class TitleComponent implements OnInit {
   @Input() title!: SBTitle;
@@ -26,7 +26,7 @@ export class TitleComponent implements OnInit {
   editTitle = false;
 
   ngOnInit(): void {
-    // this.title.title.style.bold = true;
+    this.title.title.style.bold = true;
   }
 
   onEditTitle(e: Event) {
