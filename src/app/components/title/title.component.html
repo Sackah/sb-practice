@@ -1,16 +1,45 @@
-<section>
+<section (dblclick)="onEditTitle($event)" (clickOutside)="handelOutsideClick()">
     <div>
         @if(!editTitle){
-        <h1 (dblclick)="onEditTitle($event)">
+        <h1 [class]="titleStyle">
             {{title.title.detail}}
         </h1>
+        <input [class]="descriptionStyle" type="text" placeholder="Survey description"
+            [value]="title.description.detail">
         }
         @if(editTitle){
-        <input type="text" class="title" [(ngModel)]="title.title.detail" (keydown)="onEditTitle($event)"
-            (clickOutside)="handelOutsideClick()" (dblclick)="onEditTitle($event)" />
-        }
-        <input id="desc" type="text" placeholder="Survey description"
-            class="border-b-2 border-b-[#F0F2F5] bg-transparent w-full mt-[24px] py-[6px] outline-none"
+        <!-- Input for title -->
+        <input type="text" [class]="titleStyle" [(ngModel)]="title.title.detail" (keydown)="onEditTitle($event)"
+            (dblclick)="onEditTitle($event)" />
+
+        <!-- ICONS -->
+        <div class="text-styles">
+            <label for="bold">
+                <input id="bold" type="checkbox" [(ngModel)]="title.title.style.bold">
+                <bold-icon [checked]="title.title.style.bold"></bold-icon>
+            </label>
+            <label for="italic">
+                <input id="italic" type="checkbox" [(ngModel)]="title.title.style.italic">
+                <italic-icon [checked]="title.title.style.italic"></italic-icon>
+            </label>
+        </div>
+
+        <!-- Input for description -->
+
+        <input id="desc" type="text" placeholder="Survey description" [class]="descriptionStyle"
             [(ngModel)]="title.description.detail">
+
+        <!-- ICONS -->
+        <div class="text-styles">
+            <label for="desc-bold">
+                <input id="desc-bold" type="checkbox" [(ngModel)]="title.description.style.bold">
+                <bold-icon [checked]="title.description.style.bold"></bold-icon>
+            </label>
+            <label for="desc-italic">
+                <input id="desc-italic" type="checkbox" [(ngModel)]="title.description.style.italic">
+                <italic-icon [checked]="title.description.style.italic"></italic-icon>
+            </label>
+        </div>
+        }
     </div>
 </section>

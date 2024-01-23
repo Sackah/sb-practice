@@ -39,9 +39,9 @@ ul {
 }
 
 h1,
-input {
-  font-size: 1.5rem;
-  font-weight: 600;
+input[type="text"] {
+  font-size: 1.15rem;
+  font-weight: 400;
   color: #101928;
   display: block;
   -webkit-user-select: none;
@@ -50,8 +50,8 @@ input {
   width: 100%;
 }
 
-input,
-input:focus {
+input[type="text"],
+input[type="text"]:focus {
   padding-bottom: 5px;
   border: none;
   border-bottom: 1px solid #101928;

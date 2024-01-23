@@ -12,13 +12,21 @@ import { ClickOutsideDirective } from '../../directives/clickoutside.directive';
 import { SBQuestion } from '../../models/question.model';
 import { DropdownService } from '../../dropdown/dropdown.service';
 import { QuestionComponent } from '../question/question.component';
+import { BoldIconComponent } from '../icons/bold.component';
+import { ItalicIconComponent } from '../icons/italic.component';
 
 @Component({
   selector: 'app-block',
   standalone: true,
-  imports: [FormsModule, ClickOutsideDirective, QuestionComponent],
+  imports: [
+    FormsModule,
+    ClickOutsideDirective,
+    QuestionComponent,
+    BoldIconComponent,
+    ItalicIconComponent,
+  ],
   templateUrl: './block.component.html',
-  styleUrl: './block.component.scss',
+  styleUrls: ['./block.component.scss', '../styles/text.styles.scss'],
 })
 export class BlockComponent {
   @Input() block!: SBBlock;
@@ -89,5 +97,17 @@ export class BlockComponent {
       left: -20,
     };
     this.dropdownService.open(template, this.viewContainerRef, position, event);
+  }
+
+  ngOnInit() {
+    this.block.title.style.bold = true;
+  }
+
+  get titleStyle() {
+    return {
+      label: true,
+      'text-bold': this.block.title.style.bold,
+      'text-italic': this.block.title.style.italic,
+    };
   }
 }

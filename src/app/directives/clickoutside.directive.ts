@@ -1,12 +1,8 @@
-import { DOCUMENT } from '@angular/common';
 import {
   Directive,
   ElementRef,
   Output,
   EventEmitter,
-  Inject,
-  AfterViewInit,
-  OnDestroy,
   HostListener,
 } from '@angular/core';
 
