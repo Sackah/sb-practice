@@ -14,6 +14,10 @@
             <input id="italic" type="checkbox" [(ngModel)]="block.title.style.italic">
             <italic-icon [checked]="block.title.style.italic"></italic-icon>
         </label>
+        <label for="large">
+            <input type="checkbox" id="large" [(ngModel)]="block.title.style.large">
+            <large-icon [checked]="block.title.style.large"></large-icon>
+        </label>
     </div>
     } @else {
     <header>

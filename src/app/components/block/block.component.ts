@@ -14,19 +14,21 @@ import { DropdownService } from '../../dropdown/dropdown.service';
 import { QuestionComponent } from '../question/question.component';
 import { BoldIconComponent } from '../icons/bold.component';
 import { ItalicIconComponent } from '../icons/italic.component';
+import { LargeIconComponent } from '../icons/large.component';
 
 @Component({
   selector: 'app-block',
   standalone: true,
+  templateUrl: './block.component.html',
+  styleUrls: ['./block.component.scss', '../styles/text.styles.scss'],
   imports: [
     FormsModule,
     ClickOutsideDirective,
     QuestionComponent,
     BoldIconComponent,
     ItalicIconComponent,
+    LargeIconComponent,
   ],
-  templateUrl: './block.component.html',
-  styleUrls: ['./block.component.scss', '../styles/text.styles.scss'],
 })
 export class BlockComponent {
   @Input() block!: SBBlock;
