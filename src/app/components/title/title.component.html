@@ -22,6 +22,10 @@
                 <input id="italic" type="checkbox" [(ngModel)]="title.title.style.italic">
                 <italic-icon [checked]="title.title.style.italic"></italic-icon>
             </label>
+            <label for="large">
+                <input type="checkbox" id="large" [(ngModel)]="title.title.style.large">
+                <large-icon [checked]="title.title.style.large"></large-icon>
+            </label>
         </div>
 
         <!-- Input for description -->
@@ -38,6 +42,10 @@
             <label for="desc-italic">
                 <input id="desc-italic" type="checkbox" [(ngModel)]="title.description.style.italic">
                 <italic-icon [checked]="title.description.style.italic"></italic-icon>
+            </label>
+            <label for="desc-large">
+                <input type="checkbox" id="desc-large" [(ngModel)]="title.description.style.large">
+                <large-icon [checked]="title.description.style.large"></large-icon>
             </label>
         </div>
         }

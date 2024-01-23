@@ -43,6 +43,10 @@
             <input id="italic" type="checkbox" [(ngModel)]="question.title.style.italic">
             <italic-icon [checked]="question.title.style.italic"></italic-icon>
         </label>
+        <label for="large">
+            <input type="checkbox" id="large" [(ngModel)]="question.title.style.large">
+            <large-icon [checked]="question.title.style.large"></large-icon>
+        </label>
     </div>
 
     <!-- Cases for question types in editable mode -->

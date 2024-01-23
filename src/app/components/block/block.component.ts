@@ -105,9 +105,10 @@ export class BlockComponent {
 
   get titleStyle() {
     return {
-      label: true,
+      'text-base': true,
       'text-bold': this.block.title.style.bold,
       'text-italic': this.block.title.style.italic,
+      'text-large': this.block.title.style.large,
     };
   }
 }
