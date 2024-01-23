@@ -8,20 +8,22 @@ import { FormsModule } from '@angular/forms';
 import { SBForm } from './models/form.model';
 import { BlockComponent } from './components/block/block.component';
 import { SBBlock } from './models/block.model';
+import { CustomeDropdownComponent } from "./custome-dropdown/custome-dropdown.component";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterOutlet,
-    TitleComponent,
-    ImageComponent,
-    BlockComponent,
-  ],
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss',
+    imports: [
+        CommonModule,
+        FormsModule,
+        RouterOutlet,
+        TitleComponent,
+        ImageComponent,
+        BlockComponent,
+        CustomeDropdownComponent
+    ]
 })
 export class AppComponent implements OnInit {
   image = new SBImage('https://picsum.photos/200/300');
@@ -50,4 +52,7 @@ export class AppComponent implements OnInit {
       ...this.form.blocks.slice(index + 1),
     ];
   }
+
+  // .................
+ 
 }
