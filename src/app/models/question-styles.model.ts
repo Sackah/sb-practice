@@ -1,6 +1,7 @@
 export class SBQuestionStyle {
   bold: boolean = false;
   italic: boolean = false;
+  large: boolean = false;
   underline: boolean = false;
   strikethrough: boolean = false;
   quote: boolean = false;

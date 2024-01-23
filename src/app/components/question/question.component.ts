@@ -6,19 +6,21 @@ import { LongpressDirective } from '../../directives/longpress.directive';
 import { SelectComponent } from '../../select/select.component';
 import { BoldIconComponent } from '../icons/bold.component';
 import { ItalicIconComponent } from '../icons/italic.component';
+import { LargeIconComponent } from '../icons/large.component';
 
 @Component({
   selector: 'app-question',
   standalone: true,
+  templateUrl: './question.component.html',
+  styleUrls: ['./question.component.scss', '../styles/text.styles.scss'],
   imports: [
     ClickOutsideDirective,
     FormsModule,
     SelectComponent,
     BoldIconComponent,
     ItalicIconComponent,
+    LargeIconComponent,
   ],
-  templateUrl: './question.component.html',
-  styleUrls: ['./question.component.scss', '../styles/text.styles.scss'],
 })
 export class QuestionComponent {
   @Input() question!: SBQuestion;
@@ -53,8 +55,10 @@ export class QuestionComponent {
   get titleStyle() {
     return {
       title: true,
+      'text-base': true,
       'text-bold': this.question.title.style.bold,
       'text-italic': this.question.title.style.italic,
+      'text-large': this.question.title.style.large,
     };
   }
 

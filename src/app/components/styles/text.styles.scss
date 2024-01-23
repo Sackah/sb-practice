@@ -2,12 +2,7 @@
   label {
     position: relative;
 
-    #bold,
-    #italic,
-    #underline,
-    #desc-bold,
-    #desc-italic,
-    #desc-underline {
+    input[type="checkbox"] {
       appearance: none;
       display: inline-block;
       width: 32px;
@@ -18,10 +13,17 @@
 }
 
 /**** Styling for text appearance ****/
+.text-base {
+  font-size: 1rem;
+  font-weight: 400;
+}
 .text-bold {
-  font-size: 1.5rem !important;
-  font-weight: 600 !important;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 .text-italic {
   font-style: italic;
+}
+.text-large {
+  font-size: 2rem;
 }
