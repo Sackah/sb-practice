@@ -23,5 +23,16 @@ here
 <app-custome-dropdown></app-custome-dropdown>
 
 
+<!-- .......Pagination -->
 
+<div *ngFor="let item of itemsOnCurrentPage">
+  <!-- Display item details here -->
+  <p>{{ item }}</p> 
+</div>
+
+ <app-pagination
+    [currentPage]="currentPage"
+    [totalPages]="totalPages"
+    (pageChange)="changePage($event)"
+  ></app-pagination>
 

@@ -9,21 +9,23 @@ import { SBForm } from './models/form.model';
 import { BlockComponent } from './components/block/block.component';
 import { SBBlock } from './models/block.model';
 import { CustomeDropdownComponent } from "./custome-dropdown/custome-dropdown.component";
+import { PaginationComponent } from "./pagination/pagination.component";
 
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.scss',
-    imports: [
-        CommonModule,
-        FormsModule,
-        RouterOutlet,
-        TitleComponent,
-        ImageComponent,
-        BlockComponent,
-        CustomeDropdownComponent
-    ]
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterOutlet,
+    TitleComponent,
+    ImageComponent,
+    BlockComponent,
+    CustomeDropdownComponent,
+    PaginationComponent,
+  ],
 })
 export class AppComponent implements OnInit {
   image = new SBImage('https://picsum.photos/200/300');
@@ -54,5 +56,69 @@ export class AppComponent implements OnInit {
   }
 
   // .................
+
+  items: any[] = [
+    /* Your array of items */
+    'sam',
+    'daniel',
+    'tonita',
+    'mark',
+    'sam',
+    'daniel',
+    'tonita',
+    'mark',
+    'sam',
+    'daniel',
+    'tonita',
+    'mark',
+    'sam',
+    'daniel',
+    'tonita',
+    'mark',
+    'sam',
+    'daniel',
+    'tonita',
+    'mark',
+    'sam',
+    'daniel',
+    'tonita',
+    'mark',
+    'sam',
+    'daniel',
+    'tonita',
+    'mark',
+    'sam',
+    'daniel',
+    'tonita',
+    'mark',
+    'sam',
+    'daniel',
+    'tonita',
+    'mark',
+    'sam',
+    'daniel',
+    'tonita',
+    'mark',
+    'sam',
+    'daniel',
+    'tonita',
+    'mark',
+  ];
+  itemsPerPage: number = 10; // Number of items to display per page
+  currentPage: number = 1;
  
+  get itemsOnCurrentPage(): any[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.items.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.items.length / this.itemsPerPage);
+  }
+
+  changePage(page: number) {
+    this.currentPage = page;
+  }
+
+  
 }
