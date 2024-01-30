@@ -1,100 +1,110 @@
 <section (dblclick)="editable = !editable" (clickOutside)="editable = false">
     @if(!editable){
-    <main>
-        <h1 [class]="titleStyle">{{question.title.detail}}</h1>
-    </main>
+        <main>
+            <h1 [class]="titleStyle">{{question.title.detail}}</h1>
+        </main>
 
-    <!-- Cases for question types -->
-    @switch (question.type) {
-    @case ('multiple-choice') {
-    @for (option of question.options; track $index) {
-    <div class="mcq">
-        <label for="{{option}}{{$index}}">{{option}}</label>
-        <input type="radio" id="{{option}}{{$index}}" name="option" [value]="option">
-    </div>
-    }
-    }
-    @case ('checkbox') {
+        <!-- Cases for question types -->
+        @switch (question.type) {
+            @case ('multiple-choice') {
+                @for (option of question.options; track $index) {
+                    <div class="mcq">
+                        <label for="{{option}}{{$index}}">{{option}}</label>
+                        <input type="radio" id="{{option}}{{$index}}" name="option" [value]="option">
+                    </div>
+                }
+            }
+            @case ('checkbox') {
 
-    }
-    @case ('dropdown') {
+            }
+            @case ('dropdown') {
 
-    }
-    @case ('short-text') {
-    <p class="paragraph" contenteditable="true" data-placeholder="Short answer text"></p>
-    }
-    @case ('paragraph') {
-    <p class="paragraph" contenteditable="true" data-placeholder="Long answer text"></p>
-    }
+            }
+            @case ('short-text') {
+                <p class="paragraph" contenteditable="true" data-placeholder="Short answer text"></p>
+            }
+            @case ('paragraph') {
+                <p class="paragraph" contenteditable="true" data-placeholder="Long answer text"></p>
+            }
 
-    }
+        }
     }
     @else(){
-    <main>
-        <input [class]="titleStyle" type="text" [(ngModel)]="question.title.detail" />
-        <app-select (selectionChange)="handleTypeChange($event)"></app-select>
-    </main>
-    <div class="text-styles">
-        <label for="bold">
-            <input id="bold" type="checkbox" [(ngModel)]="question.title.style.bold">
-            <bold-icon [checked]="question.title.style.bold"></bold-icon>
-        </label>
-        <label for="italic">
-            <input id="italic" type="checkbox" [(ngModel)]="question.title.style.italic">
-            <italic-icon [checked]="question.title.style.italic"></italic-icon>
-        </label>
-        <label for="large">
-            <input type="checkbox" id="large" [(ngModel)]="question.title.style.large">
-            <large-icon [checked]="question.title.style.large"></large-icon>
-        </label>
-    </div>
-
-    <!-- Cases for question types in editable mode -->
-    @switch (question.type) {
-    @case ('multiple-choice')
-    {
-    @for (option of question.options; track $index) {
-    <div class="mcq">
-        <input type="text" [(ngModel)]="question.options[$index]">
-        <input type="radio" id="option{{$index}}" name="option" [value]="option">
-    </div>
-    }
-    <div class="adder">
-        <input type="radio" disabled>
-        <p (click)="addOption()">Add option</p> or <p>add "Other"</p>
-    </div>
-    }
-    @case ('checkbox') {
-
-    }
-    @case ('dropdown') {
-
-    }
-    @case ('short-text') {
-    <p class="paragraph" contenteditable="true" data-placeholder="Short answer text"></p>
-    }
-    @case ('paragraph') {
-    <p class="paragraph" contenteditable="true" data-placeholder="Long answer text"></p>
-    }
-    }
-
-    <div class="buttons">
-        <img src="assets/copy-icon.svg" (click)="handleDuplicateQuestion()" alt="">
-
-        <img (click)="handleDeleteQuestion()" src="assets/delete-icon.svg" alt="">
-
-        <span>
-            Required
-            <label>
-                <input type="checkbox" class="switch" [(ngModel)]="question.required" />
+        <main>
+            <input [class]="titleStyle" type="text" [(ngModel)]="question.title.detail" />
+            <app-select
+             [questionType]="question.type"
+            (selectionChange)="handleTypeChange($event)"></app-select>
+        </main>
+        <div class="text-styles">
+            <label for="bold">
+                <input id="bold" type="checkbox" [(ngModel)]="question.title.style.bold">
+                <bold-icon [checked]="question.title.style.bold"></bold-icon>
             </label>
-        </span>
+            <label for="italic">
+                <input id="italic" type="checkbox" [(ngModel)]="question.title.style.italic">
+                <italic-icon [checked]="question.title.style.italic"></italic-icon>
+            </label>
+            <label for="large">
+                <input type="checkbox" id="large" [(ngModel)]="question.title.style.large">
+                <large-icon [checked]="question.title.style.large"></large-icon>
+            </label>
+        </div>
 
-        <button type="button" (click)="handleAddQuestion()">
-            <img src="assets/add-icon.svg" alt="">
-            New question
-        </button>
-    </div>
+        <!-- Cases for question types in editable mode -->
+        @switch (question.type) {
+            @case ('multiple-choice'){
+                @for (option of question.options; track $index) {
+                    <div class="mcq">
+                        <input type="text" [(ngModel)]="question.options[$index]">
+                        <input type="radio" id="option{{$index}}" name="option" [value]="option">
+                    </div>
+                }
+                <div class="adder">
+                    <input type="radio" disabled>
+                    <p (click)="addOption()">Add option</p> or <p>add "Other"</p>
+                </div>
+            }
+            @case ('checkbox') {
+                @for (option of question.options; track $index) {
+                    <div class="check">
+                        <input type="text" [(ngModel)]="question.options[$index]">
+                        <input type="checkbox" id="check{{$index}}" name="option" [value]="option">
+                    </div>
+                }
+                <div class="adder">
+                    <input type="radio" disabled>
+                    <p (click)="addOption()">Add option</p> or <p>add "Other"</p>
+                </div>
+            }
+            @case ('dropdown') {
+
+            }
+            @case ('short-text') {
+                <p class="paragraph" contenteditable="true" data-placeholder="Short answer text"></p>
+            }
+            @case ('paragraph') {
+                <p class="paragraph" contenteditable="true" data-placeholder="Long answer text"></p>
+            }
+        }
+
+        <div class="buttons">
+            <img src="assets/copy-icon.svg" (click)="handleDuplicateQuestion()" alt="">
+
+            <img (click)="handleDeleteQuestion()" src="assets/delete-icon.svg" alt="">
+
+            <span>
+                Required
+                <label>
+                    <input type="checkbox" class="switch" [(ngModel)]="question.required" />
+                </label>
+            </span>
+
+            <button type="button" (click)="handleAddQuestion()">
+                <img src="assets/add-icon.svg" alt="">
+                New question
+            </button>
+        </div>
     }
 </section>
 

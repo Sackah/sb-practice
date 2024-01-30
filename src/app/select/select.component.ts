@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ClickOutsideDirective } from '../directives/clickoutside.directive';
 import { QuestionType } from '../models/question.model';
 import { BehaviorSubject } from 'rxjs';
@@ -17,9 +17,29 @@ export class SelectComponent {
   selectionObservable = this.selection.asObservable();
   selectedItem!: string;
   @Output() selectionChange = new EventEmitter<QuestionType>();
+  @Input() questionType!: QuestionType;
 
   ngOnInit() {
-    this.selectedItem = 'Multiple Choice';
+    switch (this.questionType) {
+      case 'multiple-choice':
+        this.selectedItem = 'Multiple Choice';
+        break;
+      case 'checkbox':
+        this.selectedItem = 'Checkboxes';
+        break;
+      case 'dropdown':
+        this.selectedItem = 'Dropdown';
+        break;
+      case 'paragraph':
+        this.selectedItem = 'Paragraph';
+        break;
+      case 'short-text':
+        this.selectedItem = 'Short text';
+        break;
+      default:
+        this.selectedItem = 'Multiple Choice';
+        break;
+    }
   }
 
   toggleMenu() {

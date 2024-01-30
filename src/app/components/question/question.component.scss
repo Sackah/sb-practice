@@ -129,6 +129,7 @@ $knob-offset: 0.2rem;
   }
 }
 
+/***** multiple chioce *****/
 .mcq {
   display: flex;
   flex-direction: row-reverse;
@@ -152,7 +153,8 @@ $knob-offset: 0.2rem;
   }
 }
 
-.adder {
+.adder,
+.check {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -168,5 +170,29 @@ $knob-offset: 0.2rem;
     display: inline;
     color: #1671d9;
     cursor: pointer;
+  }
+}
+
+/***** checkbox *****/
+.check {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+
+  & > input {
+    display: inline;
+    font-size: 1rem;
+  }
+
+  & > input[type="text"] {
+    border: none;
+    border-bottom: 1px solid #101928;
+    outline: none;
+    &:focus {
+      outline: none;
+    }
   }
 }
