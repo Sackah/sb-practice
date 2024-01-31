@@ -7,6 +7,7 @@ import { SelectComponent } from '../../select/select.component';
 import { BoldIconComponent } from '../icons/bold.component';
 import { ItalicIconComponent } from '../icons/italic.component';
 import { LargeIconComponent } from '../icons/large.component';
+import { DropdownComponent } from '../dropdown/dropdown.component';
 
 @Component({
   selector: 'app-question',
@@ -20,6 +21,7 @@ import { LargeIconComponent } from '../icons/large.component';
     BoldIconComponent,
     ItalicIconComponent,
     LargeIconComponent,
+    DropdownComponent,
   ],
 })
 export class QuestionComponent {

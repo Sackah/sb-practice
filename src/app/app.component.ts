@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { TitleComponent } from './components/title/title.component';
@@ -8,8 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { SBForm } from './models/form.model';
 import { BlockComponent } from './components/block/block.component';
 import { SBBlock } from './models/block.model';
-import { CustomeDropdownComponent } from "./custome-dropdown/custome-dropdown.component";
-import { PaginationComponent } from "./pagination/pagination.component";
+import { CustomeDropdownComponent } from './custome-dropdown/custome-dropdown.component';
+import { PaginationComponent } from './pagination/pagination.component';
 
 @Component({
   selector: 'app-root',
@@ -27,11 +27,15 @@ import { PaginationComponent } from "./pagination/pagination.component";
     PaginationComponent,
   ],
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   image = new SBImage('https://picsum.photos/200/300');
   form = new SBForm();
+  // timeout: NodeJS.Timeout | undefined;
+  timeout: any;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.timeout = setInterval(() => this.clg(), 5000);
+  }
 
   clg() {
     console.log(this.form);
@@ -106,7 +110,7 @@ export class AppComponent implements OnInit {
   ];
   itemsPerPage: number = 10; // Number of items to display per page
   currentPage: number = 1;
- 
+
   get itemsOnCurrentPage(): any[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     return this.items.slice(startIndex, startIndex + this.itemsPerPage);
@@ -120,5 +124,9 @@ export class AppComponent implements OnInit {
     this.currentPage = page;
   }
 
-  
+  ngOnDestroy(): void {
+    if (this.timeout) {
+      clearInterval(this.timeout);
+    }
+  }
 }

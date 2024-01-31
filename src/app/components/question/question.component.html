@@ -18,7 +18,7 @@
 
             }
             @case ('dropdown') {
-
+                <custom-dropdown [options]="question.options"></custom-dropdown>
             }
             @case ('short-text') {
                 <p class="paragraph" contenteditable="true" data-placeholder="Short answer text"></p>
@@ -78,7 +78,7 @@
                 </div>
             }
             @case ('dropdown') {
-
+                <custom-dropdown (createOption)="addOption()" [editable]="true" [options]="question.options"></custom-dropdown>
             }
             @case ('short-text') {
                 <p class="paragraph" contenteditable="true" data-placeholder="Short answer text"></p>
