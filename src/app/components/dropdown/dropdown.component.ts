@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ClickOutsideDirective } from '../../directives/clickoutside.directive';
 
 @Component({
   selector: 'custom-dropdown',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ClickOutsideDirective],
   templateUrl: './dropdown.component.html',
   styleUrl: './dropdown.component.scss',
 })

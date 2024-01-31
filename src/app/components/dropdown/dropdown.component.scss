@@ -11,7 +11,8 @@ section {
     display: flex;
     gap: 10px;
     justify-content: center;
-    min-width: 182px;
+    width: -moz-fit-content;
+    width: fit-content;
   }
 
   &.uneditable {

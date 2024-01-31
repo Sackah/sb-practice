@@ -1,7 +1,7 @@
 <section (clickOutside)="editTitle = false">
     @if(editTitle){
     <header>
-        <input type="text" [class]="titleStyle" [(ngModel)]="block.title.detail" (keydown)="onEditTitle($event)"
+        <input type="text" [class]="titleStyle" [style.fontSize]="block.title.style.size" [(ngModel)]="block.title.detail" (keydown)="onEditTitle($event)"
             (dblclick)="onEditTitle($event)" />
         <img src="assets/3dots.svg" (click)="toggleDropdown($event, dropdownTemplate)" alt="">
     </header>

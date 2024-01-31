@@ -1,5 +1,5 @@
 @if (!editable) {
-    <section class="uneditable">
+    <section class="uneditable" (clickOutside)="isMenuOpen = false">
         <span (click)="toggleMenu()">
             {{selectedItem}}
         </span>

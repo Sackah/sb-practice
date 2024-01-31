@@ -8,8 +8,9 @@ import { FormsModule } from '@angular/forms';
 import { SBForm } from './models/form.model';
 import { BlockComponent } from './components/block/block.component';
 import { SBBlock } from './models/block.model';
-import { CustomeDropdownComponent } from './custome-dropdown/custome-dropdown.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { SideBarService } from './services/side-bar.service';
 
 @Component({
   selector: 'app-root',
@@ -23,8 +24,8 @@ import { PaginationComponent } from './pagination/pagination.component';
     TitleComponent,
     ImageComponent,
     BlockComponent,
-    CustomeDropdownComponent,
     PaginationComponent,
+    SideBarComponent,
   ],
 })
 export class AppComponent implements OnInit, OnDestroy {
@@ -32,6 +33,35 @@ export class AppComponent implements OnInit, OnDestroy {
   form = new SBForm();
   // timeout: NodeJS.Timeout | undefined;
   timeout: any;
+
+  constructor(private sidebarService: SideBarService) {
+    this.sidebarService.currentStyle.subscribe({
+      next: (style) => {
+        if (style) {
+          switch (style['type']) {
+            case 'question':
+              this.form.blocks.forEach((block) => {
+                block.questions.forEach((question) => {
+                  question.title.style.size = style.value;
+                });
+              });
+              break;
+            case 'text':
+              // this.form.text.style = style.value;
+              break;
+            case 'block-header':
+              this.form.blocks.forEach((block) => {
+                block.title.style.size = style.value;
+              });
+              break;
+            case 'title-header':
+              this.form.title.title.style.size = style.value;
+              break;
+          }
+        }
+      },
+    });
+  }
 
   ngOnInit(): void {
     // this.timeout = setInterval(() => this.clg(), 5000);

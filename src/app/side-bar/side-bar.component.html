@@ -1,0 +1,243 @@
+<div
+  class="h-full pb-[5rem] shadow-md bg-white fixed overflow-y-scroll right-0"
+>
+  <div
+    class="h-[59px] w-full p-[16px] overflow-visible flex items-center gap-x-[5px] shadow-md bg-white fixed"
+  >
+    <img
+      src="../../../../../../../assets/SurveyCreation/Creation-space/navigation/magic-wand.svg"
+      alt="magic wand icon"
+      class="w-[20px] h-[20px]"
+    />
+    <h3
+      class="text-[18px] font-bold leading-[20.3px] overflow-visible text-[#344054]"
+    >
+      Appearance
+    </h3>
+  </div>
+  <div>
+    <div class="py-[32px] px-[16px]">
+      <h2 class="text-[16px] font-bold text-[#344054] leading-[23.2px]">
+        Text Style
+      </h2>
+      <div>
+        <!-- ... -->
+        <div class="mt-[24px]">
+          <h2 class="text-[14px] font-bold text-[#344054] leading-[23.2px]">
+            TItle Header
+          </h2>
+          <span class="flex items-center gap-x-[11px] mt-[4px]">
+            <select title="select"
+              class="w-1/2 bg-transparent border-2 border-[#D0D5DD] rounded-md p-x-[12px] h-[36px] outline-none"
+            >
+              <option value="Inter">Inter</option>
+            </select>
+            <!-- ... -->
+            <select title="select" (change)="handleFontChange($event, 'title-header')"
+              class="w-1/2 bg-transparent border-2 border-[#D0D5DD] rounded-md p-x-[12px] h-[36px] outline-none"
+            >
+                @for (size of sizes; track $index) {
+                    <option value={{size}}>{{size}}</option>
+                }
+            </select>
+          </span>
+        </div>
+        <!-- ..... -->
+        <div class="mt-[24px]">
+          <h2 class="text-[14px] font-bold text-[#344054] leading-[23.2px]">
+            Block Header
+          </h2>
+          <span class="flex items-center gap-x-[11px] mt-[4px]">
+            <select title="select"
+              class="w-1/2 bg-transparent border-2 border-[#D0D5DD] rounded-md p-x-[12px] h-[36px] outline-none"
+            >
+              <option value="Inter">Inter</option>
+            </select>
+            <!-- ... -->
+            <select title="select" (change)="handleFontChange($event, 'block-header')"
+              class="w-1/2 bg-transparent border-2 border-[#D0D5DD] rounded-md p-x-[12px] h-[36px] outline-none"
+            >
+                @for (size of sizes; track $index) {
+                    <option value={{size}}>{{size}}</option>
+                }
+            </select>
+          </span>
+        </div>
+        <!-- ....... -->
+        <div class="mt-[24px]">
+          <h2 class="text-[14px] font-bold text-[#344054] leading-[23.2px]">
+            Question
+          </h2>
+          <span class="flex items-center gap-x-[11px] mt-[4px]">
+            <select title="select"
+              class="w-1/2 bg-transparent border-2 border-[#D0D5DD] rounded-md p-x-[12px] h-[36px] outline-none"
+            >
+              <option value="Inter">Inter</option>
+            </select>
+            <!-- ... -->
+            <select title="select" (change)="handleFontChange($event, 'question')"
+              class="w-1/2 bg-transparent border-2 border-[#D0D5DD] rounded-md p-x-[12px] h-[36px] outline-none"
+            >
+                @for (size of sizes; track $index) {
+                    <option value={{size}}>{{size}}</option>
+                }
+            </select>
+          </span>
+        </div>
+        <!-- ........ -->
+        <div class="mt-[24px]">
+          <h2 class="text-[14px] font-bold text-[#344054] leading-[23.2px]">
+            Text
+          </h2>
+          <span class="flex items-center gap-x-[11px] mt-[4px]">
+            <select title="select"
+              class="w-1/2 bg-transparent border-2 border-[#D0D5DD] rounded-md p-x-[12px] h-[36px] outline-none"
+            >
+              <option value="Inter">Inter</option>
+            </select>
+            <!-- ... -->
+            <select title="select" (change)="handleFontChange($event, 'text')"
+              class="w-1/2 bg-transparent border-2 border-[#D0D5DD] rounded-md p-x-[12px] h-[36px] outline-none"
+            >
+                @for (size of sizes; track $index) {
+                    <option value={{size}}>{{size}}</option>
+                }
+            </select>
+          </span>
+        </div>
+        <!-- ... -->
+      </div>
+    </div>
+    <!--  -->
+    <div class="pb-[32px] px-[16px]">
+      <div class="flex items-center justify-between">
+        <h2 class="text-[16px] font-bold text-[#344054] leading-[23.2px]">
+          Logo
+        </h2>
+        <button
+          class="px-[16px] py-[8px] rounded-md font-semibold border-2 text-[#98A2B3] border-[#D0D5DD] cursor-pointer hover:bg-gray-50 transition-all"
+          (click)="handleOpenPopup()"
+        >
+          Change
+        </button>
+      </div>
+      <div class="w-full py-[8px] flex flex-col">
+        <div class="flex items-center justify-center my-[24px]">
+          <div
+            class="w-[243px] h-[200px] object-cover overflow-hidden"
+          >
+            <img
+              [src]="
+                uploaded_logo
+                  ? uploaded_logo
+                  : '../../../../../../../../../assets/SignUp/card-brandName-logo.svg'
+              "
+              alt="default_logo_image"
+              class="object-cover"
+            />
+          </div>
+        </div>
+        <span class="flex flex-col gap-y-[4px] w-full">
+          <h2 class="text-[14px] font-bold text-[#344054] leading-[23.2px]">
+            Alignment
+          </h2>
+          <select title="section"
+            class="w-1/2 bg-transparent border-2 border-[#D0D5DD] rounded-md p-x-[12px] h-[36px] outline-none"
+          >
+            <option value="top">Top</option>
+          </select>
+        </span>
+      </div>
+      <div>
+        <!-- ... -->
+      </div>
+    </div>
+    <!--  -->
+    <div class="pb-[32px] px-[16px]">
+      <h2 class="text-[16px] font-bold text-[#344054] leading-[23.2px]">
+        Color
+      </h2>
+      <!-- Buttons -->
+      <div class="my-[24px]">
+        <h3 class="text-[14px] font-semibold text-[#344054]">Color Scheme</h3>
+        <div class="mt-[7px] grid-cols-5 grid gap-3">
+          <button
+            class="px-[18px] py-[11px] border-2 border-[#04326B] rounded-md"
+          >
+            <p class="text-[#04326B] text-[18px] font-bold">A</p>
+          </button>
+          <button
+            class="px-[18px] py-[11px] border-2 border-[#FFECE5] rounded-md"
+          >
+            <p class="text-[#8F2802] text-[18px] font-bold">A</p>
+          </button>
+          <button
+            class="px-[18px] py-[11px] border-2 border-[#B5E3C4] rounded-md"
+          >
+            <p class="text-[#036B26] text-[18px] font-bold">A</p>
+          </button>
+          <button
+            class="px-[18px] py-[11px] border-2 border-[#FBE2B7] rounded-md"
+          >
+            <p class="text-[#AD6F07] text-[18px] font-bold">A</p>
+          </button>
+          <button
+            class="px-[18px] py-[11px] border-2 border-[#F2BCBA] rounded-md"
+          >
+            <p class="text-[#800501] text-[18px] font-bold">A</p>
+          </button>
+          <button
+            class="px-[18px] py-[11px] border-2 border-[#F0E6E6] rounded-md"
+          >
+            <p class="text-[#514A4A] text-[18px] font-bold">A</p>
+          </button>
+
+          <button
+            class="px-[18px] py-[11px] bg-white shadow-md rounded-md font-bold"
+          >
+            x
+          </button>
+        </div>
+      </div>
+      <!-- Color pickers -->
+      <div>
+        <div class="w-[193px] flex flex-col items-start gap-[16px]">
+          <p class="text-[16px] font-medium">Background color</p>
+          <div
+            class="flex items-center w-[193px] rounded-md border-2 border-[#D0D5DD] overflow-visible"
+          >
+            <input
+              type="text"
+              class="w-[70px] h-[40px] py-[8px] px-[12px] border-0 bg-transparent outline-none flex-1 text-[#98A2B3]"
+              (input)="onPageHexInputChange($event)"
+              [value]="pageHexColor"
+            />
+            <input
+              type="color"
+              class="w-[40px] h-[40px] bg-transparent border-l-2 border-[#D0D5DD]"
+              [(ngModel)]="pageHexColor"
+            />
+          </div>
+        </div>
+        <div class="w-[193px] flex flex-col items-start gap-[16px]">
+          <p class="text-[16px] font-medium">Text color</p>
+          <div
+            class="flex items-center w-[193px] rounded-md border-2 border-[#F0E6E6] overflow-visible"
+          >
+            <input
+              type="text"
+              class="w-[70px] h-[40px] py-[8px] px-[12px] border-0 text-[#98A2B3] bg-transparent outline-none flex-1"
+              (input)="onPageHexInputChange($event)"
+              [value]="pageHexColor"
+            />
+            <input
+              type="color"
+              class="w-[40px] h-[40px] bg-transparent border-l-2 border-[#F0E6E6]"
+              [(ngModel)]="pageHexColor"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
