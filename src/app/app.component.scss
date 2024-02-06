@@ -11,6 +11,16 @@
   padding: 10%;
   -webkit-user-select: none;
   user-select: none;
+
+  p {
+    font-size: 1rem;
+    color: #1671d9;
+    margin-bottom: 20px;
+    cursor: pointer;
+    text-align: center;
+    -webkit-user-select: none;
+    user-select: none;
+  }
 }
 
 .page > button {
@@ -28,17 +38,19 @@
   margin-bottom: 20px;
 }
 
-p {
-  font-size: 1rem;
-  color: #1671d9;
-  margin-bottom: 20px;
-  cursor: pointer;
-  text-align: center;
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-
 // ..................................
 
+section {
+  display: flex;
+  gap: 10px;
+  margin: 30px 0;
 
+  .color-scheme-selector {
+    cursor: pointer;
+    padding: 11px 18px;
+    border-radius: 4px;
+    border-width: 3px;
+    border-style: solid;
+    background: #fff;
+  }
+}

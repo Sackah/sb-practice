@@ -11,6 +11,9 @@ import { SBBlock } from './models/block.model';
 import { PaginationComponent } from './pagination/pagination.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { SideBarService } from './services/side-bar.service';
+import { colorSchemes } from './color-schemes';
+import { SBColorScheme } from './models/colorScheme';
+import { ColorSchemeService } from './services/color-scheme.service';
 
 @Component({
   selector: 'app-root',
@@ -33,8 +36,12 @@ export class AppComponent implements OnInit, OnDestroy {
   form = new SBForm();
   // timeout: NodeJS.Timeout | undefined;
   timeout: any;
+  allColorSchemes = colorSchemes;
 
-  constructor(private sidebarService: SideBarService) {
+  constructor(
+    private sidebarService: SideBarService,
+    private colorSchemeService: ColorSchemeService
+  ) {
     this.sidebarService.currentStyle.subscribe({
       next: (style) => {
         if (style) {
@@ -65,6 +72,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // this.timeout = setInterval(() => this.clg(), 5000);
+    this.colorSchemeService.currentColorScheme.subscribe({
+      next: (colorScheme) => {
+        if (colorScheme) {
+          this.form.colorScheme = colorScheme;
+        }
+      },
+    });
   }
 
   clg() {
@@ -89,69 +103,8 @@ export class AppComponent implements OnInit, OnDestroy {
     ];
   }
 
-  // .................
-
-  items: any[] = [
-    /* Your array of items */
-    'sam',
-    'daniel',
-    'tonita',
-    'mark',
-    'sam',
-    'daniel',
-    'tonita',
-    'mark',
-    'sam',
-    'daniel',
-    'tonita',
-    'mark',
-    'sam',
-    'daniel',
-    'tonita',
-    'mark',
-    'sam',
-    'daniel',
-    'tonita',
-    'mark',
-    'sam',
-    'daniel',
-    'tonita',
-    'mark',
-    'sam',
-    'daniel',
-    'tonita',
-    'mark',
-    'sam',
-    'daniel',
-    'tonita',
-    'mark',
-    'sam',
-    'daniel',
-    'tonita',
-    'mark',
-    'sam',
-    'daniel',
-    'tonita',
-    'mark',
-    'sam',
-    'daniel',
-    'tonita',
-    'mark',
-  ];
-  itemsPerPage: number = 10; // Number of items to display per page
-  currentPage: number = 1;
-
-  get itemsOnCurrentPage(): any[] {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    return this.items.slice(startIndex, startIndex + this.itemsPerPage);
-  }
-
-  get totalPages(): number {
-    return Math.ceil(this.items.length / this.itemsPerPage);
-  }
-
-  changePage(page: number) {
-    this.currentPage = page;
+  changeColorScheme(colorScheme: SBColorScheme) {
+    this.colorSchemeService.change(colorScheme);
   }
 
   ngOnDestroy(): void {

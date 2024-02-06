@@ -1,4 +1,5 @@
 import { SBBlock } from './block.model';
+import { SBColorScheme } from './colorScheme';
 import { SBImage } from './image.model';
 import { SBTitle } from './title.model';
 
@@ -11,7 +12,7 @@ export class SBForm {
 
   blocks: SBBlock[] = [];
 
-  logo: SBImage | null = null;
+  logo = new SBImage();
 
   general = {
     title: '',
@@ -29,33 +30,7 @@ export class SBForm {
     notificationTitle: '',
   };
 
-  team = {
-    teamTitle: '',
-    teamName: '',
-    teamEmail: '',
-    teamPhone: '',
-  };
-
-  styles = {
-    colors: {
-      pageColor: '',
-      pageImage: '',
-      formColor: '',
-      formImage: '',
-      fontColor: '',
-      inputBg: '',
-    },
-    styles: {
-      fontFamily: '',
-      fontSize: '',
-      formWidth: '',
-      labelAlignment: '',
-      questionSpacing: '',
-      labelWidth: '',
-    },
-    themes: {},
-    layouts: '',
-  };
+  colorScheme = new SBColorScheme();
 
   constructor() {
     this.blocks.push(new SBBlock());
