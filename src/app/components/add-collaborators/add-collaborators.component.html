@@ -1,0 +1,21 @@
+<section>
+  <div>
+    <h3>Invite collaborators</h3>
+    <p>Invite collaborators to collaborate on this project.</p>
+    <div class="added-users">
+      @for (email of addedUsers; track $index) {
+      <span>{{ email }}</span>
+      }
+    </div>
+    <main>
+      <form (submit)="handleSubmit()" [formGroup]="form">
+        <input type="email" formControlName="email" />
+        <select title="permission" id="">
+          <option value="edit" selected>Edit</option>
+          <option value="view">View</option>
+        </select>
+        <button type="submit">Invites</button>
+      </form>
+    </main>
+  </div>
+</section>

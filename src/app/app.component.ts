@@ -14,6 +14,7 @@ import { SideBarService } from './services/side-bar.service';
 import { colorSchemes } from './color-schemes';
 import { SBColorScheme } from './models/colorScheme';
 import { ColorSchemeService } from './services/color-scheme.service';
+import { AddCollaboratorsComponent } from './components/add-collaborators/add-collaborators.component';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +30,7 @@ import { ColorSchemeService } from './services/color-scheme.service';
     BlockComponent,
     PaginationComponent,
     SideBarComponent,
+    AddCollaboratorsComponent,
   ],
 })
 export class AppComponent implements OnInit, OnDestroy {

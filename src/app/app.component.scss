@@ -23,19 +23,29 @@
   }
 }
 
-.page > button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  font-size: 1rem;
-  padding: 8px 12px;
-  background: #fff;
-  border: 1px solid #f77a4a;
-  color: #f77a4a;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-bottom: 20px;
+.page {
+  > span {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 1rem;
+    padding: 8px 12px;
+    background: #fff;
+    border: 1px solid #f77a4a;
+    color: #f77a4a;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  .add-collaborators {
+    margin-bottom: 20px;
+  }
 }
 
 // ..................................
