@@ -71,11 +71,17 @@ section {
     span {
       @include center;
       @include text;
-      //   flex: 0 1 auto;
       font-size: 0.875rem;
       color: #344054;
       padding: 2px 4px 2px 5px;
       gap: 3px;
+      border-radius: 6px;
+      border: 1px solid #d0d5dd;
+      background: #fff;
+
+      img {
+        cursor: pointer;
+      }
     }
   }
 }

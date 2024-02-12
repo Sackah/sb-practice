@@ -14,20 +14,57 @@ import {
   styleUrl: './add-collaborators.component.scss',
 })
 export class AddCollaboratorsComponent {
-  addedUsers: string[] = [];
+  addedUsers: {
+    email: string;
+    canEdit: boolean;
+  }[] = [];
   form;
 
   constructor() {
     this.form = new FormGroup({
       email: new FormControl('', [Validators.email]),
+      role: new FormControl('view'),
     });
   }
 
   handleSubmit() {
-    if (this.form.valid) {
-      console.log(this.form.value?.email);
-      this.addedUsers.push(this.form.value?.email as string);
-      this.form.reset();
+    const email = this.form.value?.email?.split(',')[0].trim() as string;
+    let canEdit;
+    if (this.form.value?.role === 'edit') {
+      canEdit = true;
+    } else {
+      canEdit = false;
     }
+    if (this.validate(email)) {
+      this.addedUsers.push({
+        email,
+        canEdit,
+      });
+      this.form.reset();
+      this.form.patchValue({
+        email: '',
+        role: 'view',
+      });
+    }
+    console.log('added users', this.addedUsers);
+  }
+
+  handleChange(event: any) {
+    if (event.data === ',') {
+      this.handleSubmit();
+    }
+  }
+
+  validate(text: string | undefined) {
+    if (text) {
+      return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(text);
+    } else return;
+  }
+
+  deleteUser(user: { email: string; canEdit: boolean }) {
+    const index = this.addedUsers.findIndex((us) => us.email === user.email);
+    this.addedUsers.splice(index, 1);
+
+    console.log(this.addedUsers);
   }
 }
