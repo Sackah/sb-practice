@@ -27,6 +27,9 @@ export class SelectComponent {
       case 'checkbox':
         this.selectedItem = 'Checkboxes';
         break;
+      case 'single-choice':
+        this.selectedItem = 'Single Choice';
+        break;
       case 'dropdown':
         this.selectedItem = 'Dropdown';
         break;
@@ -62,6 +65,10 @@ export class SelectComponent {
           break;
         case 'checkbox':
           this.selectedItem = 'Checkboxes';
+          this.selectionChange.emit(item);
+          break;
+        case 'single-choice':
+          this.selectedItem = 'Single Choice';
           this.selectionChange.emit(item);
           break;
         case 'dropdown':

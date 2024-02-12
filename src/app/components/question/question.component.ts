@@ -47,10 +47,13 @@ export class QuestionComponent {
     this.question.type = event;
     if (
       event === 'multiple-choice' ||
-      event === 'checkbox' ||
+      event === 'single-choice' ||
       event === 'dropdown'
     ) {
       this.question.options = ['option 1'];
+      this.question.option = '';
+    } else if (event === 'checkbox') {
+      this.question.option = 'option 1';
     }
   }
 

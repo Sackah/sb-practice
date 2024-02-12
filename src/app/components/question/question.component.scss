@@ -130,7 +130,9 @@ $knob-offset: 0.2rem;
 }
 
 /***** multiple chioce *****/
-.mcq {
+.mcq,
+.scq,
+.cbq {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;

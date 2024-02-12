@@ -10,12 +10,23 @@
                 @for (option of question.options; track $index) {
                     <div class="mcq">
                         <label for="{{option}}{{$index}}">{{option}}</label>
+                        <input type="checkbox" id="{{option}}{{$index}}" name="option" [value]="option">
+                    </div>
+                }
+            }
+            @case ('single-choice') {
+                @for (option of question.options; track $index) {
+                    <div class="scq">
+                        <label for="{{option}}{{$index}}">{{option}}</label>
                         <input type="radio" id="{{option}}{{$index}}" name="option" [value]="option">
                     </div>
                 }
             }
             @case ('checkbox') {
-
+                <div class="cbq">
+                    <label for="{{question.option}}">{{question.option}}</label>
+                    <input type="checkbox" id="{{question.option}}" name="{{question.option}}" [value]="question.option">
+                </div>
             }
             @case ('dropdown') {
                 <custom-dropdown [options]="question.options"></custom-dropdown>
@@ -57,7 +68,19 @@
                 @for (option of question.options; track $index) {
                     <div class="mcq">
                         <input type="text" [(ngModel)]="question.options[$index]">
-                        <input type="radio" id="option{{$index}}" name="option" [value]="option">
+                        <input type="checkbox" id="option{{$index}}" name="option" [value]="option">
+                    </div>
+                }
+                <div class="adder">
+                    <input type="radio" disabled>
+                    <p (click)="addOption()">Add option</p> or <p>add "Other"</p>
+                </div>
+            }
+            @case ('single-choice'){
+                @for (option of question.options; track $index) {
+                    <div class="mcq">
+                        <input type="text" [(ngModel)]="question.options[$index]">
+                        <input type="radio" id="select{{$index}}" name="option" [value]="option">
                     </div>
                 }
                 <div class="adder">
@@ -66,16 +89,14 @@
                 </div>
             }
             @case ('checkbox') {
-                @for (option of question.options; track $index) {
-                    <div class="check">
-                        <input type="text" [(ngModel)]="question.options[$index]">
-                        <input type="checkbox" id="check{{$index}}" name="option" [value]="option">
-                    </div>
-                }
-                <div class="adder">
+                <div class="check">
+                    <input type="text" [(ngModel)]="question.option">
+                    <input type="checkbox" id="{{question.option}}" name="option" [value]="question.option">
+                </div>
+                <!-- <div class="adder">
                     <input type="radio" disabled>
                     <p (click)="addOption()">Add option</p> or <p>add "Other"</p>
-                </div>
+                </div> -->
             }
             @case ('dropdown') {
                 <custom-dropdown (createOption)="addOption()" [editable]="true" [options]="question.options"></custom-dropdown>
