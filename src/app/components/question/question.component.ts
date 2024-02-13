@@ -52,8 +52,10 @@ export class QuestionComponent {
     ) {
       this.question.options = ['option 1'];
       this.question.option = '';
+      this.question.answers = [];
     } else if (event === 'checkbox') {
       this.question.option = 'option 1';
+      this.question.answers = '';
     }
   }
 

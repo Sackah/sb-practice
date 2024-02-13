@@ -114,4 +114,15 @@ export class AppComponent implements OnInit, OnDestroy {
       clearInterval(this.timeout);
     }
   }
+
+  handleImageChange(event: any) {
+    if (event.target.files) {
+      const image = new FormData();
+      image.append('file', event.target.files[0]);
+
+      for (let pair of image.entries()) {
+        console.log(pair[0] + ', ' + pair[1]);
+      }
+    }
+  }
 }
