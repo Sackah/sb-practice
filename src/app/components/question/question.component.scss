@@ -134,23 +134,29 @@ $knob-offset: 0.2rem;
 .scq,
 .cbq {
   display: flex;
-  flex-direction: row-reverse;
   align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 10px;
+  justify-content: flex-start;
 
-  & > input {
-    display: inline;
-    font-size: 1rem;
-  }
+  span:first-of-type {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
 
-  & > input[type="text"] {
-    border: none;
-    border-bottom: 1px solid #101928;
-    outline: none;
-    &:focus {
+    & > input {
+      display: inline;
+      font-size: 1rem;
+    }
+
+    & > input[type="text"] {
+      border: none;
+      border-bottom: 1px solid #101928;
       outline: none;
+      &:focus {
+        outline: none;
+      }
     }
   }
 }

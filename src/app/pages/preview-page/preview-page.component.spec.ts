@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConditionalComponent } from './conditional.component';
+import { PreviewPageComponent } from './preview-page.component';
 
-describe('ConditionalComponent', () => {
-  let component: ConditionalComponent;
-  let fixture: ComponentFixture<ConditionalComponent>;
+describe('PreviewPageComponent', () => {
+  let component: PreviewPageComponent;
+  let fixture: ComponentFixture<PreviewPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ConditionalComponent]
+      imports: [PreviewPageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ConditionalComponent);
+    fixture = TestBed.createComponent(PreviewPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

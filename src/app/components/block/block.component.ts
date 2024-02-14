@@ -62,7 +62,12 @@ export class BlockComponent {
   handleAddQuestion() {
     this.block.questions = [
       ...this.block.questions,
-      new SBQuestion('Untitled Question', 'multiple-choice', ['option 1']),
+      new SBQuestion('Untitled Question', 'multiple-choice', [
+        {
+          option: 'option 1',
+          conditionalQuestions: [],
+        },
+      ]),
     ];
   }
 
@@ -112,5 +117,23 @@ export class BlockComponent {
       'text-italic': this.block.title.style.italic,
       'text-large': this.block.title.style.large,
     };
+  }
+
+  handleAddMetadata(
+    event: {
+      optionIndex: number;
+      conditionalQuestionIndex: number;
+    },
+    index: number
+  ) {
+    const { optionIndex, conditionalQuestionIndex } = event;
+    /**
+     * The key in the metadata object is a string composed of the question index and the option index,
+     * separated by a hyphen. The value is the index of the conditional question.
+     *
+     * conditional question - 1 to make up for the user's input not being zero indexed
+     */
+    this.block.metadata[`${index}-${optionIndex}`] =
+      conditionalQuestionIndex - 1;
   }
 }

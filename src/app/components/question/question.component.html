@@ -9,23 +9,29 @@
             @case ('multiple-choice') {
                 @for (option of question.options; track $index) {
                     <div class="mcq">
-                        <label for="{{option}}{{$index}}">{{option}}</label>
-                        <input type="checkbox" id="{{option}}{{$index}}" name="option" [value]="option">
+                        <span>
+                            <label for="{{option.option}}{{$index}}">{{option.option}}</label>
+                            <input type="checkbox" id="{{option.option}}{{$index}}" name="option" [value]="option.option">
+                        </span>
                     </div>
                 }
             }
             @case ('single-choice') {
                 @for (option of question.options; track $index) {
                     <div class="scq">
-                        <label for="{{option}}{{$index}}">{{option}}</label>
-                        <input type="radio" id="{{option}}{{$index}}" name="option" [value]="option">
+                        <span>
+                            <label for="{{option.option}}{{$index}}">{{option.option}}</label>
+                            <input type="radio" id="{{option.option}}{{$index}}" name="option" [value]="option.option">
+                        </span>
                     </div>
                 }
             }
             @case ('checkbox') {
                 <div class="cbq">
-                    <label for="{{question.option}}">{{question.option}}</label>
-                    <input type="checkbox" id="{{question.option}}" name="{{question.option}}" [value]="question.option">
+                    <span>
+                        <label for="{{question.option}}">{{question.option}}</label>
+                        <input type="checkbox" id="{{question.option}}" name="{{question.option}}" [value]="question.option">
+                    </span>
                 </div>
             }
             @case ('dropdown') {
@@ -67,8 +73,10 @@
             @case ('multiple-choice'){
                 @for (option of question.options; track $index) {
                     <div class="mcq">
-                        <input type="text" [(ngModel)]="question.options[$index]">
-                        <input type="checkbox" id="option{{$index}}" name="option" [value]="option">
+                        <span>
+                            <input type="text" [(ngModel)]="question.options[$index].option">
+                            <input type="checkbox" id="option{{$index}}" name="option" [value]="option.option">
+                        </span>
                     </div>
                 }
                 <div class="adder">
@@ -78,9 +86,18 @@
             }
             @case ('single-choice'){
                 @for (option of question.options; track $index) {
-                    <div class="mcq">
-                        <input type="text" [(ngModel)]="question.options[$index]">
-                        <input type="radio" id="select{{$index}}" name="option" [value]="option">
+                    <div class="scq">
+                        <span>
+                            <input type="text" [(ngModel)]="question.options[$index].option">
+                            <input type="radio" id="select{{$index}}" name="option" [value]="option.option">
+                        </span>
+                        @if (showConditional) {
+                            <form [formGroup]="conditionalsForm" (submit)="addConditional($event, $index)">
+                                Block: <input type="number" formControlName="block">
+                                Question: <input type="number" formControlName="question">
+                                <button type="submit">submit</button>
+                            </form>
+                        }
                     </div>
                 }
                 <div class="adder">
@@ -110,6 +127,8 @@
         }
 
         <div class="buttons">
+            <img src="assets/rise.svg" (click)="toggleConditionals()" alt="">
+
             <img src="assets/copy-icon.svg" (click)="handleDuplicateQuestion()" alt="">
 
             <img (click)="handleDeleteQuestion()" src="assets/delete-icon.svg" alt="">

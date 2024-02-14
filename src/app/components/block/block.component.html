@@ -26,7 +26,9 @@
     </header>
     }
     @for (question of block.questions; track $index) {
-    <app-question [question]="question" (addQuestion)="handleAddQuestion()"
+    <app-question [question]="question" 
+        (metadata)="handleAddMetadata($event, $index)"
+        (addQuestion)="handleAddQuestion()"
         (deleteQuestion)="handleDeleteQuestion($index)" (duplicateQuestion)="handleDuplicateQuestion($event, $index)">
         ></app-question>
     }

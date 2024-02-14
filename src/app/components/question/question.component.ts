@@ -1,7 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { QuestionType, SBQuestion } from '../../models/question.model';
 import { ClickOutsideDirective } from '../../directives/clickoutside.directive';
-import { FormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { LongpressDirective } from '../../directives/longpress.directive';
 import { SelectComponent } from '../../select/select.component';
 import { BoldIconComponent } from '../icons/bold.component';
@@ -22,6 +27,7 @@ import { DropdownComponent } from '../dropdown/dropdown.component';
     ItalicIconComponent,
     LargeIconComponent,
     DropdownComponent,
+    ReactiveFormsModule,
   ],
 })
 export class QuestionComponent {
@@ -29,7 +35,23 @@ export class QuestionComponent {
   @Output() addQuestion = new EventEmitter<void>();
   @Output() deleteQuestion = new EventEmitter<void>();
   @Output() duplicateQuestion = new EventEmitter<SBQuestion>();
+  @Output() metadata = new EventEmitter<{
+    optionIndex: number;
+    conditionalQuestionIndex: number;
+  }>();
   editable = false;
+  showConditional = false;
+  conditionalsForm: FormGroup;
+
+  constructor() {
+    this.conditionalsForm = new FormGroup({
+      block: new FormControl({
+        value: '',
+        disabled: true,
+      }),
+      question: new FormControl(''),
+    });
+  }
 
   handleAddQuestion() {
     this.addQuestion.emit();
@@ -43,6 +65,10 @@ export class QuestionComponent {
     this.duplicateQuestion.emit(this.question);
   }
 
+  toggleConditionals() {
+    this.showConditional = !this.showConditional;
+  }
+
   handleTypeChange(event: QuestionType) {
     this.question.type = event;
     if (
@@ -50,7 +76,12 @@ export class QuestionComponent {
       event === 'single-choice' ||
       event === 'dropdown'
     ) {
-      this.question.options = ['option 1'];
+      this.question.options = [
+        {
+          option: 'option 1',
+          conditionalQuestions: [],
+        },
+      ];
       this.question.option = '';
       this.question.answers = [];
     } else if (event === 'checkbox') {
@@ -73,6 +104,18 @@ export class QuestionComponent {
    * Operations on option
    */
   addOption() {
-    this.question.options.push(`option ${this.question.options.length + 1}`);
+    this.question.options.push({
+      option: `option ${this.question.options.length + 1}`,
+      conditionalQuestions: [],
+    });
+  }
+
+  addConditional(event: Event, index: number) {
+    const questionToPointTo = this.conditionalsForm.value.question;
+    this.metadata.emit({
+      optionIndex: index,
+      conditionalQuestionIndex: questionToPointTo,
+    });
+    this.conditionalsForm.reset();
   }
 }

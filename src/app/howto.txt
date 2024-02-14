@@ -1,0 +1,19 @@
+  setupConditionals() {
+    for (let i = 0; i < this.form.questions.length; i++) {
+      for (let j = 0; j < this.form.questions[i].options.length; j++) {
+        const key = `${i}-${j}`; // Use question index and option index as key
+        const ref = this.form.metadata[key];
+        if (ref !== undefined) {
+          const conditionalQuestion = this.form.questions[ref];
+          if (conditionalQuestion) {
+            this.form.questions[i].options[j].conditionalQuestions.push(conditionalQuestion);
+            this.form.questions.splice(ref, 1);
+          }
+        }
+      }
+    }
+  }
+
+  unsetConditionals(){
+    this.form = initialForm;
+  }

@@ -1,13 +1,13 @@
 @if (!editable) {
     <section class="uneditable" (clickOutside)="isMenuOpen = false">
         <span (click)="toggleMenu()">
-            {{selectedItem}}
+            {{selectedItem.option}}
         </span>
         @if (isMenuOpen) {
             <ul>
                 @for (option of options; track $index) {
                     <li (click)="handleSeletion($event, option)">
-                        {{option}}
+                        {{option.option}}
                     </li>
                 }
             </ul>
@@ -16,11 +16,11 @@
 } @else {
     <section class="editable">
         <span>
-            {{selectedItem}}
+            {{selectedItem.option}}
         </span>
         <ul>
             @for (option of options; track $index) {
-                <input type="text" [(ngModel)]="options[$index]"/>
+                <input type="text" [(ngModel)]="options[$index].option"/>
             }
         </ul>
         <div class="adder">
