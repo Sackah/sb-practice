@@ -8,8 +8,6 @@ export type QuestionType =
   | 'paragraph'
   | 'single-choice';
 
-  export interface SBOption { option: string; conditionalQuestions: SBQuestion[] };
-
 export class SBQuestion {
   title: {
     detail: string;
@@ -18,7 +16,7 @@ export class SBQuestion {
   type: QuestionType;
   tag?: string;
   required = false;
-  options: SBOption[] = [];
+  options: string[] = [];
   /**
    * Option property only applies for checkbox instances
    */
@@ -28,7 +26,7 @@ export class SBQuestion {
   constructor(
     title = 'Untitled Question',
     type: QuestionType,
-    options?: SBOption[],
+    options?: string[],
     tag?: string,
     option?: string
   ) {

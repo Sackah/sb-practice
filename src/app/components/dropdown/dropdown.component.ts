@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from '../../directives/clickoutside.directive';
-import { SBOption } from '../../models/question.model';
 
 @Component({
   selector: 'custom-dropdown',
@@ -13,8 +12,8 @@ import { SBOption } from '../../models/question.model';
 })
 export class DropdownComponent {
   isMenuOpen = false;
-  selectedItem!: SBOption;
-  @Input() options: SBOption[] = [];
+  selectedItem!: string;
+  @Input() options: string[] = [];
   @Input() editable = false;
   @Output() createOption = new EventEmitter<boolean>();
 
@@ -26,7 +25,7 @@ export class DropdownComponent {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  handleSeletion(event: Event, option: SBOption) {
+  handleSeletion(event: Event, option: string) {
     if (this.editable) {
       event.stopPropagation();
     }

@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { SBForm } from '../../models/form.model';
 import { CommonModule } from '@angular/common';
+import { SBQuestion } from '../../models/question.model';
 
 @Component({
   selector: 'app-preview-page',
@@ -23,7 +24,9 @@ export class PreviewPageComponent implements OnInit, OnDestroy {
   @Input() form!: SBForm;
   @Output() formChange = new EventEmitter<SBForm>();
   initialForm!: SBForm;
-  listOfConditionals: { [key: string]: boolean } = {};
+  conditionalQuestions: {
+    [key: string]: { index: number; question: SBQuestion };
+  } = {};
 
   ngOnInit(): void {
     this.initialForm = JSON.parse(JSON.stringify(this.form));
@@ -63,9 +66,10 @@ export class PreviewPageComponent implements OnInit, OnDestroy {
           if (ref !== undefined) {
             const conditionalQuestion = block.questions[ref];
             if (conditionalQuestion) {
-              block.questions[i].options[j].conditionalQuestions.push(
-                conditionalQuestion
-              );
+              this.conditionalQuestions[key] = {
+                index: ref,
+                question: conditionalQuestion,
+              };
               block.questions.splice(ref, 1);
             }
           }
@@ -76,7 +80,21 @@ export class PreviewPageComponent implements OnInit, OnDestroy {
 
   showConditionals(questionIndex: number, optionIndex: number) {
     const key = `${questionIndex}-${optionIndex}`;
-    this.listOfConditionals[key] = !this.listOfConditionals[key];
+    if (key in this.conditionalQuestions) {
+      // Retrieve the conditional question
+      const { question } = this.conditionalQuestions[key];
+      // Check if the conditional question is already in the questions array
+      const index = this.form.blocks[0].questions.findIndex(
+        (q) => q === question
+      );
+      if (index === -1) {
+        // If the conditional question is not in the questions array, insert it
+        this.form.blocks[0].questions.splice(questionIndex + 1, 0, question);
+      } else {
+        // If the conditional question is in the questions array, remove it
+        this.form.blocks[0].questions.splice(index, 1);
+      }
+    }
   }
 
   ngOnDestroy(): void {

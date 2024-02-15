@@ -29,7 +29,8 @@
     <app-question [question]="question" 
         (metadata)="handleAddMetadata($event, $index)"
         (addQuestion)="handleAddQuestion()"
-        (deleteQuestion)="handleDeleteQuestion($index)" (duplicateQuestion)="handleDuplicateQuestion($event, $index)">
+        (deleteQuestion)="handleDeleteQuestion($index)" 
+        (duplicateQuestion)="handleDuplicateQuestion($event, $index)">
         ></app-question>
     }
     @if(block.questions.length < 1){ <div class="buttons">

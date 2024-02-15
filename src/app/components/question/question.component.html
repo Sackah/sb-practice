@@ -10,8 +10,8 @@
                 @for (option of question.options; track $index) {
                     <div class="mcq">
                         <span>
-                            <label for="{{option.option}}{{$index}}">{{option.option}}</label>
-                            <input type="checkbox" id="{{option.option}}{{$index}}" name="option" [value]="option.option">
+                            <label for="{{option}}{{$index}}">{{option}}</label>
+                            <input type="checkbox" id="{{option}}{{$index}}" name="option" [value]="option">
                         </span>
                     </div>
                 }
@@ -20,8 +20,8 @@
                 @for (option of question.options; track $index) {
                     <div class="scq">
                         <span>
-                            <label for="{{option.option}}{{$index}}">{{option.option}}</label>
-                            <input type="radio" id="{{option.option}}{{$index}}" name="option" [value]="option.option">
+                            <label for="{{option}}{{$index}}">{{option}}</label>
+                            <input type="radio" id="{{option}}{{$index}}" name="option" [value]="option">
                         </span>
                     </div>
                 }
@@ -74,8 +74,8 @@
                 @for (option of question.options; track $index) {
                     <div class="mcq">
                         <span>
-                            <input type="text" [(ngModel)]="question.options[$index].option">
-                            <input type="checkbox" id="option{{$index}}" name="option" [value]="option.option">
+                            <input type="text" [(ngModel)]="question.options[$index]">
+                            <input type="checkbox" id="option{{$index}}" name="option" [value]="option">
                         </span>
                     </div>
                 }
@@ -88,8 +88,8 @@
                 @for (option of question.options; track $index) {
                     <div class="scq">
                         <span>
-                            <input type="text" [(ngModel)]="question.options[$index].option">
-                            <input type="radio" id="select{{$index}}" name="option" [value]="option.option">
+                            <input type="text" [(ngModel)]="question.options[$index]">
+                            <input type="radio" id="select{{$index}}" name="option" [value]="option">
                         </span>
                         @if (showConditional) {
                             <form [formGroup]="conditionalsForm" (submit)="addConditional($event, $index)">

@@ -17,12 +17,7 @@ export class SBBlock {
       style: new SBQuestionStyle(),
     };
     const mcq = new SBQuestion('Untitled Question', 'multiple-choice');
-    mcq.options = [
-      {
-        option: 'option 1',
-        conditionalQuestions: [],
-      },
-    ];
+    mcq.options = ['option 1'];
     this.questions.push(mcq);
   }
 }

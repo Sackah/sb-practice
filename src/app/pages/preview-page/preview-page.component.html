@@ -44,8 +44,10 @@
                     @for (option of question.options; track $index) {
                         <div class="mcq">
                             <span>
-                                <label for="{{option.option}}{{$index}}">{{option.option}}</label>
-                                <input type="checkbox" id="{{option.option}}{{$index}}" name="option" [value]="option.option">
+                                <label for="{{option}}{{$index}}">{{option}}</label>
+                                <input type="checkbox" 
+                                    id="{{option}}{{$index}}" name="option" [value]="option"
+                                >
                             </span>
                         </div>
                     }
@@ -54,17 +56,14 @@
                     @for (option of question.options; track $index) {
                         <div class="scq">
                             <span>
-                                <label for="{{blockIndex}}-{{questionIndex}}-option-{{$index}}">{{option.option}}</label>
-                                <input type="radio" id="{{blockIndex}}-{{questionIndex}}-option-{{$index}}" name="{{blockIndex}}-{{questionIndex}}" (change)="showConditionals(questionIndex, $index)" [value]="option.option">
+                                <label for="{{blockIndex}}-{{questionIndex}}-option-{{$index}}">{{option}}</label>
+                                <input type="radio" 
+                                    id="{{blockIndex}}-{{questionIndex}}-option-{{$index}}" 
+                                    name="{{blockIndex}}-{{questionIndex}}" 
+                                    (change)="showConditionals(questionIndex, $index)" 
+                                    [value]="option"
+                                >
                             </span>
-                            @if (listOfConditionals[questionIndex + '-' + $index]) {
-                                @for (conditionalQuestion of option.conditionalQuestions; track $index) {
-                                  <div class="conditional-question">
-                                    <h1>{{conditionalQuestion.title.detail}}</h1>
-                                    <input type="text" placeholder="Short answer text">
-                                  </div>
-                                }
-                            }
                         </div>
                     }
                 }
@@ -72,7 +71,9 @@
                     <div class="cbq">
                         <span>
                             <label for="{{question.option}}">{{question.option}}</label>
-                            <input type="checkbox" id="{{question.option}}" name="{{question.option}}" [value]="question.option">
+                            <input type="checkbox" id="{{question.option}}" 
+                                name="{{question.option}}" [value]="question.option"
+                            >
                         </span>
                     </div>
                 }

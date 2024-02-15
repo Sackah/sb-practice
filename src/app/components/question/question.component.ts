@@ -76,12 +76,7 @@ export class QuestionComponent {
       event === 'single-choice' ||
       event === 'dropdown'
     ) {
-      this.question.options = [
-        {
-          option: 'option 1',
-          conditionalQuestions: [],
-        },
-      ];
+      this.question.options = ['option 1'];
       this.question.option = '';
       this.question.answers = [];
     } else if (event === 'checkbox') {
@@ -104,10 +99,7 @@ export class QuestionComponent {
    * Operations on option
    */
   addOption() {
-    this.question.options.push({
-      option: `option ${this.question.options.length + 1}`,
-      conditionalQuestions: [],
-    });
+    this.question.options.push(`option ${this.question.options.length + 1}`);
   }
 
   addConditional(event: Event, index: number) {
