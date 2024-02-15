@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { SBForm } from '../../models/form.model';
 import { AddCollaboratorsComponent } from '../../components/add-collaborators/add-collaborators.component';
 import { TitleComponent } from '../../components/title/title.component';
@@ -24,7 +24,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './builder-page.component.html',
   styleUrl: './builder-page.component.scss',
 })
-export class BuilderPageComponent {
+export class BuilderPageComponent implements OnChanges {
   @Input() form!: SBForm;
   // timeout: NodeJS.Timeout | undefined;
   timeout: any;
@@ -102,6 +102,12 @@ export class BuilderPageComponent {
   ngOnDestroy(): void {
     if (this.timeout) {
       clearInterval(this.timeout);
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['form']) {
+      this.form = changes['form'].currentValue;
     }
   }
 

@@ -18,6 +18,7 @@
     ></app-builder-page>
   } @else {
     <app-preview-page
+    (formChange)="form = $event"
       [form]="form"
     ></app-preview-page>
   }

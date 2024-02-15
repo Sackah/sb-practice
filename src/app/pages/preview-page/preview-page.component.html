@@ -4,7 +4,7 @@
     [style.color]="form.colorScheme.textColor"
 >
 <span>
-    <button type="button">
+    <button type="button" (click)="clg()">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="20"
@@ -35,9 +35,9 @@
         <header>
             <h1 [class]="titleStyle">{{block.title.detail}}</h1>
         </header>
-        <div *ngFor="let question of block.questions; index as questionIndex" class="ssq">
+        <div *ngFor="let question of block.questions; index as questionIndex">
             <main>
-                <h1 [class]="titleStyle">{{question.title.detail}}</h1>
+                <h1 class="text-base">{{question.title.detail}}</h1>
             </main>
             @switch (question.type) {
                 @case ('multiple-choice') {
@@ -55,8 +55,16 @@
                         <div class="scq">
                             <span>
                                 <label for="{{blockIndex}}-{{questionIndex}}-option-{{$index}}">{{option.option}}</label>
-                                <input type="radio" id="{{blockIndex}}-{{questionIndex}}-option-{{$index}}" name="{{blockIndex}}-{{questionIndex}}" [value]="option.option">
+                                <input type="radio" id="{{blockIndex}}-{{questionIndex}}-option-{{$index}}" name="{{blockIndex}}-{{questionIndex}}" (change)="showConditionals($index)" [value]="option.option">
                             </span>
+                            @if (listOfConditionals[$index]) {
+                                @for (conditionalQuestion of option.conditionalQuestions; track $index) {
+                                    <div class="conditional-question">
+                                        <h1>{{conditionalQuestion.title.detail}}</h1>
+                                        <input type="text" placeholder="Short answer text">
+                                    </div>
+                                }
+                            }
                         </div>
                     }
                 }

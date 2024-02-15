@@ -1,4 +1,11 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { SBForm } from '../../models/form.model';
 import { CommonModule } from '@angular/common';
 
@@ -7,10 +14,21 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './preview-page.component.html',
-  styleUrl: './preview-page.component.scss',
+  styleUrls: [
+    './preview-page.component.scss',
+    '../../components/styles/text.styles.scss',
+  ],
 })
-export class PreviewPageComponent {
+export class PreviewPageComponent implements OnInit, OnDestroy {
   @Input() form!: SBForm;
+  @Output() formChange = new EventEmitter<SBForm>();
+  initialForm!: SBForm;
+  listOfConditionals: boolean[] = [];
+
+  ngOnInit(): void {
+    this.initialForm = JSON.parse(JSON.stringify(this.form));
+    this.setupConditionals();
+  }
 
   get titleStyle() {
     return {
@@ -32,7 +50,36 @@ export class PreviewPageComponent {
     };
   }
 
-  // get uniqueId(optionName: string, questionIndex: number){
+  clg() {
+    console.log(this.form);
+  }
 
-  // }
+  setupConditionals() {
+    this.form.blocks.forEach((block) => {
+      for (let i = 0; i < block.questions.length; i++) {
+        for (let j = 0; j < block.questions[i].options.length; j++) {
+          const key = `${i}-${j}`; // Use question index and option index as key
+          const ref = block.metadata[key];
+          if (ref !== undefined) {
+            const conditionalQuestion = block.questions[ref];
+            if (conditionalQuestion) {
+              block.questions[i].options[j].conditionalQuestions.push(
+                conditionalQuestion
+              );
+              block.questions.splice(ref, 1);
+            }
+          }
+        }
+      }
+    });
+  }
+
+  showConditionals(index: number) {
+    this.listOfConditionals[index] = !this.listOfConditionals[index];
+  }
+
+  ngOnDestroy(): void {
+    this.formChange.emit(this.initialForm);
+    this.form = this.initialForm;
+  }
 }

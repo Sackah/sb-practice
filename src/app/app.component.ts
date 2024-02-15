@@ -39,7 +39,7 @@ import { PreviewPageComponent } from './pages/preview-page/preview-page.componen
 })
 export class AppComponent {
   form = new SBForm();
-  showBuilderPage = false;
+  showBuilderPage = true;
 
   togglePages() {
     this.showBuilderPage = !this.showBuilderPage;
