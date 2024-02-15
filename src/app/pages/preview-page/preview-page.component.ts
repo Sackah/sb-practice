@@ -23,7 +23,7 @@ export class PreviewPageComponent implements OnInit, OnDestroy {
   @Input() form!: SBForm;
   @Output() formChange = new EventEmitter<SBForm>();
   initialForm!: SBForm;
-  listOfConditionals: boolean[] = [];
+  listOfConditionals: { [key: string]: boolean } = {};
 
   ngOnInit(): void {
     this.initialForm = JSON.parse(JSON.stringify(this.form));
@@ -74,8 +74,9 @@ export class PreviewPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  showConditionals(index: number) {
-    this.listOfConditionals[index] = !this.listOfConditionals[index];
+  showConditionals(questionIndex: number, optionIndex: number) {
+    const key = `${questionIndex}-${optionIndex}`;
+    this.listOfConditionals[key] = !this.listOfConditionals[key];
   }
 
   ngOnDestroy(): void {
