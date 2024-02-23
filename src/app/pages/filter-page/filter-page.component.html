@@ -1,0 +1,22 @@
+<div class="page">
+  <section>
+    <div class="checks">
+      @for (survey of surveys; track $index) {
+      <label class="form-check-label">
+        <input
+          class="checkbox"
+          type="checkbox"
+          (click)="changeFilter($event, survey.category)"
+        />
+        {{ survey.category }}
+      </label>
+      }
+    </div>
+    <div class="items">
+      <app-survey-list 
+        [surveys]="visibleSurveys"
+      >
+      </app-survey-list>
+    </div>
+  </section>
+</div>

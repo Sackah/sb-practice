@@ -1,0 +1,12 @@
+@for (survey of surveys; track $index) {
+    <div class="item">
+        <h2>{{survey.title}}</h2>
+        <p>{{survey.description}}</p>
+        @for (question of survey.questions; track $index) {
+            <h3>{{question.question}}</h3>
+            @for (option of question.options; track $index) {
+                <p>{{option.option}}</p>
+            }
+        }
+    </div>
+}

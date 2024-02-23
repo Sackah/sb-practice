@@ -3,23 +3,31 @@
     <p>Home</p>
     <img src="assets/arrow-right.svg" alt="">
     <p
-      (click)="showBuilderPage = true"
-      [class]="{active: showBuilderPage}"
+      (click)="togglePages('builder')"
+      [class]="{active: pages === 'builder'}"
     >Survey</p>
     <img src="assets/arrow-right.svg" alt="">
     <p
-      (click)="showBuilderPage = false"
-      [class]="{active: !showBuilderPage}"
+      (click)="togglePages('preview')"
+      [class]="{active: pages === 'preview'}"
     >Preview</p>
+    <img src="assets/arrow-right.svg" alt="">
+    <p
+      (click)="togglePages('filter')"
+      [class]="{active: pages === 'filter'}"
+    >Filter</p>
   </header>
-  @if (showBuilderPage) {
+  @if (pages === 'builder') {
     <app-builder-page
       [form]="form"
     ></app-builder-page>
-  } @else {
+  } @else if (pages === 'preview') {
     <app-preview-page
     (formChange)="form = $event"
       [form]="form"
     ></app-preview-page>
+  } @else if (pages === 'filter') {
+    <app-filter-page
+    ></app-filter-page>
   }
 </div>

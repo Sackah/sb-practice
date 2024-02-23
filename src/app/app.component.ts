@@ -17,6 +17,7 @@ import { ColorSchemeService } from './services/color-scheme.service';
 import { AddCollaboratorsComponent } from './components/add-collaborators/add-collaborators.component';
 import { BuilderPageComponent } from './pages/builder-page/builder-page.component';
 import { PreviewPageComponent } from './pages/preview-page/preview-page.component';
+import { FilterPageComponent } from './pages/filter-page/filter-page.component';
 
 @Component({
   selector: 'app-root',
@@ -35,13 +36,16 @@ import { PreviewPageComponent } from './pages/preview-page/preview-page.componen
     AddCollaboratorsComponent,
     BuilderPageComponent,
     PreviewPageComponent,
+    FilterPageComponent,
   ],
 })
 export class AppComponent {
   form = new SBForm();
-  showBuilderPage = true;
+  // showBuilderPage = true;
+  pages: 'builder' | 'preview' | 'filter' = 'builder';
 
-  togglePages() {
-    this.showBuilderPage = !this.showBuilderPage;
+  togglePages(page: typeof this.pages) {
+    this.pages = page;
+    // this.showBuilderPage = !this.showBuilderPage;
   }
 }

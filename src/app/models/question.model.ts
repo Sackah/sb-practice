@@ -22,6 +22,7 @@ export class SBQuestion {
    */
   option: string = '';
   answers: string | string[] = '';
+  isConditional = false;
 
   constructor(
     title = 'Untitled Question',

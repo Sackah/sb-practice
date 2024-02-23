@@ -59,8 +59,8 @@ export class PreviewPageComponent implements OnInit, OnDestroy {
 
   setupConditionals() {
     this.form.blocks.forEach((block) => {
-      for (let i = 0; i < block.questions.length; i++) {
-        for (let j = 0; j < block.questions[i].options.length; j++) {
+      for (let i = block.questions.length - 1; i >= 0; i--) {
+        for (let j = block.questions[i].options.length - 1; j >= 0; j--) {
           const key = `${i}-${j}`; // Use question index and option index as key
           const ref = block.metadata[key];
           if (ref !== undefined) {
@@ -70,6 +70,7 @@ export class PreviewPageComponent implements OnInit, OnDestroy {
                 index: ref,
                 question: conditionalQuestion,
               };
+              conditionalQuestion.isConditional = true; // Set the isConditional property
               block.questions.splice(ref, 1);
             }
           }
@@ -78,21 +79,30 @@ export class PreviewPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  showConditionals(questionIndex: number, optionIndex: number) {
-    const key = `${questionIndex}-${optionIndex}`;
-    if (key in this.conditionalQuestions) {
-      // Retrieve the conditional question
+  showConditionals(event: Event, questionIndex: number, optionIndex: number) {
+    const { checked } = event.target as HTMLInputElement;
+
+    // Remove all conditional questions first
+    for (let key in this.conditionalQuestions) {
       const { question } = this.conditionalQuestions[key];
-      // Check if the conditional question is already in the questions array
       const index = this.form.blocks[0].questions.findIndex(
         (q) => q === question
       );
-      if (index === -1) {
-        // If the conditional question is not in the questions array, insert it
-        this.form.blocks[0].questions.splice(questionIndex + 1, 0, question);
-      } else {
-        // If the conditional question is in the questions array, remove it
+      if (index !== -1) {
         this.form.blocks[0].questions.splice(index, 1);
+      }
+    }
+
+    // If a radio button is checked, insert its related conditional questions
+    if (checked) {
+      const key = `${questionIndex}-${optionIndex}`;
+      if (key in this.conditionalQuestions) {
+        const { question } = this.conditionalQuestions[key];
+        // Find the new index of the question that triggered the conditional question
+        const newQuestionIndex = this.form.blocks[0].questions.findIndex(
+          (q) => q === this.form.blocks[0].questions[questionIndex]
+        );
+        this.form.blocks[0].questions.splice(newQuestionIndex + 1, 0, question);
       }
     }
   }

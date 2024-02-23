@@ -1,4 +1,10 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  inject,
+} from '@angular/core';
 import { SBForm } from '../../models/form.model';
 import { AddCollaboratorsComponent } from '../../components/add-collaborators/add-collaborators.component';
 import { TitleComponent } from '../../components/title/title.component';
@@ -10,6 +16,8 @@ import { SBColorScheme } from '../../models/colorScheme';
 import { colorSchemes } from '../../color-schemes';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { AccountSetupService } from '../../services/account-setup.service';
 
 @Component({
   selector: 'app-builder-page',
@@ -32,7 +40,8 @@ export class BuilderPageComponent implements OnChanges {
 
   constructor(
     private sidebarService: SideBarService,
-    private colorSchemeService: ColorSchemeService
+    private colorSchemeService: ColorSchemeService,
+    private accountSetupService: AccountSetupService
   ) {
     this.sidebarService.currentStyle.subscribe({
       next: (style) => {
@@ -113,12 +122,32 @@ export class BuilderPageComponent implements OnChanges {
 
   handleImageChange(event: any) {
     if (event.target.files) {
-      const image = new FormData();
-      image.append('file', event.target.files[0]);
+      const fd = new FormData();
+      fd.append('profilePicture', event.target.files[0]);
+      fd.append('email', 'gasicen109@tospage.com');
+      fd.append('firstName', 'lala');
+      fd.append('lastName', 'Yad');
+      fd.append('phoneNumber', '02323232342424');
+      fd.append('location', 'Accra');
+      fd.append('timeZone', 'Africa/Accra');
+      fd.append('refId', '45c88ad20c9ba9fe1ecae0b6505c23b6');
 
-      for (let pair of image.entries()) {
+      for (let pair of fd.entries()) {
         console.log(pair[0] + ', ' + pair[1]);
       }
+
+      this.postForm(fd);
     }
+  }
+
+  postForm(form: FormData) {
+    this.accountSetupService.post(form).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }
