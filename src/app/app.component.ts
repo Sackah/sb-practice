@@ -18,6 +18,7 @@ import { AddCollaboratorsComponent } from './components/add-collaborators/add-co
 import { BuilderPageComponent } from './pages/builder-page/builder-page.component';
 import { PreviewPageComponent } from './pages/preview-page/preview-page.component';
 import { FilterPageComponent } from './pages/filter-page/filter-page.component';
+import { SocketPageComponent } from './pages/socket-page/socket-page.component';
 
 @Component({
   selector: 'app-root',
@@ -37,12 +38,13 @@ import { FilterPageComponent } from './pages/filter-page/filter-page.component';
     BuilderPageComponent,
     PreviewPageComponent,
     FilterPageComponent,
+    SocketPageComponent,
   ],
 })
 export class AppComponent {
   form = new SBForm();
   // showBuilderPage = true;
-  pages: 'builder' | 'preview' | 'filter' = 'builder';
+  pages: 'builder' | 'preview' | 'filter' | 'socket' = 'builder';
 
   togglePages(page: typeof this.pages) {
     this.pages = page;

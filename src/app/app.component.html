@@ -1,33 +1,39 @@
 <div class="page">
   <header>
     <p>Home</p>
-    <img src="assets/arrow-right.svg" alt="">
+    <img src="assets/arrow-right.svg" alt="" />
     <p
       (click)="togglePages('builder')"
-      [class]="{active: pages === 'builder'}"
-    >Survey</p>
-    <img src="assets/arrow-right.svg" alt="">
+      [class]="{ active: pages === 'builder' }"
+    >
+      Survey
+    </p>
+    <img src="assets/arrow-right.svg" alt="" />
     <p
       (click)="togglePages('preview')"
-      [class]="{active: pages === 'preview'}"
-    >Preview</p>
-    <img src="assets/arrow-right.svg" alt="">
-    <p
-      (click)="togglePages('filter')"
-      [class]="{active: pages === 'filter'}"
-    >Filter</p>
+      [class]="{ active: pages === 'preview' }"
+    >
+      Preview
+    </p>
+    <img src="assets/arrow-right.svg" alt="" />
+    <p (click)="togglePages('filter')" [class]="{ active: pages === 'filter' }">
+      Filter
+    </p>
+    <img src="assets/arrow-right.svg" alt="" />
+    <p (click)="togglePages('socket')" [class]="{ active: pages === 'socket' }">
+      Socket
+    </p>
   </header>
   @if (pages === 'builder') {
-    <app-builder-page
-      [form]="form"
-    ></app-builder-page>
+  <app-builder-page [form]="form"></app-builder-page>
   } @else if (pages === 'preview') {
-    <app-preview-page
+  <app-preview-page
     (formChange)="form = $event"
-      [form]="form"
-    ></app-preview-page>
+    [form]="form"
+  ></app-preview-page>
   } @else if (pages === 'filter') {
-    <app-filter-page
-    ></app-filter-page>
+  <app-filter-page></app-filter-page>
+  } @else if (pages === 'socket') {
+  <app-socket-page></app-socket-page>
   }
 </div>
