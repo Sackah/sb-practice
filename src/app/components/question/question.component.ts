@@ -71,15 +71,11 @@ export class QuestionComponent {
 
   handleTypeChange(event: QuestionType) {
     this.question.type = event;
-    if (
-      event === 'multiple-choice' ||
-      event === 'single-choice' ||
-      event === 'dropdown'
-    ) {
+    if (event === 'multiple-choice' || event === 'dropdown') {
       this.question.options = ['option 1'];
       this.question.option = '';
       this.question.answers = [];
-    } else if (event === 'checkbox') {
+    } else if (event === 'checkbox' || event === 'single-choice') {
       this.question.option = 'option 1';
       this.question.answers = '';
     }
