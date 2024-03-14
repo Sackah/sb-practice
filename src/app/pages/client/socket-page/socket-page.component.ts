@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { SocketService } from '../../services/socket.service';
+import { SocketService } from '../../../services/socket.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({

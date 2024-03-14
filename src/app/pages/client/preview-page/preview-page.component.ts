@@ -6,9 +6,9 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { SBForm } from '../../models/form.model';
+import { SBForm } from '../../../models/form.model';
 import { CommonModule } from '@angular/common';
-import { SBQuestion } from '../../models/question.model';
+import { SBQuestion } from '../../../models/question.model';
 
 @Component({
   selector: 'app-preview-page',
@@ -17,7 +17,7 @@ import { SBQuestion } from '../../models/question.model';
   templateUrl: './preview-page.component.html',
   styleUrls: [
     './preview-page.component.scss',
-    '../../components/survey-creation/styles/text.styles.scss',
+    '../../../components/survey-creation/styles/text.styles.scss',
   ],
 })
 export class PreviewPageComponent implements OnInit, OnDestroy {

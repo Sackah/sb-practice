@@ -5,19 +5,19 @@ import {
   SimpleChanges,
   inject,
 } from '@angular/core';
-import { SBForm } from '../../models/form.model';
-import { AddCollaboratorsComponent } from '../../components/general/add-collaborators/add-collaborators.component';
-import { TitleComponent } from '../../components/survey-creation/title/title.component';
-import { BlockComponent } from '../../components/survey-creation/block/block.component';
-import { SideBarService } from '../../services/side-bar.service';
-import { ColorSchemeService } from '../../services/color-scheme.service';
-import { SBBlock } from '../../models/block.model';
-import { SBColorScheme } from '../../models/colorScheme';
-import { colorSchemes } from '../../color-schemes';
+import { SBForm } from '../../../models/form.model';
+import { AddCollaboratorsComponent } from '../../../components/general/add-collaborators/add-collaborators.component';
+import { TitleComponent } from '../../../components/survey-creation/title/title.component';
+import { BlockComponent } from '../../../components/survey-creation/block/block.component';
+import { SideBarService } from '../../../services/side-bar.service';
+import { ColorSchemeService } from '../../../services/color-scheme.service';
+import { SBBlock } from '../../../models/block.model';
+import { SBColorScheme } from '../../../models/colorScheme';
+import { colorSchemes } from '../../../color-schemes';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { AccountSetupService } from '../../services/account-setup.service';
+import { AccountSetupService } from '../../../services/account-setup.service';
 
 @Component({
   selector: 'app-builder-page',
