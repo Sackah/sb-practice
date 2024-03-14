@@ -30,7 +30,7 @@
     <a
       routerLink="/{{ menu.nav_link }}"
       routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
+      [routerLinkActiveOptions]="menu.activeOptions"
     >
       <div
         class="flex flex-col items-center justify-center py-[12px] px-[20px] rounded-md w-[80px] cursor-pointer hover:bg-gray-700 overflow-hidden"

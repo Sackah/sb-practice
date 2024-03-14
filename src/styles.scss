@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -39,8 +40,8 @@ iframe {
 body {
   background-color: #f9fafb;
   ::-webkit-scrollbar {
-    width: 8px; 
-    height: 8px; 
+    width: 8px;
+    height: 8px;
   }
 
   /* Track (background of the scrollbar) */

@@ -1,0 +1,78 @@
+@mixin page-heading {
+  color: $grey-800;
+  font-family: $font-main;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.04rem;
+  padding: 18px 0;
+}
+
+@mixin center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-row {
+  @include center;
+  flex-direction: row;
+}
+
+@mixin flex-col {
+  @include center;
+  flex-direction: column;
+}
+
+@mixin text-bold($size: 1.25rem, $color: $grey-900) {
+  font-size: $size;
+  color: $color;
+  font-weight: 600;
+}
+
+@mixin text-light($size: 1rem, $color: $grey-500) {
+  font-size: $size;
+  color: $color;
+  font-weight: 400;
+}
+
+@mixin button(
+  $bg: $white,
+  $text: $black,
+  $border-color: $orange-400,
+  $text-size: 0.875rem
+) {
+  border-radius: 8px;
+  border: 1.5px solid $border-color;
+  background: $bg;
+  padding: 8px 12px;
+  font-size: $text-size;
+  font-weight: 600;
+  color: $text;
+  @include center;
+  justify-content: space-between;
+}
+
+@mixin img-container($size: 80px) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+}
+
+@mixin image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@mixin input($bg: $white, $color: $grey-900, $border-color: $grey-300) {
+  border-radius: 6px;
+  border: 1px solid $border-color;
+  background: $bg;
+  padding: 16px;
+  color: $color;
+  width: 100%;
+  &:focus {
+    outline: none;
+    border: 1px solid $orange-200;
+  }
+}
