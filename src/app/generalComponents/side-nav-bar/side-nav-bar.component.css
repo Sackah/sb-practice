@@ -1,0 +1,15 @@
+.active {
+  background-color: #2b313d;
+  border-radius: 0.375rem;
+}
+
+@media screen {
+  #sideNav {
+    left: -100%;
+  }
+}
+@media (min-width: 768px) {
+  #sideNav {
+    left: 0;
+  }
+}/*# sourceMappingURL=side-nav-bar.component.css.map */

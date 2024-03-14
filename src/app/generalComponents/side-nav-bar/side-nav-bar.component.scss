@@ -1,0 +1,14 @@
+.active {
+  background-color: #2b313d;
+  border-radius: 0.375rem;
+  // width: 100%;
+}
+
+#sideNav {
+  @media screen {
+    left: -100%;
+  }
+  @media (min-width: "768px") {
+    left: 0;
+  }
+}
