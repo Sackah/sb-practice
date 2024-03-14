@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { QuestionType } from '../models/question.model';
-import { TextSizes } from '../side-bar/sizes';
+import { TextSizes } from '../components/general/side-bar/sizes';
 
 @Injectable({
   providedIn: 'root',

@@ -17,7 +17,7 @@ import { SBQuestion } from '../../models/question.model';
   templateUrl: './preview-page.component.html',
   styleUrls: [
     './preview-page.component.scss',
-    '../../components/styles/text.styles.scss',
+    '../../components/survey-creation/styles/text.styles.scss',
   ],
 })
 export class PreviewPageComponent implements OnInit, OnDestroy {

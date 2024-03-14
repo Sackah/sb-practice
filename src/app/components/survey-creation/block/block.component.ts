@@ -6,11 +6,11 @@ import {
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
-import { SBBlock } from '../../models/block.model';
+import { SBBlock } from '../../../models/block.model';
 import { FormsModule } from '@angular/forms';
-import { ClickOutsideDirective } from '../../directives/clickoutside.directive';
-import { SBQuestion } from '../../models/question.model';
-import { DropdownService } from '../../dropdown/dropdown.service';
+import { ClickOutsideDirective } from '../../../directives/clickoutside.directive';
+import { SBQuestion } from '../../../models/question.model';
+import { DropdownService } from '../../ui/dropdown/dropdown.service';
 import { QuestionComponent } from '../question/question.component';
 import { BoldIconComponent } from '../icons/bold.component';
 import { ItalicIconComponent } from '../icons/italic.component';

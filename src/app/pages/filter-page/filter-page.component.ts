@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Survey, Surveys } from './static';
-import { SurveyListComponent } from '../../components/survey-list/survey-list.component';
+import { SurveyListComponent } from '../../components/general/survey-list/survey-list.component';
 import { FilterService } from '../../services/filter.service';
 
 @Component({
@@ -14,7 +14,6 @@ export class FilterPageComponent {
   surveys = Surveys;
   filterService = inject(FilterService);
   filter = (category: Survey) => true;
-
 
   checkedCategories: string[] = [];
 

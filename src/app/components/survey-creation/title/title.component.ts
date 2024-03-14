@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SBTitle } from '../../models/title.model';
+import { SBTitle } from '../../../models/title.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ClickOutsideDirective } from '../../directives/clickoutside.directive';
+import { ClickOutsideDirective } from '../../../directives/clickoutside.directive';
 import { BoldIconComponent } from '../icons/bold.component';
 import { ItalicIconComponent } from '../icons/italic.component';
 import { LargeIconComponent } from '../icons/large.component';

@@ -51,6 +51,7 @@ export class AddCollaboratorsComponent {
 
   handleChange(event: any) {
     if (event.data === ',') {
+      console.log('rea');
       this.handleSubmit();
     }
   }

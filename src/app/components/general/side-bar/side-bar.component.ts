@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TextSizes, sizes } from './sizes';
-import { SideBarService } from '../services/side-bar.service';
+import { SideBarService } from '../../../services/side-bar.service';
 
 @Component({
   selector: 'app-side-bar',

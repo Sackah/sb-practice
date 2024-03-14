@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SBImage } from '../../models/image.model';
+import { SBImage } from '../../../models/image.model';
 
 @Component({
   selector: 'app-image',

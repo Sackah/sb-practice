@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
-import { Survey } from '../../pages/filter-page/static';
-import { FilterService } from '../../services/filter.service';
+import { Survey } from '../../../pages/filter-page/static';
+import { FilterService } from '../../../services/filter.service';
 
 @Component({
   selector: 'app-survey-list',

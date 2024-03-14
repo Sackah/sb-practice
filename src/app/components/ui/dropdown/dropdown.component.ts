@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ClickOutsideDirective } from '../directives/clickoutside.directive';
+import { ClickOutsideDirective } from '../../../directives/clickoutside.directive';
 
 @Component({
   selector: 'app-dropdown',

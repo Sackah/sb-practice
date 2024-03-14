@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { QuestionType, SBQuestion } from '../../models/question.model';
-import { ClickOutsideDirective } from '../../directives/clickoutside.directive';
+import { QuestionType, SBQuestion } from '../../../models/question.model';
+import { ClickOutsideDirective } from '../../../directives/clickoutside.directive';
 import {
   FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { LongpressDirective } from '../../directives/longpress.directive';
-import { SelectComponent } from '../../select/select.component';
+import { LongpressDirective } from '../../../directives/longpress.directive';
+import { SelectComponent } from '../../ui/select/select.component';
 import { BoldIconComponent } from '../icons/bold.component';
 import { ItalicIconComponent } from '../icons/italic.component';
 import { LargeIconComponent } from '../icons/large.component';

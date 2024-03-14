@@ -6,9 +6,9 @@ import {
   inject,
 } from '@angular/core';
 import { SBForm } from '../../models/form.model';
-import { AddCollaboratorsComponent } from '../../components/add-collaborators/add-collaborators.component';
-import { TitleComponent } from '../../components/title/title.component';
-import { BlockComponent } from '../../components/block/block.component';
+import { AddCollaboratorsComponent } from '../../components/general/add-collaborators/add-collaborators.component';
+import { TitleComponent } from '../../components/survey-creation/title/title.component';
+import { BlockComponent } from '../../components/survey-creation/block/block.component';
 import { SideBarService } from '../../services/side-bar.service';
 import { ColorSchemeService } from '../../services/color-scheme.service';
 import { SBBlock } from '../../models/block.model';

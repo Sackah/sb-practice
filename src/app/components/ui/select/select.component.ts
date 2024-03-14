@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ClickOutsideDirective } from '../directives/clickoutside.directive';
-import { QuestionType } from '../models/question.model';
+import { ClickOutsideDirective } from '../../../directives/clickoutside.directive';
+import { QuestionType } from '../../../models/question.model';
 import { BehaviorSubject } from 'rxjs';
 import { CommonModule } from '@angular/common';
 

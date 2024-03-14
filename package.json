@@ -39,8 +39,6 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "socket.io": "^4.6.0-alpha1",
-    "socket.io-msgpack-parser": "^3.0.0",
     "typescript": "~5.2.2"
   }
 }
