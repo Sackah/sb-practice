@@ -15,13 +15,13 @@ export class SideNavBarComponent {
       id: 1,
       navName: 'Home',
       icon_link: '../../../assets/SideMenu/home_icon.svg',
-      nav_link: '/user/home',
+      nav_link: '/admin/home',
     },
     {
       id: 2,
       navName: 'Template',
       icon_link: '../../../assets/SideMenu/template_icon.svg',
-      nav_link: '/user/most_popular',
+      nav_link: '/admin/most_popular',
     },
     {
       id: 3,
@@ -34,7 +34,7 @@ export class SideNavBarComponent {
       id: 3,
       navName: 'Settings',
       icon_link: '../../../assets/SideMenu/settings_icon.svg',
-      nav_link: '/user/settings',
+      nav_link: '/admin/settings',
     },
   ];
 
