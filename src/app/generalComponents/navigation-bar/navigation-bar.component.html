@@ -1,0 +1,47 @@
+<nav
+  class="bg-white shadow-md lg:px-[105px] px-[1rm] fixed w-screen z-[50] overflow-visible 2xl:py-[1.3rem]"
+>
+  <div class="mx-auto px-[108px]">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex">
+        <a
+          routerLink=""
+          class="flex items-center text-orange-600 text-lg font-semibold px-2 cursor-pointer"
+        >
+          <img
+            src="../../../assets/NavigationBar/brand_logo.svg"
+            alt="Brand name logo"
+            class="2xl:w-[32px]"
+          />
+          <span class="ml-[16px] 2xl:text-[26px] overflow-hidden"
+            >SurveyBuilder</span
+          >
+        </a>
+      </div>
+
+      <div class="flex items-center justify-between gap-x-[20px]">
+        @if (isLoggedIn) {
+        <div
+          class="w-[52px] h-[52px] rounded-full overflow-hidden border-2 border-[#712EFF]"
+        >
+          <img
+            src="{{
+              profileImg ? profileImg : 'assets/USER/settings/user.svg'
+            }}"
+            alt="user profile image"
+            class="object-cover bg-[#e4d2cb]"
+          />
+        </div>
+        }
+        <div>
+          <h4 class="text-[18px] font-semibold">{{ user ? user : email }}</h4>
+          <p class="text-[16px] text-[#BABABA]">
+            @if (role === 'ADMIN') {
+            {{ role }}
+            }
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

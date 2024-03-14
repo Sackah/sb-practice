@@ -15,6 +15,7 @@ export class FilterPageComponent {
   filterService = inject(FilterService);
   filter = (category: Survey) => true;
 
+
   checkedCategories: string[] = [];
 
   changeFilter(event: Event, category: string) {

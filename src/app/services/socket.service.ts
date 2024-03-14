@@ -18,7 +18,6 @@ export class SocketService {
   constructor() {
     this.showConnection();
     this.receiveMessage();
-    this.receiveForm();
     this.showDisconnection();
   }
 
@@ -36,11 +35,6 @@ export class SocketService {
     });
   }
 
-  private receiveForm() {
-    this.socket.on('form', (form: Form) => {
-      this.form$.next(form);
-    });
-  }
 
   showConnection() {
     this.socket.on('connect', () => {
