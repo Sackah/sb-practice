@@ -1,0 +1,28 @@
+<div class="backdrop" (click)="close()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <header>
+      <h1>Invite users</h1>
+      <img
+        (click)="close()"
+        class="cursor-pointer"
+        src="assets/Admin/close.svg"
+        alt=""
+      />
+    </header>
+    <form [formGroup]="form" (submit)="handleSubmit()">
+      <label for="email">Link</label>
+      <input
+        type="text"
+        id="email"
+        placeholder="Enter email address"
+        formControlName="email"
+      />
+      <div class="flex justify-end">
+        <span class="flex gap-2">
+          <button type="button" (click)="close()">Cancel</button>
+          <button type="submit">Send</button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>

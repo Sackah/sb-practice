@@ -1,3 +1,4 @@
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { User } from '../../store/user';
 
@@ -25,4 +26,24 @@ export class ProfileValidator<T extends User = User> {
 
     return out;
   }
+}
+
+export function passwordMatchValidator(
+  passwordField: string,
+  confirmPasswordField: string
+): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const password = control.get(passwordField);
+    const confirmPassword = control.get(confirmPasswordField);
+
+    if (!password || !confirmPassword) {
+      return null;
+    }
+
+    if (password.value !== confirmPassword.value) {
+      return { passwordMismatch: true };
+    }
+
+    return null;
+  };
 }

@@ -82,7 +82,7 @@ export class AdminProfileComponent implements OnInit {
       pendSignal(this.updateProfileSignal);
       this.enableSubmission = false;
 
-      this.profileUpdateService.post(this.form.value).subscribe({
+      this.profileUpdateService.postDetails(this.form.value).subscribe({
         next: (re) => {
           completeSignal(this.updateProfileSignal, re);
           this.enableSubmission = true;

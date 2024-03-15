@@ -23,10 +23,10 @@
   flex-direction: column;
 }
 
-@mixin text-bold($size: 1.25rem, $color: $grey-900) {
+@mixin text-bold($size: 1.25rem, $color: $grey-900, $weight: 600) {
   font-size: $size;
   color: $color;
-  font-weight: 600;
+  font-weight: $weight;
 }
 
 @mixin text-light($size: 1rem, $color: $grey-500) {
@@ -36,8 +36,8 @@
 }
 
 @mixin button(
-  $bg: $white,
-  $text: $black,
+  $bg: $orange-400,
+  $text: $white,
   $border-color: $orange-400,
   $text-size: 0.875rem
 ) {
@@ -58,7 +58,7 @@
   border-radius: 50%;
 }
 
-@mixin image {
+@mixin img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -75,4 +75,25 @@
     outline: none;
     border: 1px solid $orange-200;
   }
+}
+
+@mixin backdrop {
+  @include center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 50;
+  background-color: rgb(156 163 175 / 0.4);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+@mixin modal($padding: 32px 48px, $br: 16px) {
+  padding: $padding;
+  border-radius: $br;
+  z-index: 50;
+  background-color: $white;
 }

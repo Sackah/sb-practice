@@ -5,28 +5,18 @@ import {
 } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
-import { environment } from '../../../environments/environment.development';
-import { UpdatePassword, UpdateProfileDetails } from '../../shared/types';
+import { User } from '../../store/user';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProfileUpdateService {
+export class FetchUsersService {
   private http = inject(HttpClient);
 
-  postDetails(details: UpdateProfileDetails) {
+  // TODO: Change server to valid endpoint
+  get() {
     return this.http
-      .put(`${environment.baseUrl}/admin/update-user`, details, this.options)
-      .pipe(catchError((err) => this.onError(err)));
-  }
-
-  postPassword(details: UpdatePassword) {
-    return this.http
-      .put(
-        `${environment.baseUrl}/admin/update-password`,
-        details,
-        this.options
-      )
+      .get<User[]>(`assets/Admin/store/userList.json`, this.options)
       .pipe(catchError((err) => this.onError(err)));
   }
 

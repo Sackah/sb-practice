@@ -4,3 +4,7 @@ export interface UpdateProfileDetails {
   lastName?: string;
   email?: string;
 }
+
+export interface UpdatePassword {
+  password: string;
+}

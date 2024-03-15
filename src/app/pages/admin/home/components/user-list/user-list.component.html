@@ -1,0 +1,58 @@
+<section>
+  <table class="table">
+    <thead>
+      <header class="flex justify-start w-full">
+        <input type="search" class="mr-2" id="" placeholder="Search here..." />
+        <button>
+          <img src="assets/Admin/filter.svg" alt="" />
+          Filter
+        </button>
+      </header>
+      <tr class="bg-[#F9FAFB]">
+        <th>Name</th>
+        <th>Email</th>
+        <th>Activation</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of users; track $index) {
+      <tr class="row">
+        <td class="flex items-center gap-3">
+          <div class="img-container">
+            @if (user.profilePicture) {
+            <img [src]="user.profilePicture" alt="" />
+            } @else { {{ getInitials(user.username) }} }
+          </div>
+          <h2>{{ user.username }}</h2>
+        </td>
+        <td>{{ user.email }}</td>
+        <td>
+          <app-switch [(check)]="user.enabled" />
+        </td>
+        <td class="flex justify-end">
+          <button type="button" title="options">
+            <img src="assets/Admin/3-dots.svg" alt="" />
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  <footer>
+    <div class="p-[16px] flex justify-between w-full">
+      <h1>Page 1 of 30</h1>
+      <div>pagination</div>
+      <div class="flex gap-3">
+        <button class="flex-row gap-2">
+          <img src="assets/Admin/arrow-left.svg" alt="" />
+          Previous
+        </button>
+        <button class="flex-row-reverse gap-2">
+          <img src="assets/Admin/arrow-right.svg" alt="" />
+          Next
+        </button>
+      </div>
+    </div>
+  </footer>
+</section>
