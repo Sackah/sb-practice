@@ -14,27 +14,31 @@ export class SideNavBarComponent {
     {
       id: 1,
       navName: 'Home',
-      icon_link: '../../../assets/SideMenu/home_icon.svg',
+      icon_link: 'assets/SideMenu/home_icon.svg',
       nav_link: '/admin/home',
+      activeOptions: { exact: true },
     },
     {
       id: 2,
       navName: 'Template',
-      icon_link: '../../../assets/SideMenu/template_icon.svg',
-      nav_link: '/admin/most_popular',
+      icon_link: 'assets/SideMenu/template_icon.svg',
+      nav_link: '/admin/template',
+      activeOptions: { exact: true },
     },
     {
       id: 3,
       navName: 'History',
-      icon_link: '../../../assets/SideMenu/history_icon.svg',
-      nav_link: '/user/history',
+      icon_link: 'assets/SideMenu/history_icon.svg',
+      nav_link: '/admin/history',
+      activeOptions: { exact: true },
     },
 
     {
       id: 3,
       navName: 'Settings',
-      icon_link: '../../../assets/SideMenu/settings_icon.svg',
+      icon_link: 'assets/SideMenu/settings_icon.svg',
       nav_link: '/admin/settings',
+      activeOptions: { exact: false },
     },
   ];
 

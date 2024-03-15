@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router } from '@angular/router';
 import { NavigationBarComponent } from '../../components/general/navigation-bar/navigation-bar.component';
 import { SideNavBarComponent } from '../../components/general/side-nav-bar/side-nav-bar.component';
 
@@ -7,17 +7,30 @@ import { SideNavBarComponent } from '../../components/general/side-nav-bar/side-
   template: `
     <app-navigation-bar></app-navigation-bar>
     <app-side-nav-bar></app-side-nav-bar>
-    <div id="root">
+    <div id="admin-root">
       <router-outlet></router-outlet>
     </div>
   `,
   selector: 'app-admin-main',
-  styles: ``,
+  styles: `
+      #admin-root{
+        padding-top: 64px;
+        padding-left: 112px;
+        min-height: 100vh;
+        width: 100%;
+      }
+      @media (min-width: 1536px){
+        #admin-root{
+          padding-top: calc(64px + 48px);
+        }
+      }
+  `,
   standalone: true,
   imports: [RouterOutlet, NavigationBarComponent, SideNavBarComponent],
 })
 export class AdminEntryComponent {
-  constructor() {
-    console.log('AdminMainComponent');
+  constructor(private router: Router) {
+    // TODO: change router back to /admin/home
+    this.router.navigate(['/admin/settings']);
   }
 }

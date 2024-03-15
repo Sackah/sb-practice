@@ -1,0 +1,59 @@
+<section>
+  <div class="upper">
+    <span>
+      <h3>Profile photo</h3>
+      <p>This image will be displayed on your profile</p>
+      <button (click)="image.click()">
+        <img src="assets/Admin/img-add.svg" alt="" />
+        Change Photo
+      </button>
+    </span>
+    <span class="cursor-pointer overflow-hidden" (click)="image.click()">
+      <img [src]="user.profilePicture || 'assets/Admin/user.svg'" alt="" />
+    </span>
+  </div>
+</section>
+
+<section>
+  <div class="lower">
+    <span>
+      <h3>Personal Information</h3>
+      <p>Update your personal details here</p>
+      <button [disabled]="!enableSubmission" (click)="submit.click()">
+        Save Changes
+      </button>
+    </span>
+    <span>
+      <form [formGroup]="form" (submit)="handleSubmit()">
+        <main class="flex gap-5 mb-[20px]">
+          <span class="w-1/2 block">
+            <label for="first-name"> First name </label>
+            <input id="first-name" type="text" formControlName="firstName" />
+          </span>
+          <span class="w-1/2 block">
+            <label for="last-name"> Last name </label>
+            <input id="last-name" type="text" formControlName="lastName" />
+          </span>
+        </main>
+        <span class="w-full">
+          <label for="email"> Email address </label>
+          <input id="email" type="email" formControlName="email" />
+        </span>
+        <button
+          type="submit"
+          style="display: none"
+          #submit
+          title="submit"
+        ></button>
+      </form>
+    </span>
+  </div>
+</section>
+
+<input
+  type="file"
+  #image
+  class="hidden"
+  accept="image/*"
+  (change)="handleImageChange($event)"
+/>
