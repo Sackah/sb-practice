@@ -19,12 +19,12 @@
     <span>
       <h3>Personal Information</h3>
       <p>Update your personal details here</p>
-      <button [disabled]="!form.valid" (click)="submit.click()">
+      <button [disabled]="!enableSubmission" (click)="submit.click()">
         Save Changes
       </button>
     </span>
     <span>
-      <form [formGroup]="form">
+      <form [formGroup]="form" (submit)="handleSubmit()">
         <main class="flex gap-5 mb-[20px]">
           <span class="w-1/2 block">
             <label for="first-name"> First name </label>
