@@ -45,6 +45,25 @@ export class UserActionsService {
       .pipe(catchError((err) => this.onError(err)));
   }
 
+  toggleUserActivation(status: boolean, userId: string) {
+    if (!status) {
+      return this.http
+        .delete(
+          `${environment.baseUrl}/users/deactivate/${userId}`,
+          this.options
+        )
+        .pipe(catchError((err) => this.onError(err)));
+    } else {
+      return this.http
+        .post<{}>(
+          `${environment.baseUrl}/users/activate`,
+          { userId },
+          this.options
+        )
+        .pipe(catchError((err) => this.onError(err)));
+    }
+  }
+
   selectUser(user: User) {
     this.selectedUser.set(user);
   }

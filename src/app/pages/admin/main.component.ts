@@ -31,6 +31,6 @@ import { SideNavBarComponent } from '../../components/general/side-nav-bar/side-
 export class AdminEntryComponent {
   constructor(private router: Router) {
     // TODO: change router back to /admin/home
-    this.router.navigate(['/admin/templates']);
+    this.router.navigate(['/admin/users']);
   }
 }

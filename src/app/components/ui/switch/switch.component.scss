@@ -4,6 +4,7 @@ $knob-size: 1.25rem;
 $knob-offset: 0.2rem;
 
 .switch {
+  cursor: pointer;
   appearance: none;
   display: inline-block;
   width: $switch-width;

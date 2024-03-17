@@ -11,22 +11,22 @@
       </button>
     </div>
   </header>
-  @if (userListSignal().pending) {
-
-    <div>loading</div>
-
-  } @else if (userListSignal().data) {
 
     <app-admin-user-list
-      [users]="userListSignal().data!"
+      [paginationParams]="paginationParams"
+      [totalPages]="totalPages"
+      [signal]="userListSignal"
       [(confirmDelete)]="confirmDelete"
-    />
+      (next)="next()"
+      (prev)="prev()"
+    >
+      <app-admin-pagination 
+        [currentPage]="paginationParams.currentPage" 
+        [totalPages]="totalPages" 
+        (pageChange)="pageChange($event)"
+      />
+    </app-admin-user-list>
 
-  } @else if (userListSignal().error) {
-
-    <div>{{ userListSignal().error.message }}</div>
-    
-  }
 </section>
 
 @if (inviteUser) {

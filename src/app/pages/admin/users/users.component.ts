@@ -11,6 +11,7 @@ import { User } from '../../../store/user';
 import { UserActionsService } from '../../../services/admin/user-actions.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ConfirmDeleteModalComponent } from './components/confirm-delete-modal/confirm-delete-modal.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @Component({
   selector: 'app-admin-users',
@@ -21,6 +22,7 @@ import { ConfirmDeleteModalComponent } from './components/confirm-delete-modal/c
     InviteUserModalComponent,
     UserListComponent,
     ConfirmDeleteModalComponent,
+    PaginationComponent,
   ],
 })
 export class AdminUsersComponent implements OnInit, OnDestroy {
@@ -30,12 +32,64 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
   deleteUserSignal = newSignal<{}>();
   userActionsService = inject(UserActionsService);
   destroyer$ = new Subject<void>();
+  paginationParams = {
+    currentPage: 1,
+    total: 100,
+    limit: 10,
+  };
+  totalPages = Math.ceil(
+    this.paginationParams.total / this.paginationParams.limit
+  );
 
   ngOnInit() {
     this.fetchUsers();
   }
 
+  prev() {
+    if (this.paginationParams.currentPage > 1) {
+      this.paginationParams = {
+        ...this.paginationParams,
+        currentPage: this.paginationParams.currentPage - 1,
+      };
+    }
+  }
+
+  next() {
+    if (this.paginationParams.currentPage < this.totalPages) {
+      this.paginationParams = {
+        ...this.paginationParams,
+        currentPage: this.paginationParams.currentPage + 1,
+      };
+    }
+  }
+
+  pageChange(value: string | number) {
+    switch (value) {
+      case '... ':
+        this.paginationParams = {
+          ...this.paginationParams,
+          currentPage: 1,
+        };
+        break;
+      case ' ...':
+        this.paginationParams = {
+          ...this.paginationParams,
+          currentPage: this.totalPages,
+        };
+        break;
+      default:
+        if (typeof value === 'number') {
+          this.paginationParams = {
+            ...this.paginationParams,
+            currentPage: value,
+          };
+        }
+        break;
+    }
+  }
+
   fetchUsers() {
+    const offsetConstant = this.paginationParams.currentPage * 10 - 10;
     pendSignal(this.userListSignal);
     this.userActionsService
       .getUsers()

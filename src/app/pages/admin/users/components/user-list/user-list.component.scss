@@ -101,3 +101,10 @@ footer {
     padding-right: 12px;
   }
 }
+
+.loader,
+.error {
+  // number of items in the table
+  min-height: calc(67px * 7);
+  @include center;
+}

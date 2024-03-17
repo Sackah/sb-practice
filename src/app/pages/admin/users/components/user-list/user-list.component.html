@@ -15,9 +15,12 @@
               spellcheck="false"
               (focus)="search.classList.toggle('focus')"
               (blur)="search.classList.toggle('focus')"
-            />
-          </div>
-          <button>Search</button>
+              [disabled]="signal().pending"
+              />
+            </div>
+            <button
+              [disabled]="signal().pending"
+            >Search</button>
         </form>
       </header>
       <tr class="bg-[#F9FAFB]">
@@ -28,63 +31,76 @@
       </tr>
     </thead>
     <tbody>
-      @for (user of users(); track $index) {
-      <tr
-        [routerLink]="['/admin/templates']"
-        (click)="userActionsService.selectUser(user)"
-        class="row relative overflow-visible"
-      >
-        <td class="flex items-center gap-3 col-span-3">
-          <div class="img-container">
-            @if (user.profilePicture) {
-            <img [src]="user.profilePicture" alt="" />
-            } @else { {{ initials(user.username) }} }
-          </div>
-          <h2>{{ user.username }}</h2>
-        </td>
-        <td class="col-span-2">{{ user.email }}</td>
-        <td>
-          <app-switch [(check)]="user.enabled" />
-        </td>
-        <td class="flex justify-end">
-          <button
-            type="button"
-            title="options"
-            (click)="toggleDropdown($event, $index)"
-          >
-            <img src="assets/Admin/3-dots.svg" alt="" />
-          </button>
-          <div
-            [class]="{
-              dropdown: true,
-              'overflow-hidden': true,
-              show: showDropDown[$index]
-            }"
-            (clickOutside)="showDropDown[$index] = false"
-            (click)="
-              userActionsService.selectUser(user);
-              confirmDeleteChange.emit(!confirmDelete);
-              showDropDown[$index] = false;
-              $event.stopPropagation()
-            "
-          >
-            Delete
-          </div>
-        </td>
-      </tr>
+      @if (signal().pending) {
+        <div class="loader">loading</div>
+      } @else if (signal().error) {
+        <div class="error">{{signal().error.message}}</div>
+      } @else if (signal().data) {
+          @for (user of signal().data; track $index) {
+            <tr
+              class="row relative overflow-visible"
+            >
+              <td 
+                class="flex items-center gap-3 col-span-3"
+                [routerLink]="['/admin/templates']"
+                (click)="userActionsService.selectUser(user)"
+              >
+                <div class="img-container">
+                  @if (user.profilePicture) {
+                  <img [src]="user.profilePicture" alt="" />
+                  } @else { {{ initials(user.username) }} }
+                </div>
+                <h2>{{ user.username }}</h2>
+              </td>
+              <td class="col-span-2">{{ user.email }}</td>
+              <td>
+                <app-switch 
+                  [check]="user.enabled" 
+                  (checkChange)="toggleUser($event, user)" 
+                  [disabled]="userActivationSignal().pending"
+                />
+              </td>
+              <td class="flex justify-end">
+                <button
+                  type="button"
+                  title="options"
+                  (click)="toggleDropdown($event, $index)"
+                >
+                  <img src="assets/Admin/3-dots.svg" alt="" />
+                </button>
+                <div
+                  [class]="{
+                    dropdown: true,
+                    'overflow-hidden': true,
+                    show: showDropDown[$index]
+                  }"
+                  (clickOutside)="showDropDown[$index] = false"
+                  (click)="
+                    userActionsService.selectUser(user);
+                    confirmDeleteChange.emit(!confirmDelete);
+                    showDropDown[$index] = false;
+                  "
+                >
+                  Delete
+                </div>
+              </td>
+            </tr>
+          }
       }
     </tbody>
   </table>
   <footer>
     <div class="p-[16px] flex items-center justify-between w-full">
-      <h1>Page 1 of 30</h1>
-      <div>pagination</div>
+      <h1>Page {{paginationParams.currentPage}} of {{totalPages}}</h1>
+      <div>
+        <ng-content></ng-content>
+      </div>
       <div class="flex gap-3">
-        <button class="flex-row gap-2">
+        <button (click)="prev.emit()" class="flex-row gap-2">
           <img src="assets/Admin/arrow-left.svg" alt="" />
           Previous
         </button>
-        <button class="flex-row-reverse gap-2">
+        <button (click)="next.emit()" class="flex-row-reverse gap-2">
           <img src="assets/Admin/arrow-right.svg" alt="" />
           Next
         </button>

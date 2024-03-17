@@ -2,7 +2,10 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnDestroy,
+  OnInit,
   Output,
+  WritableSignal,
   inject,
   input,
 } from '@angular/core';
@@ -10,10 +13,18 @@ import { User } from '../../../../../store/user';
 import { SwitchComponent } from '../../../../../components/ui/switch/switch.component';
 import { FormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from '../../../../../directives/clickoutside.directive';
-import { getInitials } from '../../../../../shared/utils';
+import {
+  completeSignal,
+  errorSignal,
+  getInitials,
+  newSignal,
+  pendSignal,
+} from '../../../../../shared/utils';
 import { ConfirmDeleteModalComponent } from '../confirm-delete-modal/confirm-delete-modal.component';
 import { UserActionsService } from '../../../../../services/admin/user-actions.service';
 import { RouterLink } from '@angular/router';
+import { ApiSignal } from '../../../../../shared/types';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-admin-user-list',
@@ -28,14 +39,27 @@ import { RouterLink } from '@angular/router';
     RouterLink,
   ],
 })
-export class UserListComponent {
-  users = input.required<User[]>();
-  @Input() confirmDelete: boolean = false;
+export class UserListComponent implements OnInit, OnDestroy {
+  @Input({ required: true }) paginationParams!: {
+    currentPage: number;
+    total: number;
+    limit: number;
+  };
+  @Input({ required: true }) totalPages!: number;
+  @Input({ required: true }) signal!: WritableSignal<ApiSignal<User[]>>;
+  @Input({ required: true }) confirmDelete: boolean = false;
   @Output() confirmDeleteChange = new EventEmitter<boolean>();
-  limit = 10;
-  query = '';
-  showDropDown: boolean[] = Array(this.limit).fill(false);
+  @Output() next = new EventEmitter<void>();
+  @Output() prev = new EventEmitter<void>();
+  showDropDown: boolean[] = [];
   userActionsService = inject(UserActionsService);
+  userActivationSignal = newSignal<{}>();
+  destroyer$ = new Subject<void>();
+  query = '';
+
+  ngOnInit() {
+    this.showDropDown = Array(this.paginationParams.limit).fill(false);
+  }
 
   initials(username: string) {
     return getInitials(username);
@@ -51,5 +75,24 @@ export class UserListComponent {
     this.showDropDown = this.showDropDown.map((b, i) =>
       i === index ? (b = !b) : (b = false)
     );
+  }
+
+  toggleUser(e: boolean, user: User) {
+    pendSignal(this.userActivationSignal);
+    this.userActionsService
+      .toggleUserActivation(e, user.id)
+      .pipe(takeUntil(this.destroyer$))
+      .subscribe({
+        next: (res) => {
+          completeSignal(this.userActivationSignal, res);
+        },
+        error: (err) => {
+          errorSignal(this.userActivationSignal, err);
+        },
+      });
+  }
+
+  ngOnDestroy() {
+    this.destroyer$.next();
   }
 }
