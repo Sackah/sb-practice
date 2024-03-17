@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { User, user } from '../../../../../store/user';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import {
   pendSignal,
   FormCreator,
 } from '../../../../../shared/utils';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-admin-profile',
@@ -19,7 +20,7 @@ import {
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss',
 })
-export class AdminProfileComponent implements OnInit {
+export class AdminProfileComponent implements OnInit, OnDestroy {
   user: User & {
     firstName?: string;
     lastName?: string;
@@ -29,6 +30,7 @@ export class AdminProfileComponent implements OnInit {
   private profileUpdateService = inject(ProfileUpdateService);
   updateProfileSignal = newSignal<{}>();
   profileValidator!: ProfileValidator;
+  destroyer$ = new Subject<void>();
 
   ngOnInit() {
     this.user.firstName = this.user.username.split(' ')[0];
@@ -39,7 +41,7 @@ export class AdminProfileComponent implements OnInit {
   }
 
   setupForm() {
-    this.form = FormCreator.create(
+    this.form = FormCreator.createWithValues(
       {
         firstName: this.user.firstName,
         lastName: this.user.lastName,
@@ -82,16 +84,23 @@ export class AdminProfileComponent implements OnInit {
       pendSignal(this.updateProfileSignal);
       this.enableSubmission = false;
 
-      this.profileUpdateService.postDetails(this.form.value).subscribe({
-        next: (re) => {
-          completeSignal(this.updateProfileSignal, re);
-          this.enableSubmission = true;
-        },
-        error: (err) => {
-          errorSignal(this.updateProfileSignal, err);
-          this.enableSubmission = true;
-        },
-      });
+      this.profileUpdateService
+        .postDetails(this.form.value)
+        .pipe(takeUntil(this.destroyer$))
+        .subscribe({
+          next: (re) => {
+            completeSignal(this.updateProfileSignal, re);
+            this.enableSubmission = true;
+          },
+          error: (err) => {
+            errorSignal(this.updateProfileSignal, err);
+            this.enableSubmission = true;
+          },
+        });
     }
+  }
+
+  ngOnDestroy() {
+    this.destroyer$.next();
   }
 }

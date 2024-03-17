@@ -15,7 +15,6 @@ export const user: User = {
 export interface User {
   message: string;
   id: string;
-  name?: string;
   accessToken: string;
   username: string;
   email: string;

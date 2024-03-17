@@ -1,7 +1,7 @@
 <div class="backdrop" (click)="close()">
   <div class="modal" (click)="$event.stopPropagation()">
     <header>
-      <h1>Invite users</h1>
+      <h1>Confirm Deletion</h1>
       <img
         (click)="close()"
         class="cursor-pointer"
@@ -9,20 +9,23 @@
         alt=""
       />
     </header>
-    <form [formGroup]="form" (submit)="handleSubmit()">
-      <label for="email">Link</label>
-      <input
-        type="text"
-        id="email"
-        placeholder="Enter email address"
-        formControlName="email"
-      />
+    <main>
+      <h2 class="mb-2">
+        Are you sure you want to delete <strong>{{ user?.username }}?</strong>
+      </h2>
+      <p class="mb-4">This action cannot be undone</p>
       <div class="flex justify-end">
         <span class="flex gap-2">
           <button type="button" (click)="close()">Cancel</button>
-          <button type="submit">Send</button>
+          <button
+            type="submit"
+            (click)="deleteUser.emit(user); confirm.disabled = true"
+            #confirm
+          >
+            Confirm
+          </button>
         </span>
       </div>
-    </form>
+    </main>
   </div>
 </div>

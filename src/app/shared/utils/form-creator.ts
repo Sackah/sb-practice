@@ -6,7 +6,7 @@ import {
 } from '@angular/forms';
 
 export class FormCreator {
-  public static create(
+  public static createWithValues(
     fields: { [key: string]: string | undefined },
     disabledField?: {
       disable: string;

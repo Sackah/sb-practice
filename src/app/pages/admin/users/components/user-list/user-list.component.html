@@ -1,0 +1,84 @@
+<section class="overflow-x-visible">
+  <table class="table overflow-visible">
+    <thead>
+      <header>
+        <form class="flex justify-start w-full" (submit)="handleSearch($event)">
+          <input
+            type="search"
+            class="mr-2"
+            id=""
+            placeholder="Search here..."
+            [(ngModel)]="query"
+            [ngModelOptions]="{ standalone: true }"
+            spellcheck="false"
+          />
+          <button>Search</button>
+        </form>
+      </header>
+      <tr class="bg-[#F9FAFB]">
+        <th class="col-span-3">Name</th>
+        <th class="col-span-2">Email</th>
+        <th>Activation</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of users(); track $index) {
+      <tr class="row relative overflow-visible">
+        <td class="flex items-center gap-3 col-span-3">
+          <div class="img-container">
+            @if (user.profilePicture) {
+            <img [src]="user.profilePicture" alt="" />
+            } @else { {{ initials(user.username) }} }
+          </div>
+          <h2>{{ user.username }}</h2>
+        </td>
+        <td class="col-span-2">{{ user.email }}</td>
+        <td>
+          <app-switch [(check)]="user.enabled" />
+        </td>
+        <td class="flex justify-end">
+          <button
+            type="button"
+            title="options"
+            (click)="toggleDropdown($event, $index)"
+          >
+            <img src="assets/Admin/3-dots.svg" alt="" />
+          </button>
+          <div
+            [class]="{
+              dropdown: true,
+              'overflow-hidden': true,
+              show: showDropDown[$index]
+            }"
+            (clickOutside)="showDropDown[$index] = false"
+            (click)="
+              userActionsService.selectUser(user);
+              confirmDeleteChange.emit(!confirmDelete);
+              showDropDown[$index] = false
+            "
+          >
+            Delete
+          </div>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+  <footer>
+    <div class="p-[16px] flex items-center justify-between w-full">
+      <h1>Page 1 of 30</h1>
+      <div>pagination</div>
+      <div class="flex gap-3">
+        <button class="flex-row gap-2">
+          <img src="assets/Admin/arrow-left.svg" alt="" />
+          Previous
+        </button>
+        <button class="flex-row-reverse gap-2">
+          <img src="assets/Admin/arrow-right.svg" alt="" />
+          Next
+        </button>
+      </div>
+    </div>
+  </footer>
+</section>

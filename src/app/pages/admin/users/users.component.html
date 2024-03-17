@@ -1,0 +1,41 @@
+<section>
+  <header>
+    <div>
+      <h1>All Users</h1>
+      <p>Showing data over the last 30 days</p>
+    </div>
+    <div>
+      <button (click)="inviteUser = !inviteUser">
+        <img src="assets/Admin/plus.svg" alt="" />
+        Invite User
+      </button>
+    </div>
+  </header>
+  @if (userListSignal().pending) {
+
+    <div>loading</div>
+
+  } @else if (userListSignal().data) {
+
+    <app-admin-user-list
+      [users]="userListSignal().data!"
+      [(confirmDelete)]="confirmDelete"
+    />
+
+  } @else if (userListSignal().error) {
+
+    <div>{{ userListSignal().error.message }}</div>
+    
+  }
+</section>
+
+@if (inviteUser) {
+<app-admin-invite-user-modal [(open)]="inviteUser" />
+} 
+
+@if (confirmDelete) {
+<app-admin-confirm-delete-modal
+  [(open)]="confirmDelete"
+  (deleteUser)="deleteUser($event)"
+/>
+}

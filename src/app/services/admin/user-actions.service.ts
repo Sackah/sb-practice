@@ -3,21 +3,39 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 import { User } from '../../store/user';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FetchUsersService {
+export class UserActionsService {
   private http = inject(HttpClient);
+  public selectedUser = signal<User | undefined>(undefined);
 
   // TODO: Change server to valid endpoint
-  get() {
+  getUsers() {
     return this.http
       .get<User[]>(`assets/Admin/store/userList.json`, this.options)
       .pipe(catchError((err) => this.onError(err)));
+  }
+
+  inviteUser(email: string) {
+    return this.http
+      .post(`${environment.baseUrl}/user/invite`, { email }, this.options)
+      .pipe(catchError((err) => this.onError(err)));
+  }
+
+  deleteUser(id: string) {
+    return this.http
+      .delete(`${environment.baseUrl}/users/delete/${id}`, this.options)
+      .pipe(catchError((err) => this.onError(err)));
+  }
+
+  selectUser(user: User) {
+    this.selectedUser.set(user);
   }
 
   private get options() {

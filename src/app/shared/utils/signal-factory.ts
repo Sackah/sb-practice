@@ -17,7 +17,7 @@ export const newSignal = <T>() => {
  * @function pendSignal - updates a signal to pending state
  * @param signal - the signal to be updated
  */
-export const pendSignal = <T extends {}>(
+export const pendSignal = <T extends object>(
   signal: WritableSignal<ApiSignal<T>>
 ) => {
   signal.set({
@@ -27,16 +27,12 @@ export const pendSignal = <T extends {}>(
   });
 };
 
-const mysignal = newSignal<{}>();
-pendSignal(mysignal);
-const loading = mysignal().pending;
-
 /**
  * @function completeSignal - updates a signal to complete state
  * @param signal - the signal to be updated
  * @param data - the data recieved after api call/ process completes
  */
-export const completeSignal = <T extends {}>(
+export const completeSignal = <T extends object>(
   signal: WritableSignal<ApiSignal<T>>,
   data: T
 ) => {
@@ -52,7 +48,7 @@ export const completeSignal = <T extends {}>(
  * @param signal - the signal to be updated
  * @param error - the error recieved after api call/ process completes
  */
-export const errorSignal = <T extends {}>(
+export const errorSignal = <T extends object>(
   signal: WritableSignal<ApiSignal<T>>,
   error: any
 ) => {

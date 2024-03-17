@@ -1,0 +1,28 @@
+@import "../styles/main.scss";
+
+section {
+  padding: 85px 112px;
+  height: calc(100vh - 85px);
+  width: 100%;
+  font-family: $font-main;
+  position: relative;
+}
+
+header {
+  @include flex-row;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  h1 {
+    @include page-heading;
+    padding: 0;
+  }
+
+  p {
+    @include text-light;
+  }
+
+  button {
+    @include button;
+    gap: 5px;
+  }
+}

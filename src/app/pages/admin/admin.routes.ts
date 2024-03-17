@@ -8,6 +8,7 @@ import { AdminProfileComponent } from './settings/components/profile/profile.com
 import { AdminPasswordComponent } from './settings/components/password/password.component';
 import { AdminBillingComponent } from './settings/components/billing/billing.component';
 import { AdminAccountHistoryComponent } from './settings/components/account-history/account-history.component';
+import { AdminUsersComponent } from './users/users.component';
 
 export const AdminRoutes: Routes = [
   {
@@ -17,6 +18,10 @@ export const AdminRoutes: Routes = [
       {
         path: 'home',
         component: AdminHomeComponent,
+      },
+      {
+        path: 'users',
+        component: AdminUsersComponent,
       },
       {
         path: 'template',

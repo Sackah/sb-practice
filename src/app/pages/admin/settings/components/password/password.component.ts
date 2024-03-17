@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import {
   FormCreator,
   completeSignal,
@@ -9,6 +9,7 @@ import {
 } from '../../../../../shared/utils';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProfileUpdateService } from '../../../../../services/admin/profile-update.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-admin-password',
@@ -17,12 +18,13 @@ import { ProfileUpdateService } from '../../../../../services/admin/profile-upda
   templateUrl: './password.component.html',
   styleUrl: './password.component.scss',
 })
-export class AdminPasswordComponent {
+export class AdminPasswordComponent implements OnDestroy {
   form = FormCreator.createPasswordForm(['password', 'confirmPassword'], {
     validators: passwordMatchValidator('password', 'confirmPassword'),
   });
   signal = newSignal<{}>();
   updatePasswordService = inject(ProfileUpdateService);
+  destroyer$ = new Subject<void>();
 
   handleSubmit() {
     if (this.form.valid) {
@@ -30,6 +32,7 @@ export class AdminPasswordComponent {
       pendSignal(this.signal);
       this.updatePasswordService
         .postPassword(this.form.value as { password: string })
+        .pipe(takeUntil(this.destroyer$))
         .subscribe({
           next: (res) => {
             completeSignal(this.signal, res);
@@ -39,5 +42,9 @@ export class AdminPasswordComponent {
           },
         });
     }
+  }
+
+  ngOnDestroy() {
+    this.destroyer$.next();
   }
 }

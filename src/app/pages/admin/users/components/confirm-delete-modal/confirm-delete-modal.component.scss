@@ -17,23 +17,17 @@
     }
   }
 
-  form {
-    label {
-      @include text-bold;
-      display: block;
-      margin-bottom: 16px;
-    }
-    input {
-      @include input;
-      padding: 8px 12px;
-      margin-bottom: 32px;
-    }
-
+  main {
     button {
       @include button;
 
       &:first-of-type {
         @include button($white, $grey-900, $grey-300);
+      }
+
+      &:disabled {
+        @include button($grey-300, $white, $grey-300);
+        cursor: not-allowed;
       }
     }
   }
