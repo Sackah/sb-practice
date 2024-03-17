@@ -1,0 +1,69 @@
+@import "../styles/main.scss";
+
+section {
+  padding: 85px 112px;
+  min-height: calc(100vh - 85px);
+  width: 100%;
+  font-family: $font-main;
+}
+
+header {
+  height: 250px;
+  width: 100%;
+  padding: 22px 50px;
+  background: darken($color: $grey-250, $amount: 2);
+  border-radius: 10px;
+
+  article {
+    @include center;
+    justify-content: flex-start;
+    gap: 8px;
+    p {
+      @include text-bold(1rem);
+    }
+    div.img-container {
+      @include img-container(44px);
+      background: $orange-100;
+      @include center;
+      font-weight: 600;
+      border: 2px solid $white;
+      img {
+        @include img;
+      }
+    }
+  }
+}
+
+nav {
+  @include center;
+  justify-content: space-between;
+  margin: 25px 0;
+  h2 {
+    @include page-heading;
+    font-size: 2rem;
+  }
+  button {
+    @include button($white, $grey-900, $grey-300);
+    padding: 8px 12px;
+    gap: 8px;
+    font-size: 1rem;
+  }
+  .input {
+    @include input;
+    padding: 8px 12px;
+    width: auto;
+    @include center;
+    justify-content: space-between;
+    gap: 4px;
+    border-width: 1.5px;
+    &.focus {
+      outline: none;
+      border: 1.5px solid $orange-200;
+    }
+  }
+}
+
+.dropdown {
+  @include dropdown($top: 50px, $right: 275px);
+  width: 118px;
+}

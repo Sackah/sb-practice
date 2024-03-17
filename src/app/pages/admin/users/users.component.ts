@@ -60,8 +60,6 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
     const updatedUsers = this.userListSignal().data!.filter(
       (u) => u.id !== user.id
     );
-    console.log('updated users', updatedUsers);
-    console.log('users signal', this.deleteUserSignal().data);
     completeSignal(this.userListSignal, updatedUsers);
     //
 
@@ -71,10 +69,10 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroyer$))
       .subscribe({
         next: (res) => {
-          const updatedUsers = this.userListSignal().data?.filter(
+          const updatedUsers = this.userListSignal().data!.filter(
             (u) => u.id !== user.id
           );
-          completeSignal(this.userListSignal, updatedUsers as {});
+          completeSignal(this.userListSignal, updatedUsers);
           completeSignal(this.deleteUserSignal, res);
         },
         error: (err) => {

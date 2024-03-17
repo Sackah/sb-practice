@@ -3,3 +3,9 @@ export interface ApiSignal<T> {
   pending: boolean;
   error: any;
 }
+
+export interface SurveyTemplate {
+  title: string;
+  image: string;
+  description: string;
+}

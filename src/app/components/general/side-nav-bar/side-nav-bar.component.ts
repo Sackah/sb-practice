@@ -27,9 +27,9 @@ export class SideNavBarComponent {
     },
     {
       id: 3,
-      navName: 'Template',
+      navName: 'Templates',
       icon_link: 'assets/SideMenu/template_icon.svg',
-      nav_link: '/admin/template',
+      nav_link: '/admin/templates',
       activeOptions: { exact: true },
     },
     {

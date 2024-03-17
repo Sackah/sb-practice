@@ -13,6 +13,7 @@ import { ClickOutsideDirective } from '../../../../../directives/clickoutside.di
 import { getInitials } from '../../../../../shared/utils';
 import { ConfirmDeleteModalComponent } from '../confirm-delete-modal/confirm-delete-modal.component';
 import { UserActionsService } from '../../../../../services/admin/user-actions.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin-user-list',
@@ -24,6 +25,7 @@ import { UserActionsService } from '../../../../../services/admin/user-actions.s
     FormsModule,
     ClickOutsideDirective,
     ConfirmDeleteModalComponent,
+    RouterLink,
   ],
 })
 export class UserListComponent {

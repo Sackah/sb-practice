@@ -40,8 +40,7 @@ export class InviteUserModalComponent implements OnDestroy {
   validationErrors = '';
 
   close() {
-    this.open = false;
-    this.openChange.emit(this.open);
+    this.openChange.emit(!this.open);
   }
 
   getEmailErrors(): string {
@@ -70,7 +69,7 @@ export class InviteUserModalComponent implements OnDestroy {
         .pipe(takeUntil(this.destroyer$))
         .subscribe({
           next: (res) => {
-            this.openChange.emit();
+            this.openChange.emit(!this.open);
             completeSignal(this.signal, res);
           },
           error: (err) => {

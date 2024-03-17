@@ -3,15 +3,20 @@
     <thead>
       <header>
         <form class="flex justify-start w-full" (submit)="handleSearch($event)">
-          <input
-            type="search"
-            class="mr-2"
-            id=""
-            placeholder="Search here..."
-            [(ngModel)]="query"
-            [ngModelOptions]="{ standalone: true }"
-            spellcheck="false"
-          />
+          <div class="input mr-2" #search>
+            <img src="assets/Admin/search.svg" alt="search" />
+            <input
+              type="search"
+              class="outline-none"
+              id=""
+              placeholder="Search here..."
+              [(ngModel)]="query"
+              [ngModelOptions]="{ standalone: true }"
+              spellcheck="false"
+              (focus)="search.classList.toggle('focus')"
+              (blur)="search.classList.toggle('focus')"
+            />
+          </div>
           <button>Search</button>
         </form>
       </header>
@@ -24,7 +29,11 @@
     </thead>
     <tbody>
       @for (user of users(); track $index) {
-      <tr class="row relative overflow-visible">
+      <tr
+        [routerLink]="['/admin/templates']"
+        (click)="userActionsService.selectUser(user)"
+        class="row relative overflow-visible"
+      >
         <td class="flex items-center gap-3 col-span-3">
           <div class="img-container">
             @if (user.profilePicture) {
@@ -55,7 +64,8 @@
             (click)="
               userActionsService.selectUser(user);
               confirmDeleteChange.emit(!confirmDelete);
-              showDropDown[$index] = false
+              showDropDown[$index] = false;
+              $event.stopPropagation()
             "
           >
             Delete

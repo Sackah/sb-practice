@@ -24,7 +24,7 @@ export const AdminRoutes: Routes = [
         component: AdminUsersComponent,
       },
       {
-        path: 'template',
+        path: 'templates',
         component: AdminTemplateComponent,
       },
       {

@@ -7,6 +7,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 import { User } from '../../store/user';
 import { environment } from '../../../environments/environment.development';
+import { SurveyTemplate } from '../../shared/types';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +32,16 @@ export class UserActionsService {
   deleteUser(id: string) {
     return this.http
       .delete(`${environment.baseUrl}/users/delete/${id}`, this.options)
+      .pipe(catchError((err) => this.onError(err)));
+  }
+
+  // TODO: change to a valid endpoint
+  getTemplates(userId: string) {
+    return this.http
+      .get<SurveyTemplate[]>(
+        `${environment.baseUrl}/survey/templates/${userId}`,
+        this.options
+      )
       .pipe(catchError((err) => this.onError(err)));
   }
 
