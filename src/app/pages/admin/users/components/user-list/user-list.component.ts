@@ -7,10 +7,9 @@ import {
   Output,
   WritableSignal,
   inject,
-  input,
 } from '@angular/core';
 import { User } from '../../../../../store/user';
-import { SwitchComponent } from '../../../../../components/ui/switch/switch.component';
+import { SwitchComponent } from '../../../components/ui/switch/switch.component';
 import { FormsModule } from '@angular/forms';
 import { ClickOutsideDirective } from '../../../../../directives/clickoutside.directive';
 import {
