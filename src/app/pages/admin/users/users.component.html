@@ -13,16 +13,16 @@
   </header>
 
     <app-admin-user-list
-      [paginationParams]="paginationParams"
-      [totalPages]="totalPages"
+      [paginationParams]="paginationParams()"
+      [totalPages]="totalPages()"
       [signal]="userListSignal"
       [(confirmDelete)]="confirmDelete"
       (next)="next()"
       (prev)="prev()"
     >
       <app-admin-pagination 
-        [currentPage]="paginationParams.currentPage" 
-        [totalPages]="totalPages" 
+        [currentPage]="paginationParams().currentPage" 
+        [totalPages]="totalPages()" 
         (pageChange)="pageChange($event)"
       />
     </app-admin-user-list>

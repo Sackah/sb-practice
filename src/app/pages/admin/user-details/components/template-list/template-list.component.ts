@@ -2,12 +2,12 @@ import { Component, Input } from '@angular/core';
 import { SurveyTemplate } from '../../../../../shared/types';
 
 @Component({
-  selector: 'app-admin-templates-list',
+  selector: 'app-admin-template-list',
   standalone: true,
   imports: [],
-  templateUrl: './templates-list.component.html',
-  styleUrl: './templates-list.component.scss',
+  templateUrl: './template-list.component.html',
+  styleUrl: './template-list.component.scss',
 })
-export class TemplatesListComponent {
+export class TemplateListComponent {
   @Input({ required: true }) templates: SurveyTemplate[] = [];
 }

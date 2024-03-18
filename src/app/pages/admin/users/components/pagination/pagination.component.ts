@@ -18,7 +18,7 @@ export class PaginationComponent {
   currentPage = input.required<number>();
   totalPages = input.required<number>();
   @Output() pageChange = new EventEmitter<number | string>();
-  private sibblings = 1;
+  private sibblings = 0;
 
   pagesArr = computed(() =>
     getPaginationRange(this.totalPages(), this.currentPage(), this.sibblings)

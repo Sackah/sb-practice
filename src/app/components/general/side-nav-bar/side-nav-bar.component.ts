@@ -21,7 +21,7 @@ export class SideNavBarComponent {
     {
       id: 2,
       navName: 'Users',
-      icon_link: 'assets/SideMenu/home_icon.svg',
+      icon_link: 'assets/SideMenu/users.svg',
       nav_link: '/admin/users',
       activeOptions: { exact: true },
     },
@@ -34,12 +34,11 @@ export class SideNavBarComponent {
     },
     {
       id: 4,
-      navName: 'History',
-      icon_link: 'assets/SideMenu/history_icon.svg',
-      nav_link: '/admin/history',
+      navName: 'Support',
+      icon_link: 'assets/SideMenu/support.svg',
+      nav_link: '/admin/support',
       activeOptions: { exact: true },
     },
-
     {
       id: 5,
       navName: 'Settings',

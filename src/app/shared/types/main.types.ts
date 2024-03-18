@@ -5,7 +5,30 @@ export interface ApiSignal<T> {
 }
 
 export interface SurveyTemplate {
+  active: boolean;
+  deactivated: boolean;
+  logo: {
+    style: object;
+    url: string;
+  };
+  id: string;
+  surveyTitle: {
+    title: {
+      titleName: string;
+      style: object;
+    };
+    description: {
+      detail: string;
+      style: object;
+    };
+  };
+}
+
+// TODO: delete this interface
+export interface Template {
+  active: boolean;
+  deactivated: boolean;
+  url: string;
   title: string;
-  image: string;
   description: string;
 }

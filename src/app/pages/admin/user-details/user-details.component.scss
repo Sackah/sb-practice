@@ -22,7 +22,7 @@ header {
       @include text-bold(1rem);
     }
     div.img-container {
-      @include img-container(44px);
+      @include img-container(116px);
       background: $orange-100;
       @include center;
       font-weight: 600;

@@ -1,4 +1,7 @@
-export const getInitials = (username: string) => {
+export const getInitials = (username: string | undefined) => {
+  if (!username) {
+    return 'NU';
+  }
   const firstName = username.split(' ')[0];
   const lastName = username.split(' ')[1];
 

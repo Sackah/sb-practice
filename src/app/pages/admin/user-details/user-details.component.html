@@ -1,0 +1,54 @@
+<section>
+    <header>
+      <article>
+        <div class="img-container">
+          @if (user?.profilePicture) {
+          <img [src]="user?.profilePicture" alt="" />
+          } @else { {{ initials(user?.username) }} }
+        </div>
+        <p>{{ user?.username }}</p>
+      </article>
+    </header>
+    <nav class="overflow-visible">
+      <h2>Surveys Created</h2>
+      <span class="flex gap-2 relative overflow-visible">
+        <button
+          (click)="filterDropdown = !filterDropdown; $event.stopPropagation()"
+        >
+          <img src="assets/Admin/adjust.svg" alt="" />
+          Filter
+          <img src="assets/Admin/arrow-down.svg" alt="" />
+        </button>
+        <div class="input" #search>
+          <img src="assets/Admin/search.svg" alt="search" />
+          <input
+            class="outline-none"
+            type="search"
+            [(ngModel)]="query"
+            placeholder="Search..."
+            (focus)="search.classList.toggle('focus')"
+            (blur)="search.classList.toggle('focus')"
+          />
+        </div>
+        <ul
+          [class]="{
+            dropdown: true,
+            'overflow-hidden': true,
+            show: filterDropdown
+          }"
+          (clickOutside)="filterDropdown = false"
+        >
+          <li>Date</li>
+          <li>Type</li>
+        </ul>
+      </span>
+    </nav>
+    @if (templatesSignal().pending) {
+      <div>loading</div>
+    } @else if (templatesSignal().data) {
+      <app-admin-template-list [templates]="templatesSignal().data!"/>
+    } @else if (templatesSignal().error) {
+      <div>{{templatesSignal().error.message}}</div>
+    }
+  </section>
+  

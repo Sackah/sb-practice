@@ -17,21 +17,33 @@ export class UserActionsService {
   public selectedUser = signal<User | undefined>(undefined);
 
   // TODO: Change server to valid endpoint
-  getUsers() {
+  getUsers(page: number, limit: number) {
+    '/get-users?page=page&limit=limit';
+    'assets/Admin/store/userList.json';
     return this.http
-      .get<User[]>(`assets/Admin/store/userList.json`, this.options)
+      .get<{ users: User[]; totalPages: number }>(
+        `${environment.baseUrl}/public/get-users?page=${page}&limit=${limit}`,
+        this.options
+      )
       .pipe(catchError((err) => this.onError(err)));
   }
 
   inviteUser(email: string) {
     return this.http
-      .post(`${environment.baseUrl}/user/invite`, { email }, this.options)
+      .post(`${environment.baseUrl}/public/user/invite`, { email }, this.options)
       .pipe(catchError((err) => this.onError(err)));
   }
 
   deleteUser(id: string) {
     return this.http
-      .delete(`${environment.baseUrl}/users/delete/${id}`, this.options)
+      .patch(
+        `${environment.baseUrl}/public/account-management`,
+        {
+          id,
+          status: 'DELETE',
+        },
+        this.options
+      )
       .pipe(catchError((err) => this.onError(err)));
   }
 
@@ -39,25 +51,32 @@ export class UserActionsService {
   getTemplates(userId: string) {
     return this.http
       .get<SurveyTemplate[]>(
-        `${environment.baseUrl}/survey/templates/${userId}`,
+        `${environment.baseUrl}/public/survey/templates/${userId}`,
         this.options
       )
       .pipe(catchError((err) => this.onError(err)));
   }
 
-  toggleUserActivation(status: boolean, userId: string) {
+  toggleUserActivation(status: boolean, id: string) {
     if (!status) {
       return this.http
-        .delete(
-          `${environment.baseUrl}/users/deactivate/${userId}`,
+        .patch(
+          `${environment.baseUrl}/public/account-management`,
+          {
+            id,
+            status: 'DEACTIVATE',
+          },
           this.options
         )
         .pipe(catchError((err) => this.onError(err)));
     } else {
       return this.http
-        .post<{}>(
-          `${environment.baseUrl}/users/activate`,
-          { userId },
+        .patch<{}>(
+          `${environment.baseUrl}/public/account-management`,
+          {
+            id,
+            status: 'ACTIVATE',
+          },
           this.options
         )
         .pipe(catchError((err) => this.onError(err)));

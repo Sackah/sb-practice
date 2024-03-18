@@ -1,16 +1,6 @@
 <section>
-  <header>
-    <article>
-      <div class="img-container">
-        @if (user?.profilePicture) {
-        <img [src]="user?.profilePicture" alt="" />
-        } @else { {{ initials(user?.username) }} }
-      </div>
-      <p>{{ user?.username }}</p>
-    </article>
-  </header>
-  <nav class="overflow-visible">
-    <h2>Surveys Created</h2>
+  <header class="overflow-visible">
+    <h1>Explore templates</h1>
     <span class="flex gap-2 relative overflow-visible">
       <button
         (click)="filterDropdown = !filterDropdown; $event.stopPropagation()"
@@ -41,13 +31,37 @@
         <li>Date</li>
         <li>Type</li>
       </ul>
+      <button>Create Template</button>
     </span>
+  </header>
+  <nav class="overflow-hidden">
+    <p
+      [class]="{ inline: true, active: tab === 'all' }"
+      (click)="tab = 'all'"
+    >
+      All
+    </p>
+    <p
+      [class]="{ inline: true, active: tab === 'deactivated' }"
+      (click)="tab = 'deactivated'"
+    >
+      Deactivated
+    </p>
   </nav>
-  @if (templatesSignal().pending) {
-    <div>loading</div>
-  } @else if (templatesSignal().data) {
-    <app-admin-templates-list [templates]="templatesSignal().data!"/>
-  } @else if (templatesSignal().error) {
-    <div>{{templatesSignal().error.message}}</div>
-  }
+    @if (templatesSignal().pending) {
+        <div>Loading.....</div>
+    } @else if (templatesSignal().data) {
+        <app-admin-templates-list 
+            [templates]="templatesSignal().data!" 
+        />
+    } @else {
+        <div>{{templatesSignal().error.message}}</div>
+    }
+    <div class="flex justify-end">
+        <app-admin-pagination 
+            [currentPage]="paginationParams().currentPage" 
+            [totalPages]="totalPages()" 
+            (pageChange)="pageChange($event)"
+        />
+    </div>
 </section>

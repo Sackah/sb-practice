@@ -11,16 +11,16 @@ import {
 } from '../../../shared/utils';
 import { ClickOutsideDirective } from '../../../directives/clickoutside.directive';
 import { SurveyTemplate } from '../../../shared/types';
-import { TemplatesListComponent } from './components/templates-list/templates-list.component';
+import { TemplateListComponent } from './components/template-list/template-list.component';
 
 @Component({
-  selector: 'app-admin-template',
+  selector: 'app-admin-user-details',
   standalone: true,
-  templateUrl: './template.component.html',
-  styleUrl: './template.component.scss',
-  imports: [FormsModule, ClickOutsideDirective, TemplatesListComponent],
+  imports: [FormsModule, ClickOutsideDirective, TemplateListComponent],
+  templateUrl: './user-details.component.html',
+  styleUrl: './user-details.component.scss',
 })
-export class AdminTemplateComponent implements OnInit, OnDestroy {
+export class AdminUserDetailsComponent implements OnInit, OnDestroy {
   userActionsService = inject(UserActionsService);
   user = this.userActionsService.selectedUser();
   templatesSignal = newSignal<SurveyTemplate[]>();

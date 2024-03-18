@@ -1,3 +1,3 @@
 export const environment = {
-  baseUrl: 'https://survey-sphere-api.amalitech-dev.net/survey-sphere',
+  baseUrl: 'https://c7tv1gd6-3004.uks1.devtunnels.ms/survey-sphere',
 };
