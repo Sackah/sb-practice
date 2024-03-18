@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SurveyTemplate, Template } from '../../../../shared/types';
-import { ClickOutsideDirective } from '../../../../directives/clickoutside.directive';
+import { SurveyTemplate, Template } from '../../types';
+import { ClickOutsideDirective } from '../../../directives/clickoutside.directive';
 
 @Component({
   selector: 'app-admin-templates-list',
@@ -12,8 +12,8 @@ import { ClickOutsideDirective } from '../../../../directives/clickoutside.direc
 export class TemplatesListComponent {
   @Input({ required: true }) templates: SurveyTemplate[] = [];
   showDropDown: boolean[] = Array(10).fill(false);
-  @Output() delete = new EventEmitter<void>();
-  @Output() deactivate = new EventEmitter<void>();
+  @Output() delete = new EventEmitter<SurveyTemplate>();
+  @Output() deactivate = new EventEmitter<SurveyTemplate>();
 
   toggleDropdown(e: Event, index: number) {
     e.stopPropagation();

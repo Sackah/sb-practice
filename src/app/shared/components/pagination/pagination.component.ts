@@ -5,7 +5,7 @@ import {
   computed,
   input,
 } from '@angular/core';
-import { getPaginationRange } from '../../../../../shared/utils';
+import { getPaginationRange } from '../../utils';
 
 @Component({
   selector: 'app-admin-pagination',

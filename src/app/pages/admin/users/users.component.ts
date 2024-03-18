@@ -18,7 +18,7 @@ import { User } from '../../../store/user';
 import { UserActionsService } from '../../../services/admin/user-actions.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ConfirmDeleteModalComponent } from './components/confirm-delete-modal/confirm-delete-modal.component';
-import { PaginationComponent } from './components/pagination/pagination.component';
+import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-admin-users',
@@ -138,7 +138,6 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
             (u) => u.id !== user.id
           );
           this.confirmDelete = false;
-          console.log(res);
           completeSignal(this.userListSignal, updatedUsers);
           completeSignal(this.deleteUserSignal, res);
         },

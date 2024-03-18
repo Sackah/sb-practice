@@ -9,8 +9,8 @@ import {
   pendSignal,
 } from '../../../shared/utils';
 import { SurveyTemplate, Template } from '../../../shared/types';
-import { TemplatesListComponent } from './templates-list/templates-list.component';
-import { PaginationComponent } from '../users/components/pagination/pagination.component';
+import { TemplatesListComponent } from '../../../shared/components/templates-list/templates-list.component';
+import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-admin-templates',
@@ -111,5 +111,31 @@ export class AdminTemplatesComponent implements OnInit {
           errorSignal(this.templatesSignal, err);
         },
       });
+  }
+
+  handleDelete(template: SurveyTemplate) {
+    this.templateActionsService.deleteTemplate(template.id).subscribe({
+      next: (data) => {
+        const updatedTemplates = this.templatesSignal().data!.filter(
+          (t) => t.id !== template.id
+        );
+        completeSignal(this.templatesSignal, updatedTemplates);
+      },
+      error: (err) => {
+        errorSignal(this.templatesSignal, err);
+      },
+    });
+  }
+
+  handleDeactivate(template: SurveyTemplate) {
+    this.templateActionsService.deactivateTemplate(template.id).subscribe({
+      next: () => {
+        const updatedTemplates = this.templatesSignal().data!.filter(
+          (t) => t.id !== template.id
+        );
+        completeSignal(this.templatesSignal, updatedTemplates);
+      },
+      error: () => {},
+    });
   }
 }

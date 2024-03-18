@@ -46,7 +46,7 @@
     @if (templatesSignal().pending) {
       <div>loading</div>
     } @else if (templatesSignal().data) {
-      <app-admin-template-list [templates]="templatesSignal().data!"/>
+      <app-admin-templates-list [templates]="templatesSignal().data!"/>
     } @else if (templatesSignal().error) {
       <div>{{templatesSignal().error.message}}</div>
     }

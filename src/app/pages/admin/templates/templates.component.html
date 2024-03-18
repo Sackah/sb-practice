@@ -53,6 +53,8 @@
     } @else if (templatesSignal().data) {
         <app-admin-templates-list 
             [templates]="templatesSignal().data!" 
+            (delete)="handleDelete($event)"
+            (deactivate)="handleDeactivate($event)"
         />
     } @else {
         <div>{{templatesSignal().error.message}}</div>

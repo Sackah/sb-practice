@@ -19,8 +19,8 @@
                     }"
                     (clickOutside)="showDropDown[$index] = false"
                 >
-                    <li class="mb-2" (click)="delete.emit()">Delete</li>
-                    <li (click)="deactivate.emit()">Deactivate</li>
+                    <li class="mb-2" (click)="delete.emit(template)">Delete</li>
+                    <li (click)="deactivate.emit(template)">Deactivate</li>
                 </ul>
             </span>
         </div>

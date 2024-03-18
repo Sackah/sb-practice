@@ -11,14 +11,14 @@ import {
 } from '../../../shared/utils';
 import { ClickOutsideDirective } from '../../../directives/clickoutside.directive';
 import { SurveyTemplate } from '../../../shared/types';
-import { TemplateListComponent } from './components/template-list/template-list.component';
+import { TemplatesListComponent } from '../../../shared/components/templates-list/templates-list.component';
 
 @Component({
   selector: 'app-admin-user-details',
   standalone: true,
-  imports: [FormsModule, ClickOutsideDirective, TemplateListComponent],
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.scss',
+  imports: [FormsModule, ClickOutsideDirective, TemplatesListComponent],
 })
 export class AdminUserDetailsComponent implements OnInit, OnDestroy {
   userActionsService = inject(UserActionsService);

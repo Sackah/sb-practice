@@ -25,6 +25,25 @@ export class TemplateActionsService {
       .pipe(catchError((err) => this.onError(err)));
   }
 
+  deleteTemplate(id: string) {
+    return this.http
+      .delete(`${environment.baseUrl}/public/survey/${id}`, this.options)
+      .pipe(catchError((err) => this.onError(err)));
+  }
+
+  deactivateTemplate(id: string) {
+    return this.http
+      .patch(
+        `${environment.baseUrl}/public/flag-survey`,
+        {
+          id,
+          status: 'DEACTIVATE',
+        },
+        this.options
+      )
+      .pipe(catchError((err) => this.onError(err)));
+  }
+
   private get options() {
     return {
       withCredentials: true,
