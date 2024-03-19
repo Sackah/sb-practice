@@ -5,10 +5,8 @@ import {
 } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
-
 import { environment } from '../../../../environments/environment.development';
-import { SurveyTemplate } from '../../../shared/types';
-import { User } from '../../../State/authentication/auth.state';
+import { SurveyTemplate, User } from '../../../shared/types';
 
 @Injectable({
   providedIn: 'root',

@@ -12,10 +12,8 @@ import {
   FormCreator,
 } from '../../../../../shared/utils';
 import { Subject, takeUntil } from 'rxjs';
-import { User } from '../../../../../State/authentication/auth.state';
-import { Store } from '@ngrx/store';
-import { selectUser } from '../../../../../State/authentication/auth/reducers';
 import { CurrentUserService } from '../../../../../services/admin/current-user/current-user.service';
+import { User } from '../../../../../shared/types';
 
 @Component({
   selector: 'app-admin-profile',
@@ -32,7 +30,6 @@ export class AdminProfileComponent implements OnInit, OnDestroy {
   profileValidator!: ProfileValidator;
   destroyer$ = new Subject<void>();
   private currentUserService = inject(CurrentUserService);
-  // currentUser = this.currentUserService.user()
   user: User & {
     firstName?: string;
     lastName?: string;

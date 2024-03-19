@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
-import { User } from '../../store/user';
+import { User } from '../types';
 
 export class ProfileValidator<T extends User = User> {
   private form: FormGroup;

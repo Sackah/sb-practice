@@ -1,3 +1,16 @@
+export interface User {
+  message: string;
+  id: string;
+  accessToken: string;
+  username: string;
+  email: string;
+  role: string;
+  profilePicture: string;
+  tokens: string | null;
+  enabled: boolean;
+  deleted: boolean;
+}
+
 export interface ApiSignal<T> {
   data: T | null;
   pending: boolean;

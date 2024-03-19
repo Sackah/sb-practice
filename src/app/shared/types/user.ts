@@ -1,4 +1,6 @@
-export const user: User = {
+import { User } from './main.types';
+
+const user: User = {
   id: 'gtr3243843',
   accessToken: 'atiemrjkmmtjscs',
   username: 'Tom Bradley',
@@ -11,16 +13,3 @@ export const user: User = {
   enabled: true,
   deleted: false,
 };
-
-export interface User {
-  message: string;
-  id: string;
-  accessToken: string;
-  username: string;
-  email: string;
-  role: string;
-  profilePicture: string;
-  tokens: string | null;
-  enabled: boolean;
-  deleted: boolean;
-}

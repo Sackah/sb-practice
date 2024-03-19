@@ -17,8 +17,8 @@ import {
 import { SurveyTemplate } from '../../../shared/types';
 import { TemplatesListComponent } from '../../../shared/components/templates-list/templates-list.component';
 import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
-import { ClickOutsideDirective } from '../../USER/Pages/servey-creation/components/directives/clickoutside.directive';
 import { RouterModule } from '@angular/router';
+import { ClickOutsideDirective } from '../directives/click-outside.directive';
 
 @Component({
   selector: 'app-admin-templates',

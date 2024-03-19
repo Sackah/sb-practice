@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-
 import { UserActionsService } from '../../../../../services/admin/user-action/user-actions.service';
-import { User } from '../../../../../State/authentication/auth.state';
+import { User } from '../../../../../shared/types';
 
 @Component({
   selector: 'app-admin-confirm-delete-modal',

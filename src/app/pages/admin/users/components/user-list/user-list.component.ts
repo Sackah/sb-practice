@@ -21,10 +21,9 @@ import {
 import { ConfirmDeleteModalComponent } from '../confirm-delete-modal/confirm-delete-modal.component';
 import { UserActionsService } from '../../../../../services/admin/user-action/user-actions.service';
 import { RouterLink } from '@angular/router';
-import { ApiSignal } from '../../../../../shared/types';
+import { ApiSignal, User } from '../../../../../shared/types';
 import { Subject, takeUntil } from 'rxjs';
-import { ClickOutsideDirective } from '../../../../USER/Pages/servey-creation/components/directives/clickoutside.directive';
-import { User } from '../../../../../State/authentication/auth.state';
+import { ClickOutsideDirective } from '../../../directives/click-outside.directive';
 
 @Component({
   selector: 'app-admin-user-list',

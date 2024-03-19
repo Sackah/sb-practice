@@ -15,9 +15,9 @@ import {
   newSignal,
   pendSignal,
 } from '../../../shared/utils';
-import { ClickOutsideDirective } from '../../USER/Pages/servey-creation/components/directives/clickoutside.directive';
 import { SurveyTemplate } from '../../../shared/types';
 import { TemplatesListComponent } from '../../../shared/components/templates-list/templates-list.component';
+import { ClickOutsideDirective } from '../directives/click-outside.directive';
 
 @Component({
   selector: 'app-admin-user-details',

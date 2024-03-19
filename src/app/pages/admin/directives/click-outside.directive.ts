@@ -1,0 +1,28 @@
+import {
+  Directive,
+  ElementRef,
+  Output,
+  EventEmitter,
+  HostListener,
+} from '@angular/core';
+
+@Directive({
+  selector: '[clickOutside]',
+  standalone: true,
+})
+export class ClickOutsideDirective {
+  @Output() clickOutside = new EventEmitter<void>();
+
+  @HostListener('document:click', ['$event.target'])
+  public onClick(targetElement: HTMLElement) {
+    setTimeout(() => {
+      const clickedInside =
+        this.elementRef.nativeElement.contains(targetElement);
+      if (!clickedInside) {
+        this.clickOutside.emit();
+      }
+    }, 0);
+  }
+
+  constructor(private elementRef: ElementRef) {}
+}

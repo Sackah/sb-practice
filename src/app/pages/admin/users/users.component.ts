@@ -19,7 +19,7 @@ import { UserActionsService } from '../../../services/admin/user-action/user-act
 import { Subject, takeUntil } from 'rxjs';
 import { ConfirmDeleteModalComponent } from './components/confirm-delete-modal/confirm-delete-modal.component';
 import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
-import { User } from '../../../State/authentication/auth.state';
+import { User } from '../../../shared/types';
 
 @Component({
   selector: 'app-admin-users',
