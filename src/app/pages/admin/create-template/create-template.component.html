@@ -1,0 +1,40 @@
+<app-navigation-bar
+  (magicWandBoolean)="openAppearanceSideNav($event)"
+  [handleOpenStatus]="magicWand"
+  (handlePreviewEmit)="handlePreviewStatusEmit($event)"
+></app-navigation-bar>
+
+<div
+  class="2xl:h-[91.8vh] flex"
+  [style.background]="form.colorScheme.backgroundColor"
+>
+  @if (!isPreview) {
+
+  <div class="flex-1">
+    <div class="w-[95%] mx-auto">
+      <div
+        class="2xl:w-[65%] lg:w-[75%] mx-auto mt-[30px] flex flex-col items-center"
+      >
+        <div class="w-full mt-[70px]">
+          <ng-container class="w-full">
+            <app-admin-question-hub
+              [surveyModal] = "surveyModal"
+              (formObject)="receiveMessage($event)"
+            ></app-admin-question-hub>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if (magicWand) {
+  <div class="2xl:w-[353px] lg:w-[330px]">
+    <app-appearance-side-nav></app-appearance-side-nav>
+  </div>
+  } } @else if (isPreview) {
+  <app-admin-question-preview
+    (handlePreviewEmit)="handlePreviewStatusEmit($event)"
+    [form]="form"
+  ></app-admin-question-preview>
+  }
+</div>

@@ -1,0 +1,133 @@
+<div class="mt-[3rem] mb-[3rem]" [style.color]="form.colorScheme.textColor">
+  <div
+    [style.justifyContent]="
+      (form.logo.style.alignment === 'left' && 'flex-start') ||
+      (form.logo.style.alignment === 'right' && 'flex-end') ||
+      (form.logo.style.alignment === 'center' && 'center')
+    "
+    [style.display]="'flex'"
+    class="mb-[24px]"
+  >
+    <app-logo-uploaded
+      (UploadedLogoMouseOver)="handleUploadedLogoMouseOver($event)"
+      (UploadedLogoMouseLeave)="handleUploadedLogoMouseLeave($event)"
+      (OpenPop)="handleOpenPop($event)"
+      (DeleteLogo)="handleDeleteLogo($event)"
+      [draggedImage]="draggedImage"
+      [logoUploadedOverlayer]="logoUploadedOverlayer"
+    ></app-logo-uploaded>
+  </div>
+
+  <app-title [title]="form.surveyTitle"></app-title>
+  @for (block of form.blocks; track $index) {
+  <app-block
+    [block]="block"
+    [blockIndex]="$index"
+    (delete)="deleteBlock($index)"
+    (duplicateBlock)="duplicateBlock($event, $index)"
+  ></app-block>
+
+  }
+
+  <div class="w-full text-center mb-2 flex items-center justify-center">
+    <div class="flex items-center gap-x-[10px]">
+      <button
+        class="text-[#1671D9] cursor-pointer text-[16px] font-semibold hover:bg-[#D0D5DD] border border-[#D0D5DD] transition-all rounded-[8px] px-[16px] py-[8px] shadow-md w-[150px] h-[50px]"
+        (click)="addBlock()"
+      >
+        Add Block
+      </button>
+      <button
+        class="ml-8 cursor-pointer text-[#EB5017] flex items-center justify-center font-semibold hover:text-white transition-all rounded-[8px] px-[16px] py-[8px] overflow-hidden shadow-md w-[150px] h-[50px] border"
+        (click)="onSendClick()"
+        [class.loader-inactive]="!loader"
+        [style.cursor]="loader ? 'not-allowed' : 'pointer'"
+        [style.backgroundColor]="loader ? '#D0D5DD' : null"
+        [style.color]="loader ? '#ffffff' : null"
+      >
+        @if (loader) {
+        <lottie-player
+          src="https://lottie.host/1630430f-1342-46a5-85be-5e999df521b0/ignLkmvK5o.json"
+          background="transparent"
+          speed="1"
+          loop
+          autoplay
+          style="width: 60px; height: 60px"
+        >
+        </lottie-player>
+        }@else {
+        {{ isSaved ? "Update Survey" : "Save Survey" }}
+        }
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- title and category -->
+<div
+  class="bg-gray-400/40 backdrop-blur-md fixed top-[100%] bottom-0 left-0 right-0 z-50 flex items-center justify-center transition-all"
+  [style.top]="surveyModal ? '0%' : '100%'"
+  (click)="handleCloseCategoryModal()"
+>
+  <app-title-modal
+    (surveyTemplateDetails)="getSurveyTemplateDetails($event)"
+    (btnClose)="btnCloseModal($event)"
+  ></app-title-modal>
+</div>
+
+<!-- POP UP OVER LAYER Logo upload-->
+
+<div
+  class="bg-gray-400/40 backdrop-blur-md fixed top-[0%] bottom-0 left-0 right-0 z-50 flex items-center justify-center transition-all"
+  [style.top]="isPopup ? '0%' : '100%'"
+  (click)="handleClosePop($event)"
+>
+  <div
+    class="w-[600px] px-[48px] py-[32px] bg-white rounded-md flex flex-col gap-y-[16px]"
+    (click)="handleClosePop($event, 'dontClose')"
+    (drop)="onDrop($event)"
+    (dragover)="onDragOver($event)"
+  >
+    <header class="flex items-center justify-between">
+      <h1 class="text-[32px] font-bold tracking-normal">Upload logo</h1>
+      <button (click)="handleClosePop($event)">
+        <svg
+          width="26"
+          height="26"
+          fill="#000000"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m13.59 12.002 4.454-4.453a1.126 1.126 0 0 0-1.59-1.594L12 10.408 7.547 5.955A1.127 1.127 0 1 0 5.953 7.55l4.453 4.453-4.453 4.453a1.127 1.127 0 1 0 1.594 1.594L12 13.596l4.453 4.453a1.127 1.127 0 1 0 1.594-1.594l-4.456-4.453Z"
+          ></path>
+        </svg>
+      </button>
+    </header>
+    <div
+      class="border-dashed border-2 rounded-md w-[500px] min-h-[202px] flex flex-col items-center justify-center"
+    >
+      <img
+        src="assets/SurveyCreation/Creation-space/upload_logo/File_upload_cloud.svg"
+        alt="upload_logo_cloud"
+      />
+      <div
+        class="mt-[26px] relative overflow-visible p-[5px] text-center cursor-pointer"
+      >
+        <input
+          type="file"
+          (change)="onFileSelected($event)"
+          accept=".jpeg, .jpg, .png"
+          class="absolute top-0 left-0 right-0 bottom-0 opacity-0"
+        />
+
+        <h3 class="bg-white w-[300px] text-[16px] font-semibold">
+          Drag & drop files or <span class="text-[#F56630]">Browse</span>
+        </h3>
+      </div>
+      <p class="text-[#676767] text-[16px] text-center">
+        Supported formates: JPEG, PNG
+      </p>
+    </div>
+  </div>
+</div>

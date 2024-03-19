@@ -1,0 +1,160 @@
+<div
+  class="w-screen h-full relative"
+  [style.color]="
+    form.colorScheme.textColor ? form.colorScheme.textColor : 'black'
+  "
+>
+  <div class="flex-1 min-h-full">
+    <!-- ... -->
+    <div class="2xl:w-[93%] lg:w-[90%] mx-auto">
+      <header class="fixed top-24 left-20 right-0 z-50">
+        <div
+          class="flex items-center justify-between h-[52px] w-[300px] pr-[40px]"
+        >
+          
+          <button
+            class="text-[16px] font-semibold text-black"
+            (click)="handlePreviewStatus()"
+          >
+            Survey
+          </button>
+          <img
+            src="../../../../../../../assets/SurveyCreation/Survey_from_scratch_layout/layout_forward_arrow.svg"
+            alt="layout forward arrow"
+          />
+          <button
+            class="text-[16px] font-semibold text-[#EB5017]"
+            (click)="handlePreviewStatus()"
+          >
+            Preview
+          </button>
+        </div>
+      </header>
+
+      <!-- content -->
+      <div
+        class="mx-auto mt-[50px] flex flex-col gap-y-[24px] transition-all"
+        [style.width]="getWidth()"
+      >
+        @if (cardLayout === 'classic') {
+        <app-admin-question-preview-classic
+          [form]="form"
+        ></app-admin-question-preview-classic>
+        }@else if (cardLayout === 'card') {
+        <app-admin-question-preview-card
+          [form]="form"
+        ></app-admin-question-preview-card>
+        }
+      </div>
+      <!-- end content -->
+
+      <footer
+        class="w-full items-center justify-center flex flex-col mt-[30px]"
+      >
+        <div class="flex flex-col items-center gap-y-[8px]">
+          <h4 class="text-black">Powered by</h4>
+          <img
+            src="assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/brand-logo.svg"
+            alt="brand-logo"
+          />
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- div buttons Feature -->
+  <div
+    class="flex items-center w-[268px] justify-start bg-white rounded-[8px] shadow-md py-[2px] px-[5px] fixed left-16 bottom-16"
+  >
+    <h6 class="text-[16px] font-[400] text-black">Device view</h6>
+    <div class="flex items-center flex-1 justify-evenly">
+      <div
+        class="cursor-pointer p-[12px] rounded-[8px] hover:bg-[#FFECE5] transition-all"
+        [style.backgroundColor]="
+          device_screen === 'laptop' ? '#FFECE5' : 'white'
+        "
+        (click)="handleDeviceScreen('laptop')"
+      >
+        <img
+          src="{{
+            device_screen !== 'laptop'
+              ? 'assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/preview_responsiveness/laptop_normal.svg'
+              : 'assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/preview_responsiveness/laptop_colored.svg'
+          }}"
+          title="laptop"
+          alt="laptop_icon"
+        />
+      </div>
+      <div
+        class="cursor-pointer p-[12px] rounded-[8px] hover:bg-[#FFECE5] transition-all"
+        [style.backgroundColor]="
+          device_screen === 'tablet' ? '#FFECE5' : 'white'
+        "
+        (click)="handleDeviceScreen('tablet')"
+      >
+        <img
+          src="{{
+            device_screen !== 'tablet'
+              ? 'assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/preview_responsiveness/larger_screen_normal.svg'
+              : 'assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/preview_responsiveness/larger_screen_colored.svg'
+          }}"
+          title="tablet"
+          alt="tablet_screen_icon"
+        />
+      </div>
+      <div
+        class="cursor-pointer p-[12px] rounded-[8px] hover:bg-[#FFECE5] transition-all"
+        [style.backgroundColor]="
+          device_screen === 'mobile' ? '#FFECE5' : 'white'
+        "
+        (click)="handleDeviceScreen('mobile')"
+      >
+        <img
+          src="{{
+            device_screen !== 'mobile'
+              ? 'assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/preview_responsiveness/mobile_normal.svg'
+              : 'assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/preview_responsiveness/mobile_colored.svg'
+          }}"
+          title="mobile"
+          alt="mobile_screen_icon"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="flex items-center w-[268px] justify-start bg-white rounded-[8px] shadow-md py-[2px] px-[5px] fixed right-16 bottom-16"
+  >
+    <h6 class="text-[16px] font-[400] text-black">Survey layout</h6>
+    <div class="flex items-center flex-1 justify-evenly">
+      <div
+        class="cursor-pointer p-[12px] rounded-[8px] hover:bg-[#FFECE5] transition-all"
+        [style.backgroundColor]="cardLayout === 'card' ? '#FFECE5' : 'white'"
+        (click)="handleCardLayout('card')"
+      >
+        <img
+          src="{{
+            cardLayout !== 'card'
+              ? 'assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/preview_responsiveness/classic_layout_normal.svg'
+              : 'assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/preview_responsiveness/classic_layout_colored.svg'
+          }}"
+          alt="card"
+        />
+      </div>
+      <div
+        class="cursor-pointer p-[12px] rounded-[8px] hover:bg-[#FFECE5] transition-all"
+        [style.backgroundColor]="cardLayout === 'classic' ? '#FFECE5' : 'white'"
+        (click)="handleCardLayout('classic')"
+      >
+        <img
+          src="{{
+            cardLayout !== 'classic'
+              ? 'assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/preview_responsiveness/card_layout_normal.svg'
+              : 'assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/preview_responsiveness/card_layout_colored.svg'
+          }}"
+          alt="classic"
+        />
+      </div>
+    </div>
+  </div>
+</div>
