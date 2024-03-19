@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet, Router } from '@angular/router';
-import { NavigationBarComponent } from '../../components/general/navigation-bar/navigation-bar.component';
+import { NavigationBarComponent } from '../USER/generalComponents/navigation-bar/navigation-bar.component';
 import { SideNavBarComponent } from './components/general/side-nav-bar/side-nav-bar.component';
 
 @Component({
@@ -30,7 +30,6 @@ import { SideNavBarComponent } from './components/general/side-nav-bar/side-nav-
 })
 export class AdminEntryComponent {
   constructor(private router: Router) {
-    // TODO: change router back to /admin/home
-    this.router.navigate(['/admin/templates']);
+    this.router.navigate(['/admin/home']);
   }
 }

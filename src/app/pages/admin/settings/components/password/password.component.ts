@@ -8,7 +8,7 @@ import {
   pendSignal,
 } from '../../../../../shared/utils';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ProfileUpdateService } from '../../../../../services/admin/profile-update.service';
+import { ProfileUpdateService } from '../../../../../services/admin/profile/profile-update.service';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({

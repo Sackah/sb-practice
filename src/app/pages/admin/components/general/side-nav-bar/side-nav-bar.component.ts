@@ -13,7 +13,7 @@ export class SideNavBarComponent {
   menus = [
     {
       id: 1,
-      navName: 'Home',
+      navName: 'Dashboard',
       icon_link: 'assets/SideMenu/home_icon.svg',
       nav_link: '/admin/home',
       activeOptions: { exact: true },

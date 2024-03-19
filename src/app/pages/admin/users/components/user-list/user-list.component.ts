@@ -1,4 +1,5 @@
 import {
+  CUSTOM_ELEMENTS_SCHEMA,
   Component,
   EventEmitter,
   Input,
@@ -8,10 +9,8 @@ import {
   WritableSignal,
   inject,
 } from '@angular/core';
-import { User } from '../../../../../store/user';
 import { SwitchComponent } from '../../../components/ui/switch/switch.component';
 import { FormsModule } from '@angular/forms';
-import { ClickOutsideDirective } from '../../../../../directives/clickoutside.directive';
 import {
   completeSignal,
   errorSignal,
@@ -20,10 +19,12 @@ import {
   pendSignal,
 } from '../../../../../shared/utils';
 import { ConfirmDeleteModalComponent } from '../confirm-delete-modal/confirm-delete-modal.component';
-import { UserActionsService } from '../../../../../services/admin/user-actions.service';
+import { UserActionsService } from '../../../../../services/admin/user-action/user-actions.service';
 import { RouterLink } from '@angular/router';
 import { ApiSignal } from '../../../../../shared/types';
 import { Subject, takeUntil } from 'rxjs';
+import { ClickOutsideDirective } from '../../../../USER/Pages/servey-creation/components/directives/clickoutside.directive';
+import { User } from '../../../../../State/authentication/auth.state';
 
 @Component({
   selector: 'app-admin-user-list',
@@ -37,6 +38,7 @@ import { Subject, takeUntil } from 'rxjs';
     ConfirmDeleteModalComponent,
     RouterLink,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class UserListComponent implements OnInit, OnDestroy {
   @Input({ required: true }) paginationParams!: {

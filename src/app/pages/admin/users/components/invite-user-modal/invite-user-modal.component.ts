@@ -18,7 +18,7 @@ import {
   newSignal,
   pendSignal,
 } from '../../../../../shared/utils';
-import { UserActionsService } from '../../../../../services/admin/user-actions.service';
+import { UserActionsService } from '../../../../../services/admin/user-action/user-actions.service';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({

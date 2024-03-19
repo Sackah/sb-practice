@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { User, user } from '../../../../../store/user';
+
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ProfileUpdateService } from '../../../../../services/admin/profile-update.service';
+import { ProfileUpdateService } from '../../../../../services/admin/profile/profile-update.service';
 import {
   ProfileValidator,
   completeSignal,
@@ -12,6 +12,10 @@ import {
   FormCreator,
 } from '../../../../../shared/utils';
 import { Subject, takeUntil } from 'rxjs';
+import { User } from '../../../../../State/authentication/auth.state';
+import { Store } from '@ngrx/store';
+import { selectUser } from '../../../../../State/authentication/auth/reducers';
+import { CurrentUserService } from '../../../../../services/admin/current-user/current-user.service';
 
 @Component({
   selector: 'app-admin-profile',
@@ -21,20 +25,27 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrl: './profile.component.scss',
 })
 export class AdminProfileComponent implements OnInit, OnDestroy {
-  user: User & {
-    firstName?: string;
-    lastName?: string;
-  } = user;
-  form!: FormGroup;
+  form: FormGroup = new FormGroup({});
   enableSubmission = false;
   private profileUpdateService = inject(ProfileUpdateService);
   updateProfileSignal = newSignal<{}>();
   profileValidator!: ProfileValidator;
   destroyer$ = new Subject<void>();
+  private currentUserService = inject(CurrentUserService);
+  // currentUser = this.currentUserService.user()
+  user: User & {
+    firstName?: string;
+    lastName?: string;
+  } = this.currentUserService.user()!;
 
   ngOnInit() {
-    this.user.firstName = this.user.username.split(' ')[0];
-    this.user.lastName = this.user.username.split(' ')[1];
+    const firstName = this.user.username.split(' ')[0];
+    const lastName = this.user.username.split(' ')[1];
+    this.user = {
+      ...this.user,
+      firstName,
+      lastName,
+    };
     this.setupForm();
     this.listenForChanges();
     this.profileValidator = new ProfileValidator(this.form, this.user);

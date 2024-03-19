@@ -1,16 +1,24 @@
-import { Component, OnInit, computed, inject, signal } from '@angular/core';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  OnInit,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ClickOutsideDirective } from '../../../directives/clickoutside.directive';
-import { TemplateActionsService } from '../../../services/admin/template-actions.service';
+import { TemplateActionsService } from '../../../services/admin/template-action/template-actions.service';
 import {
   completeSignal,
   errorSignal,
   newSignal,
   pendSignal,
 } from '../../../shared/utils';
-import { SurveyTemplate, Template } from '../../../shared/types';
+import { SurveyTemplate } from '../../../shared/types';
 import { TemplatesListComponent } from '../../../shared/components/templates-list/templates-list.component';
 import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
+import { ClickOutsideDirective } from '../../USER/Pages/servey-creation/components/directives/clickoutside.directive';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-admin-templates',
@@ -22,7 +30,9 @@ import { PaginationComponent } from '../../../shared/components/pagination/pagin
     ClickOutsideDirective,
     TemplatesListComponent,
     PaginationComponent,
+    RouterModule,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AdminTemplatesComponent implements OnInit {
   filterDropdown = false;

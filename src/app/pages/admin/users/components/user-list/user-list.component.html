@@ -32,7 +32,15 @@
     </thead>
     <tbody>
       @if (signal().pending) {
-        <div class="loader">loading</div>
+        <div class="loader"><lottie-player
+          src="https://lottie.host/1630430f-1342-46a5-85be-5e999df521b0/ignLkmvK5o.json"
+          background="transparent"
+          speed="1"
+          loop
+          autoplay
+          style="width: 300px; height: 300px"
+        >
+        </lottie-player></div>
       } @else if (signal().error) {
         <div class="error">{{signal().error.message}}</div>
       } @else if (signal().data) {

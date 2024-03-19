@@ -14,11 +14,12 @@ import {
   newSignal,
   pendSignal,
 } from '../../../shared/utils';
-import { User } from '../../../store/user';
-import { UserActionsService } from '../../../services/admin/user-actions.service';
+
+import { UserActionsService } from '../../../services/admin/user-action/user-actions.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ConfirmDeleteModalComponent } from './components/confirm-delete-modal/confirm-delete-modal.component';
 import { PaginationComponent } from '../../../shared/components/pagination/pagination.component';
+import { User } from '../../../State/authentication/auth.state';
 
 @Component({
   selector: 'app-admin-users',

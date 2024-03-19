@@ -1,5 +1,11 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { UserActionsService } from '../../../services/admin/user-actions.service';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  Component,
+  OnDestroy,
+  OnInit,
+  inject,
+} from '@angular/core';
+import { UserActionsService } from '../../../services/admin/user-action/user-actions.service';
 import { Subject, takeUntil } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import {
@@ -9,7 +15,7 @@ import {
   newSignal,
   pendSignal,
 } from '../../../shared/utils';
-import { ClickOutsideDirective } from '../../../directives/clickoutside.directive';
+import { ClickOutsideDirective } from '../../USER/Pages/servey-creation/components/directives/clickoutside.directive';
 import { SurveyTemplate } from '../../../shared/types';
 import { TemplatesListComponent } from '../../../shared/components/templates-list/templates-list.component';
 
@@ -19,6 +25,7 @@ import { TemplatesListComponent } from '../../../shared/components/templates-lis
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.scss',
   imports: [FormsModule, ClickOutsideDirective, TemplatesListComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AdminUserDetailsComponent implements OnInit, OnDestroy {
   userActionsService = inject(UserActionsService);

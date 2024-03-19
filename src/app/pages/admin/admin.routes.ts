@@ -36,6 +36,10 @@ export const AdminRoutes: Routes = [
         path: 'user-details',
         component: AdminUserDetailsComponent,
       },
+      // {
+      //   path: 'create-template',
+      //   component: CreateTemplateComponent,
+      // },
       {
         path: 'settings',
         component: AdminSettingsComponent,
