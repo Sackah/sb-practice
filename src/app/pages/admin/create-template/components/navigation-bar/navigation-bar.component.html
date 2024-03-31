@@ -1,0 +1,69 @@
+<nav
+  class="bg-white shadow-md lg:px-[105px] px-[1rm] fixed w-screen z-50 overflow-visible py-[1.3rem]"
+>
+  <div class="max-w-7xl mx-auto px-4 flex items-center justify-between">
+    <div class="w-[180px] lg:w-[170px] overflow-hidden">
+      <h1
+        class="text-[26px] font-bold leaing-[28.8px] tracking-wide whitespace-nowrap overflow-ellipsis"
+      >
+        {{ previousSurveyTitle !== "" ? previousSurveyTitle : "Survey Title" }}
+      </h1>
+    </div>
+
+    <div>
+      <p class="text-[14px] text-[#0D5EBA] font-semibold">
+        All changes saved at {{ timeSaved }}
+      </p>
+    </div>
+
+    <div class="flex items-center gap-x-[21px]">
+      <div class="flex gap-x-[12px]">
+        <div
+          class="w-[40px] h-[40px] flex items-center justify-center px-[12px] py-[8px] rounded-full transition-all cursor-pointer overflow-visible hover:bg-[#FFECE5]"
+          title="styles"
+          (click)="handlePreviewStatus()"
+        >
+          <img
+            src="../../../../../../../../../assets/SurveyCreation/Creation-space/navigation/eye.svg"
+            alt="preview eye"
+            class="cursor-pointer hover:bg-[#FFECE5]"
+            title="preview"
+            (click)="handlePreviewStatus()"
+          />
+        </div>
+        <div
+          class="w-[40px] h-[40px] flex items-center justify-center px-[12px] py-[8px] rounded-full transition-all cursor-pointer overflow-visible hover:bg-[#FFECE5]"
+          title="styles"
+          [style.cursor]="isCollaborator ? 'pointer' : 'not-allowed'"
+          [style.disabled]="isCollaborator ? 'false' : 'true'"
+        >
+          @if(handleOpenStatus){
+          <img
+            src="../../../../../../../../../assets/SurveyCreation/Creation-space/navigation/magic-wand_colored.svg"
+            alt="magic wand icon"
+            class="cursor-pointer"
+            (click)="handleOpenAppearance()"
+            [style.cursor]="isCollaborator ? 'pointer' : 'not-allowed'"
+          />
+          }@else {
+          <img
+            src="../../../../../../../../../assets/SurveyCreation/Creation-space/navigation/magic-wand.svg"
+            alt="magic wand icon"
+            class="cursor-pointer"
+            (click)="handleOpenAppearance()"
+            [style.cursor]="isCollaborator ? 'pointer' : 'not-allowed'"
+          />
+          }
+        </div>
+      </div>
+      <div class="flex gap-x-[8px]">
+        <button
+          class="bg-[#FFECE5] text-[#EB5017] hover:bg-[#cc3f0c] hover:text-[#fff] px-[12px] py-[8px] rounded-md font-semibold cursor-pointer transition-all"
+          (click)="onSaveClick()"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,47 @@
+@import "../../../pages/admin/styles/main.scss";
+
+main {
+  width: 100%;
+}
+
+div.card {
+  @include card;
+  span.img-container {
+    border-radius: 17px;
+    img {
+      @include img;
+    }
+  }
+  span.description {
+    overflow: visible;
+    h3 {
+      @include text-bold($size: 1.125rem, $weight: 600);
+      margin-bottom: 10px;
+      width: 90%;
+      @include ellipses($height: calc(1.125rem * 3));
+    }
+    p {
+      @include text-light($size: 0.875rem, $color: $grey-900);
+      @include ellipses($height: calc(1rem * 4), $clamp: 3);
+    }
+  }
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  @include md {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include lg {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @include xxlg {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.dropdown {
+  @include dropdown;
+}

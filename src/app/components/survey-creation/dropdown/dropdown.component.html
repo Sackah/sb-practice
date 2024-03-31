@@ -1,0 +1,31 @@
+@if (!editable) {
+    <section class="uneditable" (clickOutside)="isMenuOpen = false">
+        <span (click)="toggleMenu()">
+            {{selectedItem}}
+        </span>
+        @if (isMenuOpen) {
+            <ul>
+                @for (option of options; track $index) {
+                    <li (click)="handleSeletion($event, option)">
+                        {{option}}
+                    </li>
+                }
+            </ul>
+        }
+    </section>
+} @else {
+    <section class="editable">
+        <span>
+            {{selectedItem}}
+        </span>
+        <ul>
+            @for (option of options; track $index) {
+                <input type="text" [(ngModel)]="options[$index]"/>
+            }
+        </ul>
+        <div class="adder">
+            <input type="radio" disabled>
+            <p (click)="addOption()">Add option</p> or <p>add "Other"</p>
+        </div>
+    </section>
+}

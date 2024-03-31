@@ -1,0 +1,138 @@
+@mixin page-heading {
+  color: $grey-800;
+  font-family: $font-main;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.04rem;
+  padding: 18px 0;
+}
+
+@mixin center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-row {
+  @include center;
+  flex-direction: row;
+}
+
+@mixin flex-col {
+  @include center;
+  flex-direction: column;
+}
+
+@mixin text-bold($size: 1.25rem, $color: $grey-900, $weight: 600) {
+  font-size: $size;
+  color: $color;
+  font-weight: $weight;
+}
+
+@mixin text-light($size: 1rem, $color: $grey-500) {
+  font-size: $size;
+  color: $color;
+  font-weight: 400;
+}
+
+@mixin button(
+  $bg: $orange-400,
+  $text: $white,
+  $border-color: $orange-400,
+  $text-size: 0.875rem
+) {
+  border-radius: 8px;
+  border: 1.5px solid $border-color;
+  background: $bg;
+  padding: 8px 12px;
+  font-size: $text-size;
+  font-weight: 600;
+  color: $text;
+  @include center;
+  justify-content: space-between;
+}
+
+@mixin img-container($size: 80px) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+}
+
+@mixin img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@mixin input($bg: $white, $color: $grey-900, $border-color: $grey-300) {
+  border-radius: 6px;
+  border: 1px solid $border-color;
+  background: $bg;
+  padding: 16px;
+  color: $color;
+  width: 100%;
+  &:focus {
+    outline: none;
+    border: 1px solid $orange-200;
+  }
+}
+
+@mixin backdrop {
+  @include center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 50;
+  background-color: rgb(156 163 175 / 0.4);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+@mixin modal($padding: 32px 48px, $br: 16px) {
+  padding: $padding;
+  border-radius: $br;
+  z-index: 50;
+  background-color: $white;
+}
+
+@mixin dropdown($top: 55px, $right: -20px) {
+  position: absolute;
+  border-radius: 8px;
+  background-color: $white;
+  padding: 0.5rem 1rem;
+  box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.05),
+    0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 0px 0px 1px rgba(0, 0, 0, 0.05);
+  display: none;
+  top: $top;
+  right: $right;
+  z-index: 5;
+  cursor: pointer;
+  &.show {
+    display: block;
+  }
+}
+
+@mixin card {
+  padding: 24px 22px 37px;
+  background-color: $white;
+  border-radius: 34px;
+  border: 1px solid $grey-300;
+  width: 100%;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@mixin ellipses($width: 90%, $height: 2rem, $clamp: 2) {
+  width: $width;
+  height: $height;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $clamp;
+}

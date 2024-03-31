@@ -1,0 +1,410 @@
+<div class="mx-auto mt-[16px] flex flex-col gap-y-[24px] transition-all">
+  @if (currentIndex === 0) {
+  <div
+    class="w-full pb-[10px] flex items-center"
+    [style.justifyContent]="form.logo.style.alignment"
+  >
+    <div
+      class="block-div mt-4 w-[220px] h-[150px] flex items-center justify-center rounded-md object-contain overflow-hidden relative p-0 border border-[#E4E7EC] bg-white"
+    >
+      <img src="{{ form.logo.url }}" alt="upload_logo" />
+    </div>
+  </div>
+
+  <div class="block-div bg-white px-[32px] py-[48px] rounded-[16px]">
+    <h1
+      [style.fontSize]="form.surveyTitle.title.style.fontSize"
+      [style.fontFamily]="form.surveyTitle.title.style.fontFamily"
+      [style.fontStyle]="
+        form.surveyTitle.title.style.italic ? 'italic' : 'normal'
+      "
+      [style.fontWeight]="
+        form.surveyTitle.title.style.bold ? 'bold ' : 'normal'
+      "
+      [style.textDecoration]="
+        form.surveyTitle.title.style.underline ? 'underline' : 'normal'
+      "
+      class="text-[26px]"
+    >
+      {{ form.surveyTitle.title.titleName }}
+    </h1>
+    <p
+      [style.fontSize]="form.surveyTitle.description.style.fontSize"
+      [style.fontFamily]="form.surveyTitle.description.style.fontFamily"
+      [style.fontStyle]="
+        form.surveyTitle.description.style.italic ? 'italic' : 'normal'
+      "
+      [style.fontWeight]="
+        form.surveyTitle.description.style.bold ? 'bold ' : 'normal'
+      "
+      [style.textDecoration]="
+        form.surveyTitle.description.style.underline ? 'underline' : 'normal'
+      "
+      class="text-[16px] text-[#98A2B3]"
+    >
+      {{
+        form.surveyTitle.description.detail
+          ? form.surveyTitle.description.detail
+          : "description"
+      }}
+    </p>
+  </div>
+  }
+
+  <!-- content -->
+
+  <div
+    class="block-div bg-white px-[32px] py-[48px] rounded-[16px]"
+    [style.marginTop]="currentIndex !== 0 ? '200px' : '0px'"
+  >
+    <header class="mb-[24px]">
+      <h1
+        class="text-[20px]"
+        [style.fontSize]="form.blocks[currentIndex].title.style.fontSize"
+        [style.fontFamily]="form.blocks[currentIndex].title.style.fontFamily"
+        [style.fontStyle]="
+          form.blocks[currentIndex].title.style.italic ? 'italic' : 'normal'
+        "
+        [style.fontWeight]="
+          form.blocks[currentIndex].title.style.bold ? 'bold ' : 'normal'
+        "
+        [style.textDecoration]="
+          form.blocks[currentIndex].title.style.underline
+            ? 'underline'
+            : 'normal'
+        "
+      >
+        {{ form.blocks[currentIndex].title.titleName }}
+      </h1>
+    </header>
+
+    <!-- Main questions -->
+    <div class="flex flex-col gap-y-[24px]">
+      <div
+        *ngFor="
+          let question of form.blocks[currentIndex].questions;
+          index as questionIndex
+        "
+      >
+        <!-- Render main questions -->
+        <!-- Main question content -->
+        <div>
+          <!-- Questions -->
+          <h3
+            class="text-[18px] font-[400] flex items-center"
+            [style.fontSize]="question.title.style.fontSize"
+            [style.fontFamily]="question.title.style.fontFamily"
+            [style.fontStyle]="
+              question.title.style.italic ? 'italic' : 'normal'
+            "
+            [style.fontWeight]="question.title.style.bold ? 'bold ' : 'normal'"
+            [style.textDecoration]="
+              question.title.style.underline ? 'underline' : 'normal'
+            "
+          >
+            {{ question.title.question }}
+            @if (question.required) {
+            <img
+              src="assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/asterisk.svg"
+              alt="asterisk icon"
+            />
+            }
+          </h3>
+          @switch (question.type) {
+          <!-- Cases -->
+          @case ('multiple-choice') { @for (option of question.options; track
+          $index) {
+          <div class="mcq">
+            <label for="{{ option }}{{ $index }}">{{ option }}</label>
+            <input
+              type="checkbox"
+              id="{{ option }}{{ $index }}"
+              name="option"
+              [value]="option"
+            />
+          </div>
+          } } @case ('single-choice') {
+          <div
+            *ngFor="let option of question.options; let index = index"
+            class="question"
+          >
+            <label
+              [id]="'option_' + index"
+              class="multiple-choice-option flex gap-x-[4px]"
+            >
+              <input
+                type="radio"
+                name="{{ question.title.question }}{{ BLOCKINDEX }}{{
+                  questionIndex
+                }}"
+                [id]="'option_' + index"
+                [value]="option"
+                [required]="question.required"
+                (change)="selectedOption(option, questionIndex)"
+              />
+
+              @if (option === 'other') {
+              <input
+                type="text"
+                placeholder="Other"
+                class="other-style"
+                [required]="question.required"
+              />
+              }@else {
+              {{ option }}
+              }
+            </label>
+          </div>
+
+          } @case ('checkbox') {
+          <div class="question">
+            <div class="felx items-center gap-y-[4px] mt-4">
+              <input
+                type="checkbox"
+                name="{{ question.option }}"
+                id="{{ question.option }}"
+                class="mr-2"
+                [required]="question.required"
+              />
+              <label for="{{ question.option }}">{{ question.option }}</label>
+            </div>
+          </div>
+          } @case ('dropdown') {
+
+          <span
+            (click)="toggleMenu()"
+            [class]="{ required: question.required }"
+            class="mt-4 flex items-center justify-between gap-x-[10px] p-[10px] border border-[#d0d5dd] cursor-pointer w-fit rounded-[8px] min-w-[230px]"
+          >
+            {{ selectedItem ? selectedItem : "Pick an Option" }}
+
+            <img
+              src="assets/SurveyCreation/Creation-space/questions-creation-space/question_block/arrow-down.svg"
+              alt="arrow down"
+            />
+          </span>
+          @if (isMenuOpen) {
+          <ul
+            class="bg-gray-50 p-[10px] list-none w-fit rounded-[8px] min-w-[230px]"
+          >
+            @for (dropOption of question.options; track $index) {
+
+            <li
+              (click)="handleSeletion(dropOption)"
+              class="text-gray-700 hover:text-black px-[6px] py-[8px] cursor-pointer"
+            >
+              {{ dropOption }}
+            </li>
+            }
+          </ul>
+          } }@case('short-text'){
+          <input
+            type="text"
+            placeholder="short-text"
+            class="question border-b border-b-[#d0d5dd] w-[30%] outline-none p-[8px] mt-4"
+          />
+          } @case('paragraph'){
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="5"
+            placeholder="Paragraph"
+            class="question border border-[#d0d5dd] w-full outline-none resize-none p-[5px] mt-4"
+          ></textarea>
+          }
+
+          <!-- switch end -->
+          }
+        </div>
+
+        <!-- Check if there are conditional questions for this main question -->
+
+        <div class="mt-[10px]" *ngIf="shouldDisplayQuestion(questionIndex)">
+          <div *ngIf="question.conditions?.choice !== ''">
+            <!-- Render conditional questions -->
+            <div>
+              <!-- Questions -->
+              <h3
+                class="text-[18px] font-[400] flex items-center"
+                [style.fontSize]="question.title.style.fontSize"
+                [style.fontFamily]="question.title.style.fontFamily"
+                [style.fontStyle]="
+                  question.title.style.italic ? 'italic' : 'normal'
+                "
+                [style.fontWeight]="
+                  question.title.style.bold ? 'bold ' : 'normal'
+                "
+                [style.textDecoration]="
+                  question.title.style.underline ? 'underline' : 'normal'
+                "
+              >
+                {{ question.conditions?.question }}
+                @if (question.required) {
+                <img
+                  src="assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/asterisk.svg"
+                  alt="asterisk icon"
+                />
+                }
+              </h3>
+              @switch (question.conditions?.type) {
+              <!-- Cases -->
+              @case ('multiple-choice') { @for (option of
+              question.conditions?.conditionalOptions; track $index) {
+              <div class="mcq">
+                <label for="{{ option }}{{ $index }}">{{ option }}</label>
+                <input
+                  type="checkbox"
+                  id="{{ option }}{{ $index }}"
+                  name="option"
+                  [value]="option"
+                />
+              </div>
+              } } @case ('single-choice') {
+              <div
+                *ngFor="
+                  let option of question.conditions?.conditionalOptions;
+                  let index = index
+                "
+                class="question"
+              >
+                <label
+                  [id]="'option_' + index"
+                  class="multiple-choice-option flex gap-x-[4px]"
+                >
+                  <input
+                    type="radio"
+                    name="{{ question.conditions?.conditionalOptions }}{{
+                      BLOCKINDEX
+                    }}{{ questionIndex }}"
+                    [id]="'option_' + index"
+                    [value]="option"
+                    [required]="question.required"
+                    (change)="selectedOption(option, questionIndex)"
+                  />
+
+                  @if (option === 'other') {
+                  <input
+                    type="text"
+                    placeholder="Other"
+                    class="other-style"
+                    [required]="question.required"
+                  />
+                  }@else {
+                  {{ option }}
+                  }
+                </label>
+              </div>
+
+              } @case ('checkbox') {
+              <div class="question">
+                <div class="felx items-center gap-y-[4px] mt-4">
+                  <input
+                    type="checkbox"
+                    name="{{ question.option }}"
+                    id="{{ question.option }}"
+                    class="mr-2"
+                    [required]="question.required"
+                  />
+                  <label for="{{ question.conditions?.conditionalOptions }}">{{
+                    question.conditions?.conditionalOptions
+                  }}</label>
+                </div>
+              </div>
+              } @case ('dropdown') {
+
+              <span
+                (click)="toggleMenu()"
+                [class]="{ required: question.required }"
+                class="mt-4 flex items-center justify-between gap-x-[10px] p-[10px] border border-[#d0d5dd] cursor-pointer w-fit rounded-[8px] min-w-[230px]"
+              >
+                {{ selectedItem ? selectedItem : "Pick an Option" }}
+
+                <img
+                  src="assets/SurveyCreation/Creation-space/questions-creation-space/question_block/arrow-down.svg"
+                  alt="arrow down"
+                />
+              </span>
+              @if (isMenuOpen) {
+              <ul
+                class="bg-gray-50 p-[10px] list-none w-fit rounded-[8px] min-w-[230px]"
+              >
+                @for (dropOption of question.conditions?.conditionalOptions;
+                track $index) {
+
+                <li
+                  (click)="handleSeletion(dropOption)"
+                  class="text-gray-700 hover:text-black px-[6px] py-[8px] cursor-pointer"
+                >
+                  {{ dropOption }}
+                </li>
+                }
+              </ul>
+              } }@case('short-text'){
+              <input
+                type="text"
+                placeholder="short-text"
+                class="question border-b border-b-[#d0d5dd] w-[30%] outline-none p-[8px] mt-4"
+              />
+              } @case('paragraph'){
+              <textarea
+                name=""
+                id=""
+                cols="30"
+                rows="5"
+                placeholder="Paragraph"
+                class="question border border-[#d0d5dd] w-full outline-none resize-none p-[5px] mt-4"
+              ></textarea>
+              }
+
+              <!-- switch end -->
+              }
+            </div>
+            <!-- Conditional question content -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- btns -->
+  <div class="w-full flex items-center justify-end">
+    <div class="flex items-center justify-between gap-x-[8px]">
+      <button
+        class="flex items-center justify-between gap-x-[8px] py-[8px] px-[12px] border-2 border-[#D0D5DD] rounded-[8px]"
+        (click)="handlePreviousClick()"
+        (click)="navigate(-1)"
+        [style.color]="isPrevious ? ' #F77A4A' : '#000'"
+        [style.cursor]="currentIndex == 0 ? 'not-allowed' : 'pointer'"
+        [style.display]="currentIndex === 0 ? 'none' : 'flex'"
+        [disabled]="currentIndex === 0"
+      >
+        <img
+          src="{{
+            !isPrevious
+              ? 'assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/card_preview/previous_normal.svg'
+              : 'assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/card_preview/previous_colored.svg'
+          }}"
+          alt="Previous icon"
+        />
+        Previous
+      </button>
+      <button
+        class="flex items-center justify-between gap-x-[8px] py-[8px] px-[12px] border-2 border-[#D0D5DD] rounded-[8px]"
+        (click)="handleNextClick()"
+        [style.color]="isNext ? ' #F77A4A' : '#000'"
+        (click)="navigate(1)"
+      >
+        <img
+          src="{{
+            !isNext
+              ? 'assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/card_preview/next_normal.svg'
+              : 'assets/SurveyCreation/Creation-space/questions-creation-space/survey-preview/card_preview/next_colored.svg'
+          }}"
+          alt="next icon"
+        />
+        {{ nextText }}
+      </button>
+    </div>
+  </div>
+</div>

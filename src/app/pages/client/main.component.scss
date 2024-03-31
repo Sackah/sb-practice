@@ -1,0 +1,46 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@mixin center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.page {
+  min-width: 100%;
+  min-height: 100vh;
+  font-family: Inter, sans-serif;
+  padding: 0 10%;
+  -webkit-user-select: none;
+  user-select: none;
+  margin: 0 auto;
+
+  header {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    @include center;
+    justify-content: flex-start;
+    gap: 10px;
+
+    p {
+      color: #101928;
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 2rem;
+      cursor: pointer;
+      &.active {
+        color: #eb5017;
+      }
+    }
+  }
+}

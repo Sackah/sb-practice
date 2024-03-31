@@ -1,0 +1,41 @@
+<section>
+  <header>
+    <div>
+      <h1>All Users</h1>
+      <p>Showing data over the last 30 days</p>
+    </div>
+    <div>
+      <button (click)="inviteUser = !inviteUser">
+        <img src="assets/Admin/plus.svg" alt="" />
+        Invite User
+      </button>
+    </div>
+  </header>
+
+    <app-admin-user-list
+      [paginationParams]="paginationParams()"
+      [totalPages]="totalPages()"
+      [signal]="userListSignal"
+      [(confirmDelete)]="confirmDelete"
+      (next)="next()"
+      (prev)="prev()"
+    >
+      <app-admin-pagination 
+        [currentPage]="paginationParams().currentPage" 
+        [totalPages]="totalPages()" 
+        (pageChange)="pageChange($event)"
+      />
+    </app-admin-user-list>
+
+</section>
+
+@if (inviteUser) {
+<app-admin-invite-user-modal [(open)]="inviteUser" />
+} 
+
+@if (confirmDelete) {
+<app-admin-confirm-delete-modal
+  [(open)]="confirmDelete"
+  (deleteUser)="deleteUser($event)"
+/>
+}

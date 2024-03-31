@@ -1,0 +1,54 @@
+<section (clickOutside)="editTitle = false">
+    @if(editTitle){
+    <header>
+        <input type="text" [class]="titleStyle" [style.fontSize]="block.title.style.size" [(ngModel)]="block.title.detail" (keydown)="onEditTitle($event)"
+            (dblclick)="onEditTitle($event)" />
+        <img src="assets/3dots.svg" (click)="toggleDropdown($event, dropdownTemplate)" alt="">
+    </header>
+    <div class="text-styles">
+        <label for="bold">
+            <input id="bold" type="checkbox" [(ngModel)]="block.title.style.bold">
+            <bold-icon [checked]="block.title.style.bold"></bold-icon>
+        </label>
+        <label for="italic">
+            <input id="italic" type="checkbox" [(ngModel)]="block.title.style.italic">
+            <italic-icon [checked]="block.title.style.italic"></italic-icon>
+        </label>
+        <label for="large">
+            <input type="checkbox" id="large" [(ngModel)]="block.title.style.large">
+            <large-icon [checked]="block.title.style.large"></large-icon>
+        </label>
+    </div>
+    } @else {
+    <header>
+        <h1 [class]="titleStyle" (dblclick)="onEditTitle($event)">{{block.title.detail}}</h1>
+        <img src="assets/3dots.svg" (click)="toggleDropdown($event, dropdownTemplate)" alt="">
+    </header>
+    }
+    @for (question of block.questions; track $index) {
+    <app-question [question]="question" 
+        (metadata)="handleAddMetadata($event, $index)"
+        (addQuestion)="handleAddQuestion()"
+        (deleteQuestion)="handleDeleteQuestion($index)" 
+        (duplicateQuestion)="handleDuplicateQuestion($event, $index)">
+        ></app-question>
+    }
+    @if(block.questions.length < 1){ <div class="buttons">
+        <button type="button" (click)="handleAddQuestion()">
+            <img src="assets/add-icon.svg" alt="">
+            New question
+        </button>
+        </div>
+        }
+</section>
+
+<ng-template #dropdownTemplate>
+    <ul>
+        <li (click)="handleDuplicateBlock()"><img src="assets/copy-icon-2.svg" alt="">Duplicate</li>
+        <li (click)="handleDeleteBlock()"> <img src="assets/delete-icon-2.svg" alt="">Delete</li>
+        <li><img src="assets/minus-icon-2.svg" alt="">Add page break</li>
+    </ul>
+</ng-template>
+
+
+

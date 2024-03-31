@@ -1,0 +1,36 @@
+<section>
+  <main>
+    <h1>Settings</h1>
+    <nav class="overflow-visible">
+      <a
+        [routerLink]="['/admin/settings/profile']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Profile
+      </a>
+      <a
+        [routerLink]="['/admin/settings/password']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Password
+      </a>
+      <a
+        [routerLink]="['/admin/settings/billing']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Billing
+      </a>
+      <a
+        [routerLink]="['/admin/settings/account-history']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        Account History
+      </a>
+    </nav>
+    <router-outlet></router-outlet>
+  </main>
+</section>

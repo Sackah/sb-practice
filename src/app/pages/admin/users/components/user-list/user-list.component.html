@@ -1,0 +1,118 @@
+<section class="overflow-x-visible">
+  <table class="table overflow-visible">
+    <thead>
+      <header>
+        <form class="flex justify-start w-full" (submit)="handleSearch($event)">
+          <div class="input mr-2" #search>
+            <img src="assets/Admin/search.svg" alt="search" />
+            <input
+              type="search"
+              class="outline-none"
+              id=""
+              placeholder="Search here..."
+              [(ngModel)]="query"
+              [ngModelOptions]="{ standalone: true }"
+              spellcheck="false"
+              (focus)="search.classList.toggle('focus')"
+              (blur)="search.classList.toggle('focus')"
+              [disabled]="signal().pending"
+              />
+            </div>
+            <button
+              [disabled]="signal().pending"
+            >Search</button>
+        </form>
+      </header>
+      <tr class="bg-[#F9FAFB]">
+        <th class="col-span-3">Name</th>
+        <th class="col-span-2">Email</th>
+        <th>Activation</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @if (signal().pending) {
+        <div class="loader"><lottie-player
+          src="https://lottie.host/1630430f-1342-46a5-85be-5e999df521b0/ignLkmvK5o.json"
+          background="transparent"
+          speed="1"
+          loop
+          autoplay
+          style="width: 300px; height: 300px"
+        >
+        </lottie-player></div>
+      } @else if (signal().error) {
+        <div class="error">{{signal().error.message}}</div>
+      } @else if (signal().data) {
+          @for (user of signal().data; track $index) {
+            <tr
+              class="row relative overflow-visible"
+            >
+              <td 
+                class="flex items-center gap-3 col-span-3"
+                [routerLink]="['/admin/user-details']"
+                (click)="userActionsService.selectUser(user)"
+              >
+                <div class="img-container">
+                  @if (user.profilePicture) {
+                  <img [src]="user.profilePicture" alt="" />
+                  } @else { {{ initials(user.username) }} }
+                </div>
+                <h2>{{ user.username || 'No Username' }}</h2>
+              </td>
+              <td class="col-span-2">{{ user.email }}</td>
+              <td>
+                <app-switch 
+                  [check]="user.enabled" 
+                  (checkChange)="toggleUser($event, user)" 
+                  [disabled]="userActivationSignal().pending"
+                />
+              </td>
+              <td class="flex justify-end">
+                <button
+                  type="button"
+                  title="options"
+                  (click)="toggleDropdown($event, $index)"
+                >
+                  <img src="assets/Admin/3-dots.svg" alt="" />
+                </button>
+                <div
+                  [class]="{
+                    dropdown: true,
+                    'overflow-hidden': true,
+                    show: showDropDown[$index]
+                  }"
+                  (clickOutside)="showDropDown[$index] = false"
+                  (click)="
+                    userActionsService.selectUser(user);
+                    confirmDeleteChange.emit(!confirmDelete);
+                    showDropDown[$index] = false;
+                  "
+                >
+                  Delete
+                </div>
+              </td>
+            </tr>
+          }
+      }
+    </tbody>
+  </table>
+  <footer>
+    <div class="p-[16px] flex items-center justify-between w-full">
+      <h1>Page {{paginationParams.currentPage}} of {{totalPages}}</h1>
+      <div>
+        <ng-content></ng-content>
+      </div>
+      <div class="flex gap-3">
+        <button (click)="prev.emit()" class="flex-row gap-2">
+          <img src="assets/Admin/arrow-left.svg" alt="" />
+          Previous
+        </button>
+        <button (click)="next.emit()" class="flex-row-reverse gap-2">
+          <img src="assets/Admin/arrow-right.svg" alt="" />
+          Next
+        </button>
+      </div>
+    </div>
+  </footer>
+</section>

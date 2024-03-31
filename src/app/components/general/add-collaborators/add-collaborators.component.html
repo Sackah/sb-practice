@@ -1,0 +1,28 @@
+<section>
+  <div>
+    <h3>Invite collaborators</h3>
+    <p>Invite collaborators to collaborate on this project.</p>
+    <div class="added-users">
+      @for (user of addedUsers; track $index) {
+      <span
+        >{{ user.email }}
+        <img (click)="deleteUser(user)" src="assets/close-icon.svg" alt=""
+      /></span>
+      }
+    </div>
+    <main>
+      <form (submit)="handleSubmit()" [formGroup]="form">
+        <input
+          type="email"
+          formControlName="email"
+          (input)="handleChange($event)"
+        />
+        <select title="permission" id="" formControlName="role">
+          <option value="edit">Edit</option>
+          <option value="view" selected>View</option>
+        </select>
+        <button type="submit">Invites</button>
+      </form>
+    </main>
+  </div>
+</section>

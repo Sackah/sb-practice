@@ -1,0 +1,87 @@
+@mixin text {
+  font-feature-settings: "cv01" on, "cv04" on, "cv03" on;
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  line-height: 145%;
+}
+
+@mixin center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+section {
+  @include center;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #f0f2f5;
+  border-radius: 12px;
+
+  form {
+    @include center;
+    margin-top: 10px;
+    gap: 17px;
+    position: relative;
+    input {
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid #fcd2c2;
+      &:focus {
+        border: 1px solid #f77a4a;
+        outline: none;
+      }
+    }
+    button {
+      border-radius: 8px;
+      color: #fff;
+      padding: 10px 18px;
+      border: none;
+      background: #eb5017;
+      box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    }
+    select {
+      @include text;
+      position: absolute;
+      border: none;
+      top: 10px;
+      right: 100px;
+    }
+  }
+
+  h3 {
+    @include text;
+    color: #101828;
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+  p {
+    @include text;
+    color: #667085;
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+
+  div.added-users {
+    @include center;
+    justify-content: flex-start;
+    gap: 6px;
+    width: 300px;
+    flex-wrap: wrap;
+    span {
+      @include center;
+      @include text;
+      font-size: 0.875rem;
+      color: #344054;
+      padding: 2px 4px 2px 5px;
+      gap: 3px;
+      border-radius: 6px;
+      border: 1px solid #d0d5dd;
+      background: #fff;
+
+      img {
+        cursor: pointer;
+      }
+    }
+  }
+}

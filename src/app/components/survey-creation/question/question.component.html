@@ -1,0 +1,151 @@
+<section (dblclick)="editable = !editable" (clickOutside)="editable = false">
+    @if(!editable){
+        <main>
+            <h1 [class]="titleStyle">{{question.title.detail}}</h1>
+        </main>
+
+        <!-- Cases for question types -->
+        @switch (question.type) {
+            @case ('multiple-choice') {
+                @for (option of question.options; track $index) {
+                    <div class="mcq">
+                        <span>
+                            <label for="{{option}}{{$index}}">{{option}}</label>
+                            <input type="checkbox" id="{{option}}{{$index}}" name="option" [value]="option">
+                        </span>
+                    </div>
+                }
+            }
+            @case ('single-choice') {
+                @for (option of question.options; track $index) {
+                    <div class="scq">
+                        <span>
+                            <label for="{{option}}{{$index}}">{{option}}</label>
+                            <input type="radio" id="{{option}}{{$index}}" name="option" [value]="option">
+                        </span>
+                    </div>
+                }
+            }
+            @case ('checkbox') {
+                <div class="cbq">
+                    <span>
+                        <label for="{{question.option}}">{{question.option}}</label>
+                        <input type="checkbox" id="{{question.option}}" name="{{question.option}}" [value]="question.option">
+                    </span>
+                </div>
+            }
+            @case ('dropdown') {
+                <custom-dropdown [options]="question.options"></custom-dropdown>
+            }
+            @case ('short-text') {
+                <p class="paragraph" contenteditable="true" data-placeholder="Short answer text"></p>
+            }
+            @case ('paragraph') {
+                <p class="paragraph" contenteditable="true" data-placeholder="Long answer text"></p>
+            }
+
+        }
+    }
+    @else(){
+        <main>
+            <input [class]="titleStyle" type="text" [(ngModel)]="question.title.detail" />
+            <app-select
+             [questionType]="question.type"
+            (selectionChange)="handleTypeChange($event)"></app-select>
+        </main>
+        <div class="text-styles">
+            <label for="bold">
+                <input id="bold" type="checkbox" [(ngModel)]="question.title.style.bold">
+                <bold-icon [checked]="question.title.style.bold"></bold-icon>
+            </label>
+            <label for="italic">
+                <input id="italic" type="checkbox" [(ngModel)]="question.title.style.italic">
+                <italic-icon [checked]="question.title.style.italic"></italic-icon>
+            </label>
+            <label for="large">
+                <input type="checkbox" id="large" [(ngModel)]="question.title.style.large">
+                <large-icon [checked]="question.title.style.large"></large-icon>
+            </label>
+        </div>
+
+        <!-- Cases for question types in editable mode -->
+        @switch (question.type) {
+            @case ('multiple-choice'){
+                @for (option of question.options; track $index) {
+                    <div class="mcq">
+                        <span>
+                            <input type="text" [(ngModel)]="question.options[$index]">
+                            <input type="checkbox" id="option{{$index}}" name="option" [value]="option">
+                        </span>
+                    </div>
+                }
+                <div class="adder">
+                    <input type="radio" disabled>
+                    <p (click)="addOption()">Add option</p> or <p>add "Other"</p>
+                </div>
+            }
+            @case ('single-choice'){
+                @for (option of question.options; track $index) {
+                    <div class="scq">
+                        <span>
+                            <input type="text" [(ngModel)]="question.options[$index]">
+                            <input type="radio" id="select{{$index}}" name="option" [value]="option">
+                        </span>
+                        @if (showConditional) {
+                            <form [formGroup]="conditionalsForm" (submit)="addConditional($event, $index)">
+                                Block: <input type="number" formControlName="block">
+                                Question: <input type="number" formControlName="question">
+                                <button type="submit">submit</button>
+                            </form>
+                        }
+                    </div>
+                }
+                <div class="adder">
+                    <input type="radio" disabled>
+                    <p (click)="addOption()">Add option</p> or <p>add "Other"</p>
+                </div>
+            }
+            @case ('checkbox') {
+                <div class="check">
+                    <input type="text" [(ngModel)]="question.option">
+                    <input type="checkbox" id="{{question.option}}" name="option" [value]="question.option">
+                </div>
+                <!-- <div class="adder">
+                    <input type="radio" disabled>
+                    <p (click)="addOption()">Add option</p> or <p>add "Other"</p>
+                </div> -->
+            }
+            @case ('dropdown') {
+                <custom-dropdown (createOption)="addOption()" [editable]="true" [options]="question.options"></custom-dropdown>
+            }
+            @case ('short-text') {
+                <p class="paragraph" contenteditable="true" data-placeholder="Short answer text"></p>
+            }
+            @case ('paragraph') {
+                <p class="paragraph" contenteditable="true" data-placeholder="Long answer text"></p>
+            }
+        }
+
+        <div class="buttons">
+            <img src="assets/rise.svg" (click)="toggleConditionals()" alt="">
+
+            <img src="assets/copy-icon.svg" (click)="handleDuplicateQuestion()" alt="">
+
+            <img (click)="handleDeleteQuestion()" src="assets/delete-icon.svg" alt="">
+
+            <span>
+                Required
+                <label>
+                    <input type="checkbox" class="switch" [(ngModel)]="question.required" />
+                </label>
+            </span>
+
+            <button type="button" (click)="handleAddQuestion()">
+                <img src="assets/add-icon.svg" alt="">
+                New question
+            </button>
+        </div>
+    }
+</section>
+
+

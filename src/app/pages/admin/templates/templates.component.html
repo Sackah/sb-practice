@@ -1,0 +1,76 @@
+<section>
+  <header class="overflow-visible">
+    <h1>Explore templates</h1>
+    <span class="flex gap-2 relative overflow-visible">
+      <button
+        (click)="filterDropdown = !filterDropdown; $event.stopPropagation()"
+      >
+        <img src="assets/Admin/adjust.svg" alt="" />
+        Filter
+        <img src="assets/Admin/arrow-down.svg" alt="" />
+      </button>
+      <div class="input" #search>
+        <img src="assets/Admin/search.svg" alt="search" />
+        <input
+          class="outline-none"
+          type="search"
+          [(ngModel)]="query"
+          placeholder="Search..."
+          (focus)="search.classList.toggle('focus')"
+          (blur)="search.classList.toggle('focus')"
+        />
+      </div>
+      <ul
+        [class]="{
+          dropdown: true,
+          'overflow-hidden': true,
+          show: filterDropdown
+        }"
+        (clickOutside)="filterDropdown = false"
+      >
+        <li>Date</li>
+        <li>Type</li>
+      </ul>
+      <button routerLink="/admin/create-template">Create Template</button>
+    </span>
+  </header>
+  <nav class="overflow-hidden">
+    <p [class]="{ inline: true, active: tab === 'all' }" (click)="tab = 'all'">
+      All
+    </p>
+    <p
+      [class]="{ inline: true, active: tab === 'deactivated' }"
+      (click)="tab = 'deactivated'"
+    >
+      Deactivated
+    </p>
+  </nav>
+  @if (templatesSignal().pending) {
+  <div class="w-full h-full flex items-center justify-center">
+    <lottie-player
+      src="https://lottie.host/1630430f-1342-46a5-85be-5e999df521b0/ignLkmvK5o.json"
+      background="transparent"
+      speed="1"
+      loop
+      autoplay
+      style="width: 300px; height: 300px"
+    >
+    </lottie-player>
+  </div>
+  } @else if (templatesSignal().data) {
+  <app-admin-templates-list
+    [templates]="templatesSignal().data!"
+    (delete)="handleDelete($event)"
+    (deactivate)="handleDeactivate($event)"
+  />
+  } @else {
+  <div>{{ templatesSignal().error.message }}</div>
+  }
+  <div class="flex justify-end">
+    <app-admin-pagination
+      [currentPage]="paginationParams().currentPage"
+      [totalPages]="totalPages()"
+      (pageChange)="pageChange($event)"
+    />
+  </div>
+</section>

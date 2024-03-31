@@ -1,0 +1,29 @@
+.text-styles {
+  label {
+    position: relative;
+
+    input[type="checkbox"] {
+      appearance: none;
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      position: relative;
+    }
+  }
+}
+
+/**** Styling for text appearance ****/
+.text-base {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.text-bold {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.text-italic {
+  font-style: italic;
+}
+.text-large {
+  font-size: 2rem;
+}

@@ -1,0 +1,49 @@
+$switch-width: 2.5rem;
+$switch-height: 1.65rem;
+$knob-size: 1.25rem;
+$knob-offset: 0.2rem;
+
+.switch {
+  cursor: pointer;
+  appearance: none;
+  display: inline-block;
+  width: $switch-width;
+  height: $switch-height;
+  position: relative;
+
+  background-color: #d3d3d3;
+  vertical-align: middle;
+  border-radius: 2rem;
+  transition: background-color 0.25s;
+
+  &::before {
+    content: "";
+    display: block;
+    width: $knob-size;
+    height: $knob-size;
+    position: absolute;
+    left: 0.2rem;
+    top: 0.2rem;
+    z-index: 1;
+
+    background: #fff;
+    border-radius: calc($knob-size / 2);
+    box-shadow: 0 1px 3px #0003;
+    transition: transform 0.25s;
+  }
+
+  &:checked {
+    background-color: #039855;
+
+    &::before {
+      transform: translateX(
+        calc($switch-width - $knob-size - $knob-offset * 2)
+      );
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}

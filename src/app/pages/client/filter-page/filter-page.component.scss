@@ -1,0 +1,10 @@
+section {
+  display: flex;
+  gap: 1rem;
+
+  div.items,
+  div.checks {
+    border: 1px solid #000;
+    border-radius: 0.5rem;
+  }
+}

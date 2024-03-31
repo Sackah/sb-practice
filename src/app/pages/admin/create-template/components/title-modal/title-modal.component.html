@@ -1,0 +1,80 @@
+<div
+  (click)="stopPropagation($event)"
+  class="relative p-[64px] rounded-[16px] w-[1058px] h-[524px] bg-white"
+>
+  <div
+    class="absolute top-[64px] right-[64px] left-[64px] flex items-center justify-between"
+  >
+    <button
+      class="text-[14px] font-600 text-white flex items-center gap-y-[8px] w-[86px] h-[36px] py-[8px] overflow-visible px-[12px] rounded-[8px] bg-[#667185]"
+    routerLink="/admin/templates"
+      >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+      >
+        <path
+          d="M1.91058 10.5899C1.58514 10.2645 1.58514 9.73683 1.91058 9.4114L5.24392 6.07806C5.56935 5.75263 6.09699 5.75263 6.42243 6.07806C6.74786 6.4035 6.74786 6.93114 6.42243 7.25657L4.51168 9.16732L17.4998 9.16732C17.9601 9.16732 18.3332 9.54041 18.3332 10.0007C18.3332 10.4609 17.9601 10.834 17.4998 10.834L4.51168 10.834L6.42243 12.7447C6.74786 13.0702 6.74786 13.5978 6.42243 13.9232C6.09699 14.2487 5.56935 14.2487 5.24391 13.9232L1.91058 10.5899Z"
+          fill="white"
+        /></svg
+      >Back
+    </button>
+
+    <button>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        (click)="closeModal()"
+      >
+        <path
+          d="M7.05086 5.63664C6.66033 5.24612 6.02717 5.24612 5.63664 5.63664C5.24612 6.02717 5.24612 6.66033 5.63664 7.05086L10.5864 12.0006L5.63664 16.9504C5.24612 17.3409 5.24612 17.974 5.63664 18.3646C6.02717 18.7551 6.66033 18.7551 7.05086 18.3646L12.0006 13.4148L16.9504 18.3646C17.3409 18.7551 17.974 18.7551 18.3646 18.3646C18.7551 17.974 18.7551 17.3409 18.3646 16.9504L13.4148 12.0006L18.3646 7.05086C18.7551 6.66033 18.7551 6.02717 18.3646 5.63664C17.974 5.24612 17.3409 5.24612 16.9504 5.63664L12.0006 10.5864L7.05086 5.63664Z"
+          fill="black"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <div class="w-full items-center flex justify-center">
+    <div class="w-[588px] min-h-[350px]">
+      <div class="w-full items-center justify-center flex pb-[24px]">
+        <h2 class="text-[32px] font-black">New Survey</h2>
+      </div>
+      <form [formGroup]=" surveyDetails" class="w-full flex flex-col gap-y-[24px] pt-[24px]">
+        <div class="w-full flex flex-col justify-start">
+          <label class="text-[14px] font-semibold">Survey Title</label>
+          <input
+            placeholder="survey title"
+            type="text"
+            class="border border-[#D0D5DD] rounded-[8px] p-[16px] outline-none"
+            formControlName="title"
+          />
+        </div>
+
+        <div class="w-full flex flex-col justify-start">
+          <label class="text-[14px] font-semibold"
+            >Survey Category <span class="text-[#D42620]">*</span></label
+          >
+          <input
+            placeholder="survey category"
+            type="text"
+            class="border border-[#D0D5DD] rounded-[8px] p-[16px] outline-none"
+            formControlName="category"
+          />
+        </div>
+
+        <button
+          class="bg-[#EB5017] text-white text-[16px] rounded-[8px] p-[16px] outline-none"
+          (click)="SubmitDetails()"
+        >
+          Create Survey
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

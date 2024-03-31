@@ -1,0 +1,10 @@
+<ul>
+  @for (message of messages; track $index) {
+  <li>{{ message }}</li>
+  }
+</ul>
+
+<form [formGroup]="form" (submit)="sendMessage()">
+  <input placeholder="message" formControlName="message" />
+  <button>Send</button>
+</form>

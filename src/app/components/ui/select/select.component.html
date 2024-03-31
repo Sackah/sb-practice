@@ -1,0 +1,35 @@
+<section (clickOutside)="clickedOutside()">
+    <span (click)="toggleMenu()">
+        <img src="assets/{{selection | async}}.svg" alt="" />
+        {{selectedItem}}
+        <img src="assets/selection-arrow.svg" alt="" />
+    </span>
+    @if (isMenuOpen) {
+    <ul>
+        <li (click)="handleSeletion($event, 'multiple-choice')">
+            <img src="assets/multiple-choice.svg" alt="" />
+            Multiple Choice
+        </li>
+        <li (click)="handleSeletion($event,'checkbox')">
+            <img src="assets/checkbox.svg" alt="" />
+            Checkboxes
+        </li>
+        <li (click)="handleSeletion($event,'single-choice')">
+            <img src="assets/single-choice.svg" alt="" />
+            Single Choice
+        </li>
+        <li (click)="handleSeletion($event, 'dropdown')">
+            <img src="assets/dropdown.svg" alt="" />
+            Dropdown
+        </li>
+        <li (click)="handleSeletion($event, 'short-text')">
+            <img src="assets/short-text.svg" alt="" />
+            Short text
+        </li>
+        <li (click)="handleSeletion($event, 'paragraph')">
+            <img src="assets/paragraph.svg" alt="" />
+            Paragraph
+        </li>
+    </ul>
+    }
+</section>

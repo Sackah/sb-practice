@@ -1,0 +1,17 @@
+@import "../../../pages/admin/styles/main.scss";
+
+ul {
+  display: flex;
+  gap: 6px;
+
+  li {
+    padding: 6px 12px;
+    color: $grey-400;
+    border-radius: 6px;
+    cursor: pointer;
+    &.active {
+      background: $orange-100;
+      color: $orange-400;
+    }
+  }
+}

@@ -1,0 +1,34 @@
+@import "../../../styles/main.scss";
+
+.backdrop {
+  @include backdrop;
+}
+
+.modal {
+  @include modal;
+  width: 500px;
+
+  header {
+    @include center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    h1 {
+      @include text-bold(1.75rem, $grey-900, 700);
+    }
+  }
+
+  main {
+    button {
+      @include button;
+
+      &:first-of-type {
+        @include button($white, $grey-900, $grey-300);
+      }
+
+      &:disabled {
+        @include button($grey-300, $white, $grey-300);
+        cursor: not-allowed;
+      }
+    }
+  }
+}
